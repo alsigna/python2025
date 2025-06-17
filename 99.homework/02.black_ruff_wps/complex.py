@@ -5,6 +5,28 @@ from urllib.parse import urlencode, urlparse
 NETBOX_URL = "https://demo.netbox.dev"
 
 
+EXAMPLE_INPUT = {
+    "manufacturer": ["cisco"],
+    "role": ["router", "core-switch", "access-switch"],
+    "status": ["active", "offline"],
+    "site": ["dm-akronsk", "dm-albany", "dm-camden"],
+}
+
+EXAMPLE_RESULT = [
+    ("manufacturer_id", 3),
+    ("role_id", 1),
+    ("role_id", 2),
+    ("role_id", 4),
+    ("status", "active"),
+    ("status", "offline"),
+    ("site_id", 2),
+    ("site_id", 3),
+    ("site_id", 6),
+    ("brief", "true"),
+    ("limit", 500),
+]
+
+
 @lru_cache
 def _get_site_id(site_slug: str) -> int:
     """Заглушка для получения id сайта по его slug"""
@@ -109,10 +131,6 @@ def craft_nb_query(request_params: dict[str, str]) -> list[tuple[str, str | int]
 
 
 if __name__ == "__main__":
-    data = {
-        "manufacturer": ["cisco"],
-        "role": ["router", "core-switch", "access-switch"],
-        "status": ["active", "offline"],
-        "site": ["dm-akronsk", "dm-albany", "dm-camden"],
-    }
-    print(NETBOX_URL + "/api/dcim/devices/?" + urlencode(craft_nb_query(data)))
+    result = craft_nb_query(EXAMPLE_INPUT)
+    assert result == EXAMPLE_RESULT, "функция 'craft_nb_query' работает некорректно"
+    print(NETBOX_URL + "/api/dcim/devices/?" + urlencode(result))
