@@ -1,0 +1,6 @@
+[flake8]
+select = WPS
+ignore =
+    WPS102,
+    WPS111,
+    WPS421,
