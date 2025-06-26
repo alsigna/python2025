@@ -24,5 +24,12 @@ def collect_output(scrapli: ScrapliDict, command: str) -> str:
     return ""
 
 
+def save_config(scrapli: ScrapliDict) -> None: ...
+
+
+def reload(scrapli: ScrapliDict) -> None: ...
+
+
 if __name__ == "__main__":
     collect_output(scrapli, "show version")
+    reload()

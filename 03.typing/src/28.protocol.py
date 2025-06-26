@@ -12,7 +12,7 @@ class Figure(Protocol):
         print(f"фигура '{self.name}', c площадью '{self.area}'")
 
     @property
-    def display_colour(self) -> str:
+    def colour(self) -> str:
         return "red"
 
 
@@ -30,7 +30,7 @@ class Square:
         print(f"фигура '{self.name}', c площадью '{self.area}'")
 
     @property
-    def display_colour(self) -> str:
+    def colour(self) -> str:
         return "black"
 
 
@@ -51,7 +51,7 @@ def show_info(f: Figure) -> None:
 
 
 if __name__ == "__main__":
-    for f in Square(3), Rectangle(2, 3):
+    for f in (Square(3), Rectangle(3, 4)):
         print("-" * 10)
         show_info(f)
         if isinstance(f, Figure):

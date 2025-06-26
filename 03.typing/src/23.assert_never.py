@@ -1,5 +1,11 @@
 from enum import StrEnum, auto
-from typing import assert_never
+from typing import Never, assert_never
+
+
+def never_call(arg: Never) -> None: ...
+
+
+class MyAppException(Exception): ...
 
 
 class Vendor(StrEnum):
@@ -10,18 +16,18 @@ class Vendor(StrEnum):
 
 
 def lag_name(vendor: Vendor, intf_id: int) -> str:
-    # # вариант с if
-    # if vendor == Vendor.CISCO:
-    #     return f"Port-Channel{intf_id}"
-    # elif vendor == Vendor.HUAWEI:
-    #     return f"Eth-Trunk{intf_id}"
-    # elif vendor == Vendor.ARISTA:
-    #     return f"Port-Channel{intf_id}"
-    # # elif vendor == Vendor.ELTEX:
-    # #     return f"Port-Channel{intf_id}"
-    # else:
-    #     # assert_never(vendor)
-    #     raise NotImplementedError(vendor)
+    # вариант с if
+    if vendor == Vendor.CISCO:
+        return f"Port-Channel{intf_id}"
+    elif vendor == Vendor.HUAWEI:
+        return f"Eth-Trunk{intf_id}"
+    elif vendor == Vendor.ARISTA:
+        return f"Port-Channel{intf_id}"
+    elif vendor == Vendor.ELTEX:
+        return f"Port-Channel{intf_id}"
+    else:
+        never_call(vendor)
+        raise MyAppException(f"неизвестный {vendor}")
 
     # # вариант с match
     # match vendor:
@@ -51,4 +57,5 @@ def lag_name(vendor: Vendor, intf_id: int) -> str:
 
 if __name__ == "__main__":
     print(lag_name(Vendor.HUAWEI, 3))
+    print(lag_name(Vendor.CISCO, 3))
     print(lag_name(Vendor.ELTEX, 3))

@@ -5,7 +5,7 @@ T = TypeVar("T")
 
 # class MyBox[T]:
 class MyBox(Generic[T]):
-    def __init__(self, item: T):
+    def __init__(self, item: T) -> None:
         self.item = item
 
     def show_item(self) -> T:

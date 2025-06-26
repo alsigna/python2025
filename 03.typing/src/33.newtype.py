@@ -21,4 +21,5 @@ def connect_to_device(ip: IP) -> str:
 
 if __name__ == "__main__":
     print(connect_to_device(ip("1.2.3.4")))
-    # print(connect_to_device("1.2.3.400"))
+    print("-" * 10)
+    print(connect_to_device(ip("1.2.3.400")))

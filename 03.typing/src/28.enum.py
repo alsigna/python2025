@@ -22,5 +22,5 @@ print(
         command="show version",
         transport=Transport.SSH,
         # transport="netconf",
-    )
+    ),
 )

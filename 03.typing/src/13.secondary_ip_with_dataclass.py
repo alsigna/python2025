@@ -10,6 +10,9 @@ class IP:
     netmask: str
     secondary: bool
 
+    def __str__(self) -> str:
+        return f"{self.address} / {self.netmask} / {self.secondary}"
+
 
 def get_ip(config: str) -> Iterator[IP]:
     pattern = re.compile(

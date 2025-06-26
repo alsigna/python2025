@@ -70,7 +70,7 @@ class HuaweiVRP(Device):
 
 
 class DeviceFactory:
-    _PLATFORM_MAP: dict[str, type[Device]] = {
+    _PLATFORM_MAP: dict[Platform, type[Device]] = {
         Platform.ARISTA_EOS: AristaEOS,
         Platform.HUAWEI_VRP: HuaweiVRP,
     }

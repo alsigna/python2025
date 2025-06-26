@@ -4,19 +4,19 @@ from typing import TypeVar, overload
 # example - 1
 
 
-@overload
-def foo(a: str, b: str) -> int: ...
+# @overload
+# def foo(a: str, b: str) -> int: ...
 
 
-@overload
-def foo(a: int, b: int) -> int: ...
+# @overload
+# def foo(a: int, b: int) -> int: ...
 
 
-def foo(a: int | str, b: int | str) -> int | str:
-    if isinstance(a, int) and isinstance(b, int):
-        return a + b
-    else:
-        return int(a) + int(b)
+# def foo(a: int | str, b: int | str) -> int:
+#     if isinstance(a, int) and isinstance(b, int):
+#         return a + b
+#     else:
+#         return int(a) + int(b)
 
 
 # example - 2
@@ -47,7 +47,7 @@ def concat(a: T | Sequence[T], b: T | None = None) -> T:
     result: T
     if isinstance(a, Sequence) and b is None:
         result = _concat_seq(a)
-    elif not isinstance(a, Sequence) and b is not None:
+    elif (not isinstance(a, Sequence) or isinstance(a, str)) and b is not None:
         result = _concat_two(a, b)
     else:
         raise TypeError("Invalid arguments")
@@ -55,9 +55,8 @@ def concat(a: T | Sequence[T], b: T | None = None) -> T:
 
 
 if __name__ == "__main__":
-    # print(concat(1, 2))
-    # print(concat("1", "2"))
-    print(concat([1, 2, 3]))
     print(concat(1, 2))
     print(concat("1", "2"))
+    print(concat([1, 2, 3]))
+    print(concat("1", 2))
     # pow, sum как пример

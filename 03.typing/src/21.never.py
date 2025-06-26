@@ -19,3 +19,4 @@ if __name__ == "__main__":
     print(to_int(3))
     print(to_int(3.14))
     print(to_int(3.5))
+    print(to_int("3.5"))

@@ -1,13 +1,16 @@
 import re
+from collections import namedtuple
 from collections.abc import Iterator
 from textwrap import dedent
 from typing import NamedTuple
 
+IP = namedtuple("IP", "address, netmask, secondary")
 
-class IP(NamedTuple):
-    address: str
-    netmask: str
-    secondary: bool
+
+# class IP(NamedTuple):
+#     address: str
+#     netmask: str
+#     secondary: bool
 
 
 def get_ip(config: str) -> Iterator[IP]:

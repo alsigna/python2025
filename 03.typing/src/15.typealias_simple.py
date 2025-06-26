@@ -1,17 +1,16 @@
 import re
 from collections.abc import Iterator
 from textwrap import dedent
+from typing import TypeAlias
 
-# from typing import TypeAlias
+Address: TypeAlias = str
+Netmask: TypeAlias = str
+Secondary: TypeAlias = bool
 
-# Address: TypeAlias = str
-# Netmask: TypeAlias = str
-# Secondary: TypeAlias = bool
-
-# с py3.12
-type Address = str
-type Netmask = str
-type Secondary = bool
+# # с py3.12
+# type Address = str
+# type Netmask = str
+# type Secondary = bool
 
 
 def get_ip(config: str) -> Iterator[tuple[Address, Netmask, Secondary]]:
@@ -38,4 +37,6 @@ if __name__ == "__main__":
     )
 
     for ip in get_ip(config):
+        foo(ip[0])
+        foo(ip[1])
         print(ip)
