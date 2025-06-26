@@ -1,3 +1,7 @@
+# poetry run mypy 04.mypy/src/05.warn-unreachable.py
+# poetry run mypy 04.mypy/src/05.warn-unreachable.py --warn-unreachable
+
+
 from enum import StrEnum, auto
 
 
@@ -12,9 +16,8 @@ def vendor_check(v: Vendor) -> bool:
     elif v == Vendor.HUAWEI:
         return False
     else:
+        # на строку не ругается, с warn-unreachable - ошибку выдает
         print(f"unknown vendor: '{v}'")
-        # на raise не ругается
-        # raise ValueError(v)
 
 
 if __name__ == "__main__":

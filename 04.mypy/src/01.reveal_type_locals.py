@@ -1,3 +1,6 @@
+# poetry run mypy 04.mypy/src/01.reveal_type_locals.py
+
+
 from typing import Sequence, TypeVar
 
 # from typing import reveal_type
