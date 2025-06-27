@@ -3,8 +3,7 @@ from netaddr import IPAddress
 
 class Device:
     def __init__(self) -> None:
-        # self.__ip = "0.0.0.0"
-        self.__ip = "1.2.3.4"
+        self.__ip = "0.0.0.0"  # noqa: S104
 
     def ip(self) -> str:
         return self.__ip

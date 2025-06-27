@@ -22,7 +22,7 @@ class Router(Device):
 
 
 if __name__ == "__main__":
-    sw = Switch("rt1", "192.168.1.1")
+    sw = Switch("sw1", "192.168.1.1")
     rt = Router("rt1", "192.168.1.1", "xe")
 
     sw.show_info()
