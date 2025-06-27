@@ -573,7 +573,7 @@ d.set_ip("wrong string")
     ```python
     class MyClass:
         def __init__(self): ...  # переопределяем init - ОК
-        def __my_custom_method__(self): ...  # создаем свой dunder-метод
+        def __my_custom_method__(self): ...  # создаем свой dunder-метод - не ОК
     ```
 
 6. мусорная переменная `_`: переменная для игнорирования ненужных значений, например в циклах или при распаковки.
