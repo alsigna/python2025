@@ -80,6 +80,7 @@ lint.select = [
     "DTZ",  # flake8-datetimez
     "ERA",  # flake8-eradicate
     "SLOT", # flake8-slots
+    "SLF",  # flake8-self
 ]
 lint.ignore = [
     "D100",   # Missing docstring in public module
