@@ -55,6 +55,30 @@ class CommandHandler(Protocol):
     def run(self) -> str: ...
 
 
+class HandlerRegistry:
+    _handlers: dict[str, type[CommandHandler]] = {}
+
+    @classmethod
+    def register(cls, handler: type[CommandHandler]) -> None:
+        if not isinstance(handler, CommandHandler):
+            raise TypeError(f"{handler.__name__} не реализует протокол CommandHandler")
+        cls._handlers[handler.__name__] = handler
+
+    @classmethod
+    def get(cls, name: str) -> type[CommandHandler]:
+        return cls._handlers[name]
+
+    @classmethod
+    def all(cls) -> list[CommandHandler]:
+        return list(cls._handlers.values())
+
+
+def register_handler(cls):
+    HandlerRegistry.register(cls)
+    return cls
+
+
+@register_handler
 class RunningCollector:
     def __init__(self, device: Device) -> None:
         self._device = device
@@ -71,6 +95,7 @@ class RunningCollector:
         return config[::-1]
 
 
+@register_handler
 class RunningSaver:
     def __init__(self, device: Device) -> None:
         self._device = device
@@ -84,16 +109,14 @@ class RunningSaver:
 
 
 if __name__ == "__main__":
-    pipeline: list[type[CommandHandler]] = [
-        RunningCollector,
-        RunningSaver,
-    ]
     with Device("1.2.3.4") as device:
         results: list[str] = []
-        for Handler in pipeline:
-            print(f"{Handler.__name__=}")
-            print(f"{isinstance(Handler, CommandHandler)=}")
-            results.append(Handler(device).run())
+        for handler in HandlerRegistry.all():
+            print(f"{handler.__name__=}")
+            print(f"{isinstance(handler, CommandHandler)=}")
+            results.append(handler(device).run())
+            print("-" * 10)
 
+    print("\nрезультаты:")
     for result in results:
         print(result)

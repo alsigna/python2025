@@ -1,3 +1,4 @@
+from functools import cached_property
 from random import randint
 
 
@@ -6,7 +7,8 @@ class Switch:
         self.ip = ip
         self.hostname = hostname
 
-    @property
+    # @property
+    @cached_property
     def free_interface_count(self) -> int:
         # подключаемся к устройству/обращаемся в базе и вычисляем
         # количество свободных портов

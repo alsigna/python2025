@@ -21,8 +21,10 @@ if __name__ == "__main__":
     kitchen = Room("кухня", 10)
     bedroom = Room("спальня", 12)
     house = House("ул. крылатская 17к4")
+
     house.rooms.append(kitchen)
     house.rooms.append(bedroom)
     print(house)
+
     bedroom.area = 15
     print(house)
