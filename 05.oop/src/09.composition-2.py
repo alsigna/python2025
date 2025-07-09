@@ -72,13 +72,13 @@ class HandlerRegistry:
     def all(cls) -> list[CommandHandler]:
         return list(cls._handlers.values())
 
+    @classmethod
+    def register_handler(cls, handler: type[CommandHandler]) -> type[CommandHandler]:
+        cls.register(handler)
+        return handler
 
-def register_handler(cls):
-    HandlerRegistry.register(cls)
-    return cls
 
-
-@register_handler
+@HandlerRegistry.register_handler
 class RunningCollector:
     def __init__(self, device: Device) -> None:
         self._device = device
@@ -95,7 +95,7 @@ class RunningCollector:
         return config[::-1]
 
 
-@register_handler
+@HandlerRegistry.register_handler
 class RunningSaver:
     def __init__(self, device: Device) -> None:
         self._device = device

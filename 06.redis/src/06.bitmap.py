@@ -14,11 +14,11 @@ for day in active_days:
     r.setbit(bitmap_key, day, 1)
 
 WEEKDAYS = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
-uses_active = []
+users_active = []
 for i in range(7):
     bit = r.getbit(bitmap_key, i)
     mark = "\u2705" if bit else "\u274c"  # ✅ или ❌
-    uses_active.append(f"{WEEKDAYS[i]}: {mark}")
+    users_active.append(f"{WEEKDAYS[i]}: {mark}")
 
 print(f"Активность пользователя {user_id}:")
-print("\n".join(uses_active))
+print("\n".join(users_active))

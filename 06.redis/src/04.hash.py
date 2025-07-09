@@ -11,7 +11,7 @@ r.hset(name="user:2", key="name", value="Bob")
 r.hget(name="user:1", key="age")
 # все значения (dict)
 r.hgetall(name="user:1")
-# список ключей (dict.keys
+# список ключей (dict.keys)
 r.hkeys(name="user:1")
 # список значение (dict.values)
 r.hvals(name="user:1")

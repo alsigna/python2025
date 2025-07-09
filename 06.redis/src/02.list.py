@@ -10,7 +10,7 @@ r = Redis(decode_responses=True)
 # (integer) 3
 tasks = ["task-1", "task-2", "task-3"]
 # положить справа
-r.rpush("tasks", *tasks)
+r.rpush("tasks", "task1", "task2", "task-3")
 # положить слева
 r.lpush("tasks", *tasks)
 # размер списка
@@ -25,6 +25,7 @@ r.lrange("tasks", 2, 2)
 
 # вернуть и удалить один элемент слева
 r.lpop("tasks")
+
 # можно указать количество элементов
 r.lpop("tasks", 2)
 

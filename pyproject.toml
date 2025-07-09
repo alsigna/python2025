@@ -16,6 +16,8 @@ dependencies = [
     "aiokafka (>=0.12.0,<0.13.0)",
     "wemake-python-styleguide (>=1.1.0,<2.0.0)",
     "netaddr (>=1.3.0,<2.0.0)",
+    "redis (>=6.2.0,<7.0.0)",
+    "rq (>=2.4.0,<3.0.0)",
 ]
 
 
