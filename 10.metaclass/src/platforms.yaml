@@ -1,0 +1,21 @@
+arista_eos:
+  vendor: arista
+  commands:
+    - show version
+    - show running-config
+  secrets:
+    - sha512 (\S+)
+    - community (\S+)
+    - key 7 (\S+)
+
+cisco_iosxe:
+  vendor: cisco
+  commands:
+    - show version
+    - show running-config
+
+huawei_vrp:
+  vendor: huawei
+  commands:
+    - display version
+    - display current-configuration
