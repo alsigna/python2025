@@ -1,0 +1,19 @@
+FROM python:3.13-slim
+
+COPY ./requirements.txt ./requirements.txt
+
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PIP_NO_CACHE_DIR=on
+ENV PIP_DISABLE_PIP_VERSION_CHECK=on
+
+RUN apt update && \
+apt install -y ssh && \
+apt clean
+
+RUN pip install -r ./requirements.txt  
+
+WORKDIR /app
+COPY ./app /app
+
+CMD ["supervisord", "-c", "./supervisord.conf", "-n"]
