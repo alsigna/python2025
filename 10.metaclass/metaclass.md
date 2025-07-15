@@ -12,8 +12,8 @@
 
 Метаклассы - это классы, которые занимаются созданием классов, они позволяют вмешиваться и переопределять процесс создания.
 
-Класс - это объект, который создает экземпляры
-Метакласс - это объект, который создает классы
+Класс - это объект, который создает экземпляры.  
+Метакласс - это объект, который создает классы.
 
 ## `type`
 
@@ -66,7 +66,7 @@ Device = type(
 
 ```python
 class MyMeta(type):
-    def __new__(mcls, name: str, bases: tuple[type, ...], attrs: dict[str, Any]) -> type[Any]:
+    def __new__(mcls, name: str, bases: tuple[type, ...], attrs: dict[str, Any]) -> type:
         print(f"создание класса '{name}'")
         attrs["created_by"] = "MyMeta"
         return super().__new__(mcls, name, bases, attrs)

@@ -1,5 +1,5 @@
 class Device:
-    platform: "cisco_iosxe"
+    platform = "cisco_iosxe"
 
     def __init__(self, ip: str) -> None:
         self.ip = ip
