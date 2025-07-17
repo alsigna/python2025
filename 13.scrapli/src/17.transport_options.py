@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel
 from scrapli import Scrapli
 from scrapli.response import Response
@@ -34,7 +36,7 @@ devices = {
 }
 
 
-def send_command(device: dict[str, str], command: str) -> Response:
+def send_command(device: dict[str, Any], command: str) -> Response:
     with Scrapli(**device) as ssh:
         return ssh.send_command(command)
 

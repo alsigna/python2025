@@ -8,7 +8,7 @@ device = {
     "ssh_config_file": True,
 }
 
-with GenericDriver(**device) as ssh:
+with GenericDriver(**device) as ssh:  # type: ignore [arg-type]
     ssh.send_command("terminal length 0")
     ssh.send_command("terminal width 512")
     output = ssh.send_command("show ip arp")

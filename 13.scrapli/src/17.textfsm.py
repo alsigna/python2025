@@ -24,7 +24,7 @@ def send_commands(device: dict[str, Any], commands: list[str]) -> MultiResponse:
         )
 
 
-def print_table(data: list[dict], title: str):
+def print_table(data: list[dict[str, Any]], title: str) -> None:
     table = Table(title=title, box=box.SQUARE_DOUBLE_HEAD)
     columns = data[0].keys()
 
@@ -55,4 +55,4 @@ if __name__ == "__main__":
             print("-" * 100)
             print(f"command: {r.channel_input}")
             print(f"raw output:\n{r.result}\n")
-            print_table(r.textfsm_parse_output(), r.channel_input)
+            print_table(r.textfsm_parse_output(), r.channel_input)  # type: ignore [arg-type]
