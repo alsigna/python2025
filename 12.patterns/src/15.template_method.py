@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 
 class DeviceConfigBackup(ABC):
@@ -22,7 +23,7 @@ class DeviceConfigBackup(ABC):
         return f"=== Конфигурация ===\n{config}\n=== EOF ==="
 
     def generate_backup_filename(self, ip: str) -> str:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        timestamp = datetime.now(tz=ZoneInfo("Europe/Moscow")).strftime("%Y%m%d_%H%M%S")
         return f"backup_{self.__class__.__name__}_{ip}_{timestamp}.txt"
 
     def save_to_file(self, filename: str, config: str) -> None:
@@ -56,16 +57,18 @@ class HuaweiConfigBackup(DeviceConfigBackup):
         return f"### Huawei Configuration ###\n{config}\n### EOF ###"
 
 
-def backup_configurations(devices: list[DeviceConfigBackup]) -> None:
+def backup_configurations(devices: list[tuple[str, str]]) -> None:
     for platform, ip in devices:
         print(f"\nРезервное копирование '{platform}' устройства '{ip}':")
-        if platform == "cisco_iosxe":
-            backup = CiscoConfigBackup()
-        elif platform == "huawei_vrp":
-            backup = HuaweiConfigBackup()
-        else:
-            print(f"Неизвестная платформа устройства: '{platform}'")
-            continue
+        backup: DeviceConfigBackup
+        match platform:
+            case "cisco_iosxe":
+                backup = CiscoConfigBackup()
+            case "huawei_vrp":
+                backup = HuaweiConfigBackup()
+            case _:
+                print(f"Неизвестная платформа устройства: '{platform}'")
+                continue
 
         filename = backup.backup_configuration(ip)
         print(f"конфигурация сохранена в '{filename}'")

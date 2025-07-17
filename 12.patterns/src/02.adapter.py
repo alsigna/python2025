@@ -30,24 +30,22 @@ class SoT:
     }
 
     @classmethod
-    def request(cls, obj: Literal["device", "interface", "ip"]) -> dict[str, str]:
+    def request(cls, obj: Literal["device", "interface"]) -> dict[int, dict[str, Any]]:
         match obj:
             case "device":
                 return cls.DEVICES
             case "interface":
                 return cls.INTERFACES
-            case "ip":
-                return cls.IPS
 
 
 class DeviceSoT(Device, SoT):
-    def _device_id_by_hostname(self, data: dict, hostname: str) -> int:
-        for _id, params in data.items():
+    def _device_id_by_hostname(self, data: dict[int, Any], hostname: str) -> int:
+        for id_, params in data.items():
             if params.get("hostname") == hostname:
-                return _id
+                return id_
         return 0
 
-    def _interfaces_by_device_id(self, data: dict, device_id: int) -> list[tuple[str, str]]:
+    def _interfaces_by_device_id(self, data: dict[int, Any], device_id: int) -> list[tuple[str, str]]:
         result = []
         for params in data.values():
             if params.get("device_id") == device_id:

@@ -96,7 +96,7 @@ class HuaweiVRPFactory(Factory):
         return cls._parser
 
 
-def some_client_code(ip: str, factory: Factory):
+def some_client_code(ip: str, factory: Factory) -> None:
     device = factory.create_device(ip)
     parser = factory.create_parser()
 

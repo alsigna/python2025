@@ -47,12 +47,13 @@ db2 = Database("pg://2")
 redis2 = Redis("redis://2")
 
 
-print(f"{db1 is db2 = }")
-print(f"{db1.url = }")
-print(f"{db2.url = }")
+if __name__ == "__main__":
+    print(f"{db1 is db2 = }")
+    print(f"{db1.url = }")
+    print(f"{db2.url = }")
 
-print(f"{redis1 is redis2 = }")
-print(f"{redis1.url = }")
-print(f"{redis2.url = }")
+    print(f"{redis1 is redis2 = }")
+    print(f"{redis1.url = }")
+    print(f"{redis2.url = }")
 
-print(f"{redis1 is db1 = }")
+    print(f"{redis1 is db1 = }")  # type: ignore [comparison-overlap]

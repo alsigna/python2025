@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class NetworkDevice:
     def __init__(self, ip: str) -> None:
         self.ip = ip
@@ -17,7 +20,7 @@ class Netbox:
         self.url = url
         self.token = token
 
-    def get_device(self, hostname: str) -> None:
+    def get_device(self, hostname: str) -> str:
         print(f"получаем информацию об '{hostname}' из '{self.url}'")
         return self.DEVICES[hostname]
 
@@ -26,13 +29,13 @@ class Redis:
     def __init__(self, url: str):
         self.url = url
 
-    def store(self, data: dict) -> None:
+    def store(self, data: dict[str, Any]) -> None:
         print(f"сохраняем данные в redis '{self.url}'")
 
 
 class ConfigCollector:
     NETBOX_URL = "netbox.my.lab"
-    NETBOX_TOKEN = "12345"
+    NETBOX_TOKEN = "12345"  # noqa: S105
     REDIS_URL = "redis.my.lab"
 
     def __init__(

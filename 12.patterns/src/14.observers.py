@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 import requests
 
 NETBOX_URL = "https://demo.netbox.dev/api/dcim/devices/"
-NETBOX_TOKEN = "fe7ec39d2863d3b04860bd86ec28c2e2ff526ded"
+NETBOX_TOKEN = "fe7ec39d2863d3b04860bd86ec28c2e2ff526ded"  # noqa: S105
 NETBOX_HEADERS = {
     "Authorization": f"Token {NETBOX_TOKEN}",
     "Content-Type": "application/json",
@@ -36,13 +36,19 @@ class Netbox(DeviceObserver):
             url=NETBOX_URL,
             data=json.dumps([{"id": device_id, "status": status}]),
             headers=NETBOX_HEADERS,
+            timeout=30,
         )
         new_status = response.json()[0]["status"]["value"]
         hostname = response.json()[0]["name"]
         print(f"[NETBOX] статус '{hostname}' изменен на '{new_status}'")
 
     def update(self, device: "Device", status: str) -> None:
-        response = requests.get(NETBOX_URL, {"name": device.name}, headers=NETBOX_HEADERS)
+        response = requests.get(
+            NETBOX_URL,
+            {"name": device.name},
+            headers=NETBOX_HEADERS,
+            timeout=30,
+        )
         nb_status = response.json()["results"][0]["status"]["value"]
         device_id = response.json()["results"][0]["id"]
         if status == "up" and nb_status != "active":
@@ -58,7 +64,7 @@ class Device:
     def __init__(self, name: str) -> None:
         self.name = name
         self._status = "down"
-        self._observers = []
+        self._observers: list[DeviceObserver] = []
 
     def attach(self, observer: DeviceObserver) -> None:
         self._observers.append(observer)

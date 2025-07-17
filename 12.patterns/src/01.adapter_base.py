@@ -15,7 +15,7 @@ class External:
 
 # адаптер - делает интерфейс адаптируемого класса, совместимым с целевым
 class Adapter(Target, External):
-    def request(self):
+    def request(self) -> tuple[str, str]:
         ip = self.unsupported_request()
         return str(ip.ip), str(ip.netmask)
 

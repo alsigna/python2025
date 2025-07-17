@@ -18,7 +18,7 @@ class Adapter(Target):
     def __init__(self, external: External):
         self.external = external
 
-    def request(self):
+    def request(self) -> tuple[str, str]:
         ip = self.external.unsupported_request()
         return str(ip.ip), str(ip.netmask)
 

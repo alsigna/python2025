@@ -1,17 +1,17 @@
-from typing import Any, Literal, Self
+from typing import Any, Literal, Self, cast
 
 import requests
 
-NETBOX_TOKEN = "fe7ec39d2863d3b04860bd86ec28c2e2ff526ded"
+NETBOX_TOKEN = "9a824285b4ad0d120f6acf53ab0ac1b9b6633b5c"  # noqa: S105
 NETBOX_URL = "https://demo.netbox.dev/api/dcim/devices/"
 
 
 class NetboxRequestBuilder:
-    def __init__(self):
+    def __init__(self) -> None:
         self._method = "GET"
         self._url = ""
-        self._headers = {}
-        self._params = {}
+        self._headers: dict[str, str] = {}
+        self._params: dict[str, list[str]] = {}
         self._timeout = 5
 
     def method(self, method: Literal["get", "post"] = "get") -> Self:
@@ -28,12 +28,9 @@ class NetboxRequestBuilder:
 
     def add_params(self, key: str, value: str) -> Self:
         if key in self._params:
-            if isinstance(self._params[key], list):
-                self._params[key].append(value)
-            else:
-                self._params[key] = [self._params[key], value]
+            self._params[key].append(value)
         else:
-            self._params[key] = value
+            self._params[key] = [value]
         return self
 
     def timeout(self, timeout: int = 5) -> Self:
@@ -50,19 +47,21 @@ class NetboxRequestBuilder:
         )
         print(response.url)
         response.raise_for_status()
-        return response.json()
+        return cast(dict[str, Any], response.json())
 
 
-builder = NetboxRequestBuilder()
-data = (
-    builder.method("get")
-    .url(NETBOX_URL)
-    .add_header("Authorization", f"Token {NETBOX_TOKEN}")
-    .add_header("Content-Type", "application/json")
-    .add_header("Accept", "application/json")
-    .add_params("manufacturer", "cisco")
-    .add_params("role", "router")
-    .add_params("role", "switch")
-    .add_params("brief", True)
-    .send()
-)
+if __name__ == "__main__":
+    builder = NetboxRequestBuilder()
+    data = (
+        builder.method("get")
+        .url(NETBOX_URL)
+        .add_header("Authorization", f"Token {NETBOX_TOKEN}")
+        .add_header("Content-Type", "application/json")
+        .add_header("Accept", "application/json")
+        .add_params("manufacturer", "cisco")
+        .add_params("role", "router")
+        .add_params("role", "core-switch")
+        .add_params("brief", "true")
+        .send()
+    )
+    # print(data)

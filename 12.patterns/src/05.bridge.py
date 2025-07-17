@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class Device(ABC):
     @property
     @abstractmethod
-    def platform(self): ...
+    def platform(self) -> str: ...
 
     def __init__(self, ip: str) -> None:
         self.ip = ip
