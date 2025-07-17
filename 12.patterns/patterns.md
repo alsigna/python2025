@@ -70,7 +70,7 @@ class Target:
 # внешний адаптируемый класс - содержит что-то полезное, но не совместим с клиентским кодом
 class External:
     def unsupported_request(self) -> IPv4Interface:
-        return IPv4Interface("192.168.0.1/24")
+        return IPv4Interface("192.168.255.1/24")
 
 # адаптер - делает интерфейс адаптируемого класса, совместимым с целевым
 class Adapter(Target, External):
@@ -99,7 +99,7 @@ class Target:
 # адаптируемый класс - содержит что-то полезное, но не совместим с клиентским кодом
 class External:
     def unsupported_request(self) -> IPv4Interface:
-        return IPv4Interface("192.168.0.1/24")
+        return IPv4Interface("192.168.255.1/24")
 
 # адаптер - делает интерфейс адаптируемого класса, совместимым с целевым
 class Adapter(Target):
@@ -320,16 +320,19 @@ class DeviceFactory:
 
 ```python
 class DeviceFactory(ABC):
+    @classmethod
     @abstractmethod
     def create(cls, ip: str) -> Device: ...
 
 
 class CiscoFactory(DeviceFactory):
+    @classmethod
     def create(cls, ip: str) -> Device:
         return CiscoIOSXE(ip)
 
 
 class HuaweiFactory(DeviceFactory):
+    @classmethod
     def create(cls, ip: str) -> Device:
         return HuaweiVRP(ip)
 ```
@@ -345,21 +348,27 @@ class HuaweiFactory(DeviceFactory):
 
 ```python
 class Factory(ABC):
+    @classmethod
     @abstractmethod
     def create_device(cls, ip: str) -> Device: ...
 
+    @classmethod
     @abstractmethod
     def create_parser(cls) -> Parser: ...
 
 class CiscoIOSXEFactory(Factory):
+    @classmethod
     def create_device(cls, ip: str) -> Device:
         ...
+    @classmethod
     def create_parser(cls) -> Parser:
         ...
 
 class HuaweiVRPFactory(Factory):
+    @classmethod
     def create_device(cls, ip: str) -> Device:
         ...
+    @classmethod
     def create_parser(cls) -> Parser:
         ...
 

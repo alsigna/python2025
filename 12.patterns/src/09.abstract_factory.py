@@ -41,13 +41,13 @@ class Parser(ABC):
     def parse_version(cls, output: str) -> str: ...
 
 
-class CiscoIOSXEParser(ABC):
+class CiscoIOSXEParser(Parser):
     @classmethod
     def parse_version(cls, output: str) -> str:
         return "15.1(4)M5"
 
 
-class HuaweiVRPParser(ABC):
+class HuaweiVRPParser(Parser):
     @classmethod
     def parse_version(cls, output: str) -> str:
         return "V100R005C60"
@@ -59,9 +59,11 @@ class HuaweiVRPParser(ABC):
 
 
 class Factory(ABC):
+    @classmethod
     @abstractmethod
     def create_device(cls, ip: str) -> Device: ...
 
+    @classmethod
     @abstractmethod
     def create_parser(cls) -> Parser: ...
 
@@ -69,9 +71,11 @@ class Factory(ABC):
 class CiscoIOSXEFactory(Factory):
     _parser: Parser | None = None
 
+    @classmethod
     def create_device(cls, ip: str) -> Device:
         return CiscoIOSXE(ip)
 
+    @classmethod
     def create_parser(cls) -> Parser:
         if cls._parser is None:
             cls._parser = CiscoIOSXEParser()
@@ -81,9 +85,11 @@ class CiscoIOSXEFactory(Factory):
 class HuaweiVRPFactory(Factory):
     _parser: Parser | None = None
 
+    @classmethod
     def create_device(cls, ip: str) -> Device:
         return HuaweiVRP(ip)
 
+    @classmethod
     def create_parser(cls) -> Parser:
         if cls._parser is None:
             cls._parser = HuaweiVRPParser()

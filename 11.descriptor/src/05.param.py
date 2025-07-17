@@ -42,6 +42,7 @@ class Parameter[T]:
             return converted
 
         if self._default is not None:
+            instance.__dict__[self.name] = self._default
             return self._default
 
         raise AttributeError(
@@ -83,6 +84,6 @@ if __name__ == "__main__":
     print(f"{p1.age=}")
     print(f"{p1.height=}")
     print(f"{p1.name=}")
+    print(f"{p1.is_admin=}")
     p1.height = 192
     print(f"{p1.height=}")
-    print(f"{p1.is_admin=}")

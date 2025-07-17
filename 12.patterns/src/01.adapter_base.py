@@ -10,7 +10,7 @@ class Target:
 # адаптируемый класс - содержит что-то полезное, но не совместим с клиентским кодом
 class External:
     def unsupported_request(self) -> IPv4Interface:
-        return IPv4Interface("192.168.0.1/24")
+        return IPv4Interface("192.168.255.1/24")
 
 
 # адаптер - делает интерфейс адаптируемого класса, совместимым с целевым

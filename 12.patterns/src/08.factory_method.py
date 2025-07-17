@@ -33,16 +33,19 @@ class HuaweiVRP(Device):
 
 
 class DeviceFactory(ABC):
+    @classmethod
     @abstractmethod
     def create(cls, ip: str) -> Device: ...
 
 
 class CiscoFactory(DeviceFactory):
+    @classmethod
     def create(cls, ip: str) -> Device:
         return CiscoIOSXE(ip)
 
 
 class HuaweiFactory(DeviceFactory):
+    @classmethod
     def create(cls, ip: str) -> Device:
         return HuaweiVRP(ip)
 

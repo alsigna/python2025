@@ -19,7 +19,10 @@ class Device:
 
 
 class SoT:
-    DEVICES = {1: {"hostname": "rt1"}, 2: {"hostname": "rt2"}}
+    DEVICES = {
+        1: {"hostname": "rt1"},
+        2: {"hostname": "rt2"},
+    }
     INTERFACES = {
         101: {"device_id": 1, "name": "eth1", "ip": "192.168.1.1/24"},
         102: {"device_id": 1, "name": "eth2", "ip": "192.168.2.1/24"},
