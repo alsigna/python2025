@@ -2,7 +2,7 @@ from typing import Any, Literal, Self, cast
 
 import requests
 
-NETBOX_TOKEN = "9a824285b4ad0d120f6acf53ab0ac1b9b6633b5c"  # noqa: S105
+NETBOX_TOKEN = "b91ad8c15445553d0c7d1bdc726535b3b52c3a12"  # noqa: S105
 NETBOX_URL = "https://demo.netbox.dev/api/dcim/devices/"
 
 
@@ -52,7 +52,7 @@ class NetboxRequestBuilder:
 
 if __name__ == "__main__":
     builder = NetboxRequestBuilder()
-    data = (
+    request = (
         builder.method("get")
         .url(NETBOX_URL)
         .add_header("Authorization", f"Token {NETBOX_TOKEN}")
@@ -61,7 +61,9 @@ if __name__ == "__main__":
         .add_params("manufacturer", "cisco")
         .add_params("role", "router")
         .add_params("role", "core-switch")
-        .add_params("brief", "true")
-        .send()
     )
+    brief = False
+    if brief:
+        request.add_params("brief", "true")
+    data = request.send()
     # print(data)

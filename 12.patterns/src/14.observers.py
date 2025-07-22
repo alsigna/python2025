@@ -2,9 +2,11 @@ import json
 from abc import ABC, abstractmethod
 
 import requests
+import urllib3
 
+urllib3.disable_warnings()
 NETBOX_URL = "https://demo.netbox.dev/api/dcim/devices/"
-NETBOX_TOKEN = "fe7ec39d2863d3b04860bd86ec28c2e2ff526ded"  # noqa: S105
+NETBOX_TOKEN = "b91ad8c15445553d0c7d1bdc726535b3b52c3a12"  # noqa: S105
 NETBOX_HEADERS = {
     "Authorization": f"Token {NETBOX_TOKEN}",
     "Content-Type": "application/json",
@@ -48,6 +50,7 @@ class Netbox(DeviceObserver):
             {"name": device.name},
             headers=NETBOX_HEADERS,
             timeout=30,
+            verify=False,
         )
         nb_status = response.json()["results"][0]["status"]["value"]
         device_id = response.json()["results"][0]["id"]
