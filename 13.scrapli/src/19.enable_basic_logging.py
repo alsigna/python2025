@@ -13,7 +13,7 @@ device = {
     "ssh_config_file": True,
 }
 
-enable_basic_logging("./18.enable_basic_logging.log", "DEBUG")
+enable_basic_logging("./19.enable_basic_logging.log", "DEBUG")
 
 
 def ping_interactive(device: dict[str, Any], target: str) -> Response:

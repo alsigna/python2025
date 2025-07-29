@@ -23,18 +23,12 @@ def send_configs(device: dict[str, Any], configs: list[str]) -> MultiResponse:
 
 
 if __name__ == "__main__":
-    config = (
-        dedent(
-            """
-            int loo1001
-             ip address 100.64.72.101 255.255.255.255
-            int loo1002
-             ip address 100.64.73.101 255.255.255.255
-            """,
-        )
-        .strip()
-        .splitlines()
-    )
+    config = [
+        "int loo101",
+        "ip address 100.64.72.101 255.255.255.255",
+        "int loo102",
+        "ip address 100.64.73.102 255.255.255.255",
+    ]
     try:
         result = send_configs(device, config)
     except Exception as exc:

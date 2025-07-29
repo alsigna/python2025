@@ -10,10 +10,10 @@ device = {
     "auth_password": "P@ssw0rd",
     "auth_strict_key": False,
     "ssh_config_file": True,
-    # "auth_secondary": "P@ssw0rd",
-    "default_desired_privilege_level": "exec",
+    "auth_secondary": "P@ssw0rd",
+    # "default_desired_privilege_level": "exec",
     # "default_desired_privilege_level": "privilege_exec",
-    # "default_desired_privilege_level": "configuration",
+    "default_desired_privilege_level": "configuration",
 }
 
 
@@ -25,7 +25,7 @@ def send_command(device: dict[str, Any], command: str) -> Response:
 
 if __name__ == "__main__":
     try:
-        result = send_command(device, "show privilege")
+        result = send_command(device, "do show privilege")
     except Exception as exc:
         print(f"ошибка {exc.__class__.__name__}: {str(exc)}")
     else:

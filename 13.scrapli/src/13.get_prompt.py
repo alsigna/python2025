@@ -9,7 +9,7 @@ device = {
     "auth_password": "P@ssw0rd",
     "auth_secondary": "P@ssw0rd",
     "auth_strict_key": False,
-    "default_desired_privilege_level": "exec",
+    # "default_desired_privilege_level": "exec",
     "ssh_config_file": True,
 }
 

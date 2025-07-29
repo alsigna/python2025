@@ -18,7 +18,7 @@ def send_command(device: dict[str, Any], command: str) -> Response:
         **device,
         # channel_log=True,
         channel_log_mode="write",
-        channel_log="./19.channel_log.log",
+        channel_log="./20.channel_log.log",
     ) as ssh:
         return ssh.send_command(command=command)
 

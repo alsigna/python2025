@@ -19,14 +19,14 @@ def ping_interactive(device: dict[str, Any], target: str) -> Response:
         prompt = ssh.get_prompt()
         return ssh.send_interactive(
             interact_events=[
-                ("ping", "[ip]:", False),
-                ("ip", "Target IP address:", False),
-                (target, "Repeat count [5]:", False),
-                ("10", "Datagram size [100]:", False),
-                ("1500", "Timeout in seconds [2]:", False),
-                ("1", "Extended commands [n]:", False),
-                ("n", "Sweep range of sizes [n]:", False),
-                ("n", prompt, False),
+                ("ping", "[ip]:"),
+                ("ip", "Target IP address:"),
+                (target, "Repeat count [5]:"),
+                ("10", "Datagram size [100]:"),
+                ("1500", "Timeout in seconds [2]:"),
+                ("1", "Extended commands [n]:"),
+                ("n", "Sweep range of sizes [n]:"),
+                ("n", prompt),
             ],
         )
 
