@@ -41,6 +41,7 @@
     - [logger `scrapli`](#logger-scrapli)
   - [`GenericDriver`](#genericdriver)
   - [`Driver`](#driver)
+  - [Jump-server](#jump-server)
 
 ## Описание
 
@@ -1031,4 +1032,34 @@ print("-" * 10)
 print(output_ch.decode())
 print("-" * 10)
 print(output_tr.decode())
+```
+
+## Jump-server
+
+Доступно несколько вариантов подключения к устройствам через jump-server, возможности и настройка зависят от используемого транспорта. Самый простой вариант - использовать ssh-config файл.
+
+```text
+Host jumphost
+  PubkeyAuthentication yes
+  Hostname jumphost.my.com
+  User jumpuser
+  IdentityFile /path/to/key
+
+
+Host *
+  PubkeyAuthentication no
+  KexAlgorithms +diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+  HostKeyAlgorithms +ssh-rsa
+  ProxyJump jumphost
+```
+
+И использовать его в коде:
+
+```python
+device = {
+    "auth_username": "username",
+    "auth_password": "password",
+    "auth_strict_key": False,
+    "ssh_config_file": "/path/to/custom/ssh/config",
+}
 ```

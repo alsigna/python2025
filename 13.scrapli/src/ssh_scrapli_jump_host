@@ -1,0 +1,13 @@
+Host jumphost
+  PubkeyAuthentication yes
+  Hostname 192.168.122.1
+  User alexigna
+  IdentityFile /Users/alexigna/.ssh/gcp_eve_rsa
+
+
+Host 192.168.122.1??
+  PubkeyAuthentication no
+  KexAlgorithms +diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+  HostKeyAlgorithms +ssh-rsa
+  ProxyJump jumphost
+

@@ -18,7 +18,7 @@ scrapli_template = {
     "auth_username": "admin",
     "auth_password": "P@ssw0rd",
     "auth_strict_key": False,
-    # "ssh_config_file": "/Users/alexigna/projects/python2025/12.scrapli/src/ssh_scrapli",
+    # "ssh_config_file": "/Users/alexigna/projects/python2025/13.scrapli/src/ssh_scrapli",
     "ssh_config_file": True,
     # "transport_options": {
     #     "open_cmd": [
