@@ -4,8 +4,8 @@ from scrapli import Scrapli
 
 
 class CiscoDevice:
-    def __init__(self, host: str):
-        self.ssh = Scrapli(
+    def __init__(self, host: str) -> None:
+        self.cli = Scrapli(
             host=host,
             platform="cisco_iosxe",
             auth_strict_key=False,
@@ -21,28 +21,20 @@ class CiscoDevice:
             },
         )
 
-    def _open(self):
-        if not self.ssh.isalive():
-            try:
-                self.ssh.open()
-            except Exception:
-                raise
-
-    def get_version(self):
-        self._open()
-        output = self.ssh.send_command("show version | i Software")
-        self.ssh.close()
+    def get_version(self) -> str:
+        with self.cli:
+            output = self.cli.send_command("show version | i Software")
         if output.failed:
-            return "__FAILURE__"
+            return ""
 
         version = re.findall(r"version ([a-z0-9_\.\(\)]*)", output.result, flags=re.I)
         if not version:
-            return "__FAILURE__"
+            return ""
 
         return version[0]
 
 
 if __name__ == "__main__":
-    device = CiscoDevice("192.168.122.113")
+    device = CiscoDevice("192.168.122.101")
     version = device.get_version()
     print(version)

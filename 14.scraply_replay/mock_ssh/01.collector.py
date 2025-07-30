@@ -7,13 +7,14 @@ device = {
     "auth_password": "P@ssw0rd",
     "auth_secondary": "P@ssw0rd",
     "auth_strict_key": False,
+    "timeout_ops": 120,
     "transport_options": {
         "open_cmd": [
             "-o",
             "KexAlgorithms=+diffie-hellman-group-exchange-sha1",
             "-o",
             "HostKeyAlgorithms=+ssh-rsa",
-        ]
+        ],
     },
 }
 

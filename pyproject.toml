@@ -21,6 +21,7 @@ dependencies = [
     "rich (>=14.0.0,<15.0.0)",
     "paramiko (>=3.5.1,<4.0.0)",
     "jinja2 (>=3.1.6,<4.0.0)",
+    "scrapli-replay (>=2024.7.30,<2025.0.0)",
 ]
 
 
@@ -39,6 +40,7 @@ flake8-pyproject = "^1.2.3"
 radon = "^6.0.1"
 mypy = "^1.16.1"
 types-requests = "^2.32.4.20250611"
+pytest = "^8.4.1"
 
 
 [tool.black]

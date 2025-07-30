@@ -151,10 +151,9 @@ import re
 
 from scrapli import Scrapli
 
-
 class CiscoDevice:
-    def __init__(self, host: str):
-        self.ssh = Scrapli(
+    def __init__(self, host: str) -> None:
+        self.cli = Scrapli(
             host=host,
             platform="cisco_iosxe",
             auth_strict_key=False,
@@ -170,17 +169,9 @@ class CiscoDevice:
             },
         )
 
-    def _open(self):
-        if not self.ssh.isalive():
-            try:
-                self.ssh.open()
-            except Exception:
-                raise
-
-    def get_version(self):
-        self._open()
-        output = self.ssh.send_command("show version | i Software")
-        self.ssh.close()
+    def get_version(self) -> str:
+        with self.cli:
+            output = self.cli.send_command("show version | i Software")
         if output.failed:
             return "__FAILURE__"
 
