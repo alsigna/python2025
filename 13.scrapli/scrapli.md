@@ -1063,3 +1063,22 @@ device = {
     "ssh_config_file": "/path/to/custom/ssh/config",
 }
 ```
+
+Либо настройки из ssh-config файла перенести в transport_options:
+
+```python
+device = {
+    "ssh_config_file": False,
+    "transport": "system",
+    "transport_options": {
+        "open_cmd": [
+            "-o",
+            "ProxyCommand=ssh -W %h:%p -i /path/to/custom/ssh/config jumpuser@jumphost.my.com",
+        ],
+    },
+}
+```
+
+Данный метод работает на system транспорте, так как использует возможности встроенного SSH агента.
+
+Если требуется использовать другой транспорт, например paramiko/telnet/..., то подключение через jump-server можно сделать через commandeer.

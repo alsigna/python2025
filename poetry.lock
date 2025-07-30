@@ -1449,6 +1449,8 @@ files = [
 
 [package.dependencies]
 ntc-templates = {version = ">=1.1.0,<8.0.0", optional = true, markers = "extra == \"textfsm\""}
+paramiko = {version = ">=2.6.0,<4.0.0", optional = true, markers = "extra == \"paramiko\""}
+scrapli_community = {version = ">=2021.01.30", optional = true, markers = "extra == \"community\""}
 textfsm = {version = ">=1.1.0,<2.0.0", optional = true, markers = "extra == \"textfsm\""}
 
 [package.extras]
@@ -1715,4 +1717,4 @@ pygments = ">=2.5,<3.0"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "17a250dd4d112ef29816f67fb105f474f56ca6c43c405f6b4e5f5cfd1c79e2a3"
+content-hash = "bc96deb450c6db234ac64661a43b266441a7dbda14b642821f84a8eb96faf294"
