@@ -30,30 +30,27 @@ rh.setFormatter(
 )
 log.addHandler(rh)
 
+device = {
+    "platform": "mikrotik_routeros",
+    "host": "192.168.122.107",
+    "auth_username": "admin",
+    "auth_password": "P@ssw0rd",
+    "auth_strict_key": False,
+    "ssh_config_file": True,
+    "transport": "paramiko",  # на system работает плохо
+}
 
-interface_template = """
-config system interface
-    edit "{name}"
-        set ip {ip} {mask}
-        set allowaccess ping https ssh http telnet
-        set description "{description}"
-    next
-end
-"""
 
 if __name__ == "__main__":
     with Scrapli(**device) as ssh:
-        output = ssh.send_command("show system interface port1")
+        prompt = ssh.get_prompt()
+        print(prompt)
+
+        output = ssh.send_command(command="/export")
         print(output.result)
 
-        output = ssh.send_command("show")
+        output = ssh.send_command("/interface/print")
         print(output.result)
 
-        config = interface_template.format(
-            name="port2",
-            ip="10.0.0.1",
-            mask="255.255.255.0",
-            description="test from scrapli",
-        )
-        output = ssh.send_commands(config.splitlines(), stop_on_failed=True)
+        output = ssh.send_command("/ip/address/print")
         print(output.result)
