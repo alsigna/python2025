@@ -3,16 +3,6 @@ import logging
 from rich.logging import RichHandler
 from scrapli import Scrapli
 
-device = {
-    "platform": "fortinet_ngfw",
-    "host": "192.168.122.106",
-    "auth_username": "admin",
-    "auth_password": "P@ssw0rd",
-    "auth_strict_key": False,
-    "ssh_config_file": True,
-}
-
-
 log = logging.getLogger("scrapli")
 log.setLevel(logging.DEBUG)
 
