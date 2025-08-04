@@ -1,0 +1,7 @@
+cisco:
+  platform: cisco_iosxe
+  port: 22
+
+huawei:
+  platform: huawei_vrp
+  port: 22

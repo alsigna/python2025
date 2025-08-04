@@ -1,0 +1,19 @@
+cisco:
+  platform: cisco_iosxe
+
+huawei:
+  platform: huawei_vrp
+
+msk:
+  data:
+    address:
+      city: moscow
+      street: some-msk-street
+    device_count: 100
+
+spb:
+  data:
+    address:
+      city: saint-petersburg
+      street: some-spb-street
+    device_count: 50

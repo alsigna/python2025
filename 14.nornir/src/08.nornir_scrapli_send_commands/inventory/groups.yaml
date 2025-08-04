@@ -1,0 +1,21 @@
+cisco:
+  platform: cisco_iosxe
+  data:
+    commands:
+      - show version
+      - show clock
+      - show inventory
+    backup_commands:
+      - show version
+      - show running-config
+
+huawei:
+  platform: huawei_vrp
+  data:
+    commands:
+      - display version
+      - display clock
+      - display device
+    backup_commands:
+      - display version
+      - display current-configuration

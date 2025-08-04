@@ -1,0 +1,10 @@
+r1:
+  hostname: 192.168.122.101
+  groups:
+    - cisco
+  data:
+    var1: on-hosts-level
+r2:
+  hostname: 192.168.122.102
+  groups:
+    - cisco

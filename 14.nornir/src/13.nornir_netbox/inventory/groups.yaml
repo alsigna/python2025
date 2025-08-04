@@ -1,0 +1,5 @@
+platform__cisco_iosxe:
+  platform: cisco_iosxe
+
+platform__huawei_vrp:
+  platform: huawei_vrp

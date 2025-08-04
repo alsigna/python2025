@@ -22,6 +22,8 @@ dependencies = [
     "paramiko (>=3.5.1,<4.0.0)",
     "jinja2 (>=3.1.6,<4.0.0)",
     "scrapli-replay (>=2024.7.30,<2025.0.0)",
+    "nornir (>=3.5.0,<4.0.0)",
+    "nornir-utils (>=0.2.0,<0.3.0)",
 ]
 
 

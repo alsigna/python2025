@@ -1,0 +1,10 @@
+cisco:
+  # napalm
+  # platform: ios
+  # netmiko
+  # platform: cisco_ios
+  # scrapli
+  platform: cisco_iosxe
+
+huawei:
+  platform: huawei_vrp

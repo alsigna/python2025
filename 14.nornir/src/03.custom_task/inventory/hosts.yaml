@@ -1,0 +1,14 @@
+r0:
+  hostname: 192.168.122.100
+  groups:
+    - cisco
+r1:
+  hostname: 192.168.122.101
+  groups:
+    - cisco
+  data:
+    mgmt_ip: 192.168.122.101
+r2:
+  hostname: 192.168.122.102
+  groups:
+    - cisco

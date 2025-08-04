@@ -1,0 +1,4 @@
+name,hostname,groups
+r01,192.168.122.101,cisco
+r02,192.168.122.102,cisco
+r03,192.168.122.103,huawei

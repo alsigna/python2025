@@ -1,0 +1,10 @@
+cisco:
+  platform: cisco_iosxe
+  data:
+    vendor: cisco
+    some_var: 42
+
+huawei:
+  platform: huawei_vrp
+  data:
+    vendor: huawei

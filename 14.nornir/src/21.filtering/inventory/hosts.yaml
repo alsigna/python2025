@@ -1,0 +1,29 @@
+r10:
+  hostname: 192.168.122.110
+  groups:
+    - cisco
+    - msk
+  data:
+    rid: 10.255.255.101
+    role: access
+    model: iosv
+
+r11:
+  hostname: 192.168.122.111
+  groups:
+    - cisco
+    - msk
+  data:
+    rid: 10.255.255.102
+    role: core
+    model: csr1000v
+
+r12:
+  hostname: 192.168.122.112
+  groups:
+    - cisco
+    - spb
+  data:
+    rid: 10.255.255.103
+    role: access
+    model: csr1000v

@@ -1,0 +1,15 @@
+inventory:
+  plugin: SimpleInventory
+  options:
+    host_file: ./14.nornir/src/02.tcp_ping/inventory/hosts.yaml
+    group_file: ./14.nornir/src/02.tcp_ping/inventory/groups.yaml
+    defaults_file: ./14.nornir/src/02.tcp_ping/inventory/defaults.yaml
+logging:
+  enabled: True
+  level: DEBUG
+  to_console: True
+  log_file: ./14.nornir/src/02.tcp_ping/nornir.log
+runner:
+  plugin: threaded
+  options:
+    num_workers: 5

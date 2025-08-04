@@ -1,0 +1,12 @@
+username: admin
+password: P@ssw0rd
+port: 22
+connection_options:
+  scrapli:
+    extras:
+      auth_strict_key: True
+      transport: system
+      transport_options:
+        open_cmd:
+          - -o KexAlgorithms=+diffie-hellman-group-exchange-sha1
+          - -o HostKeyAlgorithms=+ssh-rsa

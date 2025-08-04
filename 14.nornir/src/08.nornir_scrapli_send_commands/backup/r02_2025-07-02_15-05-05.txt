@@ -1,0 +1,217 @@
+Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M), Version 15.9(3)M3, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Wed 27-Jan-21 09:58 by prod_rel_team
+
+
+ROM: Bootstrap program is IOSv
+
+r02 uptime is 3 hours, 48 minutes
+System returned to ROM by reload
+System image file is "flash0:/vios-adventerprisek9-m"
+Last reload reason: Unknown reason
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco IOSv (revision 1.0) with  with 984321K/62464K bytes of memory.
+Processor board ID 9TU215EWFIVAUIE4IC5WW
+4 Gigabit Ethernet interfaces
+DRAM configuration is 72 bits wide with parity disabled.
+256K bytes of non-volatile configuration memory.
+2097152K bytes of ATA System CompactFlash 0 (Read/Write)
+0K bytes of ATA CompactFlash 1 (Read/Write)
+0K bytes of ATA CompactFlash 2 (Read/Write)
+0K bytes of ATA CompactFlash 3 (Read/Write)
+
+
+
+Configuration register is 0x0
+
+Building configuration...
+
+Current configuration : 3834 bytes
+!
+! Last configuration change at 12:03:55 UTC Wed Jul 2 2025 by admin
+!
+version 15.9
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname r02
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition mgmt
+ !
+ address-family ipv4
+ exit-address-family
+!
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization console
+aaa authorization exec default local
+!
+!
+!
+!
+!
+aaa session-id common
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+username admin privilege 15 secret 9 $9$6Wzi50ym8Zs/a.$acje5b2PHFyHJd7MnO6jGqs9t.wsbW8.mx0uZMmA4EQ
+username cisco privilege 15 secret 9 $9$/k9MyEBkFDH8IM$jclZykZKpJCqzb/dLNicF6LXVzUdwEcLo3x2WnHl3uQ
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 10.255.255.102 255.255.255.255
+!
+interface GigabitEthernet0/0
+ vrf forwarding mgmt
+ ip address 192.168.122.102 255.255.255.0
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/1
+ ip address 192.168.12.2 255.255.255.252
+ ip ospf network point-to-point
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+router ospf 1
+ router-id 10.255.255.102
+ network 10.255.255.102 0.0.0.0 area 0.0.0.0
+ network 192.168.12.2 0.0.0.0 area 0.0.0.0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route vrf mgmt 10.8.0.0 255.255.255.0 192.168.122.1
+ip ssh rsa keypair-name SSH
+!
+ipv6 ioam timestamp
+!
+!
+!
+!
+!
+control-plane
+!
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+line aux 0
+line vty 0 4
+ transport input all
+line vty 5 15
+ transport input all
+!
+no scheduler allocate
+event manager applet cmd_log
+ event cli pattern ".*" sync no skip no
+ action 1.0 syslog msg "$_cli_msg"
+!
+end

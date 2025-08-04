@@ -468,7 +468,6 @@ files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
 ]
-markers = {main = "platform_system == \"Windows\""}
 
 [[package]]
 name = "confluent-kafka"
@@ -1008,6 +1007,38 @@ files = [
 
 [package.extras]
 nicer-shell = ["ipython"]
+
+[[package]]
+name = "nornir"
+version = "3.5.0"
+description = "Pluggable multi-threaded framework with inventory management to help operate collections of devices"
+optional = false
+python-versions = "<4.0,>=3.9"
+groups = ["main"]
+files = [
+    {file = "nornir-3.5.0-py3-none-any.whl", hash = "sha256:7e273d7b2aa519fa84b4fbbeb74ac5df3595d80105009049f0157c72a345b0b2"},
+    {file = "nornir-3.5.0.tar.gz", hash = "sha256:f0d212999a37bc5962534738c47099b3e11a45d8f7dc8bc855530f7fb73d2f64"},
+]
+
+[package.dependencies]
+"ruamel.yaml" = ">=0.17"
+setuptools = ">=43.0.0"
+
+[[package]]
+name = "nornir-utils"
+version = "0.2.0"
+description = "Collection of plugins and functions for nornir that don't require external dependencies"
+optional = false
+python-versions = ">=3.6.2,<4.0.0"
+groups = ["main"]
+files = [
+    {file = "nornir_utils-0.2.0-py3-none-any.whl", hash = "sha256:b4c430793a74f03affd5ff2d90abc8c67a28c7ff325f48e3a01a9a44ec71b844"},
+    {file = "nornir_utils-0.2.0.tar.gz", hash = "sha256:4de6aaa35e5c1a98e1c84db84a008b0b1e974dc65d88484f2dcea3e30c95fbc2"},
+]
+
+[package.dependencies]
+colorama = ">=0.4.3,<0.5.0"
+nornir = ">=3,<4"
 
 [[package]]
 name = "ntc-templates"
@@ -1747,6 +1778,27 @@ dev = ["black (>=23.3.0,<25.0.0)", "darglint (>=1.8.1,<2.0.0)", "isort (>=5.10.1
 docs = ["mdx-gh-links (>=0.2,<1.0)", "mkdocs (>=1.2.3,<2.0.0)", "mkdocs-gen-files (>=0.4.0,<1.0.0)", "mkdocs-literate-nav (>=0.5.0,<1.0.0)", "mkdocs-material (>=8.1.6,<10.0.0)", "mkdocs-material-extensions (>=1.0.3,<2.0.0)", "mkdocs-section-index (>=0.3.4,<1.0.0)", "mkdocstrings[python] (>=0.19.0,<1.0.0)"]
 
 [[package]]
+name = "setuptools"
+version = "80.9.0"
+description = "Easily download, build, install, upgrade, and uninstall Python packages"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "setuptools-80.9.0-py3-none-any.whl", hash = "sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922"},
+    {file = "setuptools-80.9.0.tar.gz", hash = "sha256:f36b47402ecde768dbfafc46e8e4207b4360c654f1f3bb84475f0a28628fb19c"},
+]
+
+[package.extras]
+check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1) ; sys_platform != \"cygwin\"", "ruff (>=0.8.0) ; sys_platform != \"cygwin\""]
+core = ["importlib_metadata (>=6) ; python_version < \"3.10\"", "jaraco.functools (>=4)", "jaraco.text (>=3.7)", "more_itertools", "more_itertools (>=8.8)", "packaging (>=24.2)", "platformdirs (>=4.2.2)", "tomli (>=2.0.1) ; python_version < \"3.11\"", "wheel (>=0.43.0)"]
+cover = ["pytest-cov"]
+doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "pyproject-hooks (!=1.1)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier", "towncrier (<24.7)"]
+enabler = ["pytest-enabler (>=2.2)"]
+test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21) ; python_version >= \"3.9\" and sys_platform != \"cygwin\"", "jaraco.envs (>=2.2)", "jaraco.path (>=3.7.2)", "jaraco.test (>=5.5)", "packaging (>=24.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-home (>=0.5)", "pytest-perf ; sys_platform != \"cygwin\"", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel (>=0.44.0)"]
+type = ["importlib_metadata (>=7.0.2) ; python_version < \"3.10\"", "jaraco.develop (>=7.21) ; sys_platform != \"cygwin\"", "mypy (==1.14.*)", "pytest-mypy"]
+
+[[package]]
 name = "six"
 version = "1.17.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -1978,4 +2030,4 @@ pygments = ">=2.5,<3.0"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "86de3b624e32e815960bdebc4aa801b03ae794dcfd0ba1cc7773f8498822ebb5"
+content-hash = "547c39f62342df94054fffbcbe6b0e08d9f3fe121ccbcae8045648e40109a624"

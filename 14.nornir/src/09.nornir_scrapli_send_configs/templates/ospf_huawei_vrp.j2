@@ -1,0 +1,11 @@
+#
+sysname {{ host.name }}
+#
+ospf {{ host.ospf.pid }} router-id {{ host.ospf.router_id }}
+{% for area, networks in host.ospf.areas.items() %}
+ area {{ area }}
+    {%- for network in networks +%}
+  network {{ network.network }} {{ network.wildcard }}
+    {%- endfor +%}
+{% endfor %}
+#

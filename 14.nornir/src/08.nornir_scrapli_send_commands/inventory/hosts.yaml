@@ -1,0 +1,12 @@
+r01:
+  hostname: 192.168.122.101
+  groups:
+    - cisco
+r02:
+  hostname: 192.168.122.102
+  groups:
+    - cisco
+r03:
+  hostname: 192.168.122.103
+  groups:
+    - huawei

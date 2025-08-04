@@ -1,0 +1,6 @@
+cisco:
+  platform: ios
+  port: 22
+  version: "1.2.3"
+  password: P@ssw0rd
+
