@@ -24,6 +24,7 @@ dependencies = [
     "scrapli-replay (>=2024.7.30,<2025.0.0)",
     "nornir (>=3.5.0,<4.0.0)",
     "nornir-utils (>=0.2.0,<0.3.0)",
+    "nornir-jinja2 (>=0.2.0,<0.3.0)",
 ]
 
 

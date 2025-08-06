@@ -10,6 +10,6 @@ if __name__ == "__main__":
     result = nr.run(
         task=my_random_task,
         some_text="42",
-        name="my test task",
+        name="my random task",
     )
     print_result(result)

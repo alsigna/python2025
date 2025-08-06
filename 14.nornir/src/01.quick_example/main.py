@@ -5,6 +5,7 @@ from nornir import InitNornir
 if __name__ == "__main__":
     cwd = Path(__file__).parent
     nr = InitNornir(config_file=Path(cwd, "config.yaml"))
+    pass
     # nr = InitNornir(
     #     inventory={
     #         "plugin": "SimpleInventory",

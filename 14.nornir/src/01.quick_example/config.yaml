@@ -4,11 +4,10 @@ inventory:
     host_file: ./14.nornir/src/01.quick_example/inventory/hosts.yaml
     group_file: ./14.nornir/src/01.quick_example/inventory/groups.yaml
     defaults_file: ./14.nornir/src/01.quick_example/inventory/defaults.yaml
-    # host_file: ./inventory/hosts.yaml
-    # group_file: ./inventory/groups.yaml
-    # defaults_file: ./inventory/defaults.yaml
+
 logging:
   enabled: True
+
 runner:
   plugin: threaded
   options:
