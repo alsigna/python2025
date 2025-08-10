@@ -1,0 +1,307 @@
+Cisco IOS XE Software, Version 17.03.03
+Cisco IOS Software [Amsterdam], Virtual XE Software (X86_64_LINUX_IOSD-UNIVERSALK9-M), Version 17.3.3, RELEASE SOFTWARE (fc7)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Thu 04-Mar-21 12:49 by mcpre
+
+
+Cisco IOS-XE software, Copyright (c) 2005-2021 by cisco Systems, Inc.
+All rights reserved.  Certain components of Cisco IOS-XE software are
+licensed under the GNU General Public License ("GPL") Version 2.0.  The
+software code licensed under GPL Version 2.0 is free software that comes
+with ABSOLUTELY NO WARRANTY.  You can redistribute and/or modify such
+GPL code under the terms of GPL Version 2.0.  For more details, see the
+documentation or "License Notice" file accompanying the IOS-XE software,
+or the applicable URL provided on the flyer accompanying the IOS-XE
+software.
+
+
+ROM: IOS-XE ROMMON
+
+r01 uptime is 35 minutes
+Uptime for this control processor is 37 minutes
+System returned to ROM by reload
+System image file is "bootflash:packages.conf"
+Last reload reason: reload
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+License Level: ax
+License Type: N/A(Smart License Enabled)
+Next reload license Level: ax
+
+The current throughput level is 1000 kbps
+
+
+Smart Licensing Status: UNREGISTERED/No Licenses in Use
+
+cisco CSR1000V (VXE) processor (revision VXE) with 2071913K/3075K bytes of memory.
+Processor board ID 9RQ38I0EKUL
+Router operating mode: Autonomous
+4 Gigabit Ethernet interfaces
+32768K bytes of non-volatile configuration memory.
+3978412K bytes of physical memory.
+6188032K bytes of virtual hard disk at bootflash:.
+
+Configuration register is 0x2102
+
+Building configuration...
+
+Current configuration : 5083 bytes
+!
+! Last configuration change at 16:21:50 UTC Thu Aug 7 2025
+!
+version 17.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service call-home
+platform qfp utilization monitor load 80
+platform punt-keepalive disable-kernel-core
+platform console serial
+!
+hostname r01
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition mgmt
+ !
+ address-family ipv4
+ exit-address-family
+!
+enable secret 9 $9$f2swvBhuWARlC.$UOFQavjINCUc.QRcuQOF7zgBO2n1ZdySZdYv2EIXdFE
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization console
+aaa authorization exec default local
+!
+!
+!
+!
+!
+!
+aaa session-id common
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+!
+!
+!
+login on-success log
+!
+!
+!
+!
+!
+!
+!
+subscriber templating
+!
+!
+!
+!
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+crypto pki trustpoint SLA-TrustPoint
+ enrollment pkcs12
+ revocation-check crl
+!
+!
+crypto pki certificate chain SLA-TrustPoint
+ certificate ca 01
+  30820321 30820209 A0030201 02020101 300D0609 2A864886 F70D0101 0B050030
+  32310E30 0C060355 040A1305 43697363 6F312030 1E060355 04031317 43697363
+  6F204C69 63656E73 696E6720 526F6F74 20434130 1E170D31 33303533 30313934
+  3834375A 170D3338 30353330 31393438 34375A30 32310E30 0C060355 040A1305
+  43697363 6F312030 1E060355 04031317 43697363 6F204C69 63656E73 696E6720
+  526F6F74 20434130 82012230 0D06092A 864886F7 0D010101 05000382 010F0030
+  82010A02 82010100 A6BCBD96 131E05F7 145EA72C 2CD686E6 17222EA1 F1EFF64D
+  CBB4C798 212AA147 C655D8D7 9471380D 8711441E 1AAF071A 9CAE6388 8A38E520
+  1C394D78 462EF239 C659F715 B98C0A59 5BBB5CBD 0CFEBEA3 700A8BF7 D8F256EE
+  4AA4E80D DB6FD1C9 60B1FD18 FFC69C96 6FA68957 A2617DE7 104FDC5F EA2956AC
+  7390A3EB 2B5436AD C847A2C5 DAB553EB 69A9A535 58E9F3E3 C0BD23CF 58BD7188
+  68E69491 20F320E7 948E71D7 AE3BCC84 F10684C7 4BC8E00F 539BA42B 42C68BB7
+  C7479096 B4CB2D62 EA2F505D C7B062A4 6811D95B E8250FC4 5D5D5FB8 8F27D191
+  C55F0D76 61F9A4CD 3D992327 A8BB03BD 4E6D7069 7CBADF8B DF5F4368 95135E44
+  DFC7C6CF 04DD7FD1 02030100 01A34230 40300E06 03551D0F 0101FF04 04030201
+  06300F06 03551D13 0101FF04 05300301 01FF301D 0603551D 0E041604 1449DC85
+  4B3D31E5 1B3E6A17 606AF333 3D3B4C73 E8300D06 092A8648 86F70D01 010B0500
+  03820101 00507F24 D3932A66 86025D9F E838AE5C 6D4DF6B0 49631C78 240DA905
+  604EDCDE FF4FED2B 77FC460E CD636FDB DD44681E 3A5673AB 9093D3B1 6C9E3D8B
+  D98987BF E40CBD9E 1AECA0C2 2189BB5C 8FA85686 CD98B646 5575B146 8DFC66A8
+  467A3DF4 4D565700 6ADF0F0D CF835015 3C04FF7C 21E878AC 11BA9CD2 55A9232C
+  7CA7B7E6 C1AF74F6 152E99B7 B1FCF9BB E973DE7F 5BDDEB86 C71E3B49 1765308B
+  5FB0DA06 B92AFE7F 494E8A9E 07B85737 F3A58BE1 1A48A229 C37C1E69 39F08678
+  80DDCD16 D6BACECA EEBC7CF9 8428787B 35202CDC 60E4616A B623CDBD 230E3AFB
+  418616A9 4093E049 4D10AB75 27E86F73 932E35B5 8862FDAE 0275156F 719BB2F0
+  D697DF7F 28
+  	quit
+!
+license udi pid CSR1000V sn 9RQ38I0EKUL
+diagnostic bootup level minimal
+memory free low-watermark processor 71497
+!
+!
+spanning-tree extend system-id
+!
+username admin privilege 15 secret 9 $9$6Wzi50ym8Zs/a.$acje5b2PHFyHJd7MnO6jGqs9t.wsbW8.mx0uZMmA4EQ
+username cisco privilege 15 secret 9 $9$/k9MyEBkFDH8IM$jclZykZKpJCqzb/dLNicF6LXVzUdwEcLo3x2WnHl3uQ
+username user secret 9 $9$bcR5RILrM54w9k$zKjufWFjXmhGhRuhtiTh2QCKhLVBsJjUG/TF3R/nSJE
+!
+redundancy
+!
+!
+!
+!
+!
+!
+cdp run
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description RID
+ no ip address
+!
+interface Loopback101
+ ip address 100.64.72.101 255.255.255.255
+!
+interface Loopback102
+ ip address 100.64.73.102 255.255.255.255
+!
+interface GigabitEthernet1
+ vrf forwarding mgmt
+ ip address 192.168.122.101 255.255.255.0
+ ip ospf network point-to-point
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet2
+ ip address 192.168.12.1 255.255.255.252
+ ip ospf network point-to-point
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet3
+ ip address 192.168.13.1 255.255.255.252
+ ip ospf network point-to-point
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+interface GigabitEthernet4
+ no ip address
+ negotiation auto
+ no mop enabled
+ no mop sysid
+!
+router ospf 1
+ router-id 10.255.255.101
+ network 10.255.255.101 0.0.0.0 area 0.0.0.0
+ network 192.168.12.1 0.0.0.0 area 0.0.0.0
+ network 192.168.13.1 0.0.0.0 area 0.0.0.0
+ network 192.168.17.1 0.0.0.0 area 0.0.0.0
+!
+ip forward-protocol nd
+no ip http server
+no ip http secure-server
+!
+ip route vrf mgmt 10.8.0.0 255.255.255.0 192.168.122.1
+ip ssh rsa keypair-name SSH
+!
+!
+!
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+line con 0
+ stopbits 1
+line vty 0 4
+ transport input all
+line vty 5 15
+ transport input all
+!
+call-home
+ ! If contact email address in call-home is configured as sch-smart-licensing@cisco.com
+ ! the email address configured in Cisco Smart License Portal will be used as contact email address to send SCH notifications.
+ contact-email-addr sch-smart-licensing@cisco.com
+ profile "CiscoTAC-1"
+  active
+  destination transport-method http
+!
+!
+!
+!
+event manager applet cmd_log
+ event cli pattern ".*" sync no skip no
+ action 1.0 syslog msg "$_cli_msg"
+!
+end

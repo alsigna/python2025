@@ -1,7 +1,7 @@
 Huawei Versatile Routing Platform Software
 VRP (R) Software, Version 5.160 (USG6000V2 V500R001C10)
 Copyright (C) 2014-2015 Huawei Technologies Co., Ltd
-USG6000V2 uptime is 0 week, 0 day, 3 hours, 48 minutes
+USG6000V2 uptime is 0 week, 0 day, 0 hour, 39 minutes
 
 
 IPS Signature Database Version   :
@@ -18,7 +18,6 @@ sysname r03
  undo l2tp sendaccm enable
  l2tp domain suffix-separator @
 #
-undo telnet server enable
 undo telnet ipv6 server enable
 #
 clock timezone UTC add 00:00:00

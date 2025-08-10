@@ -88,15 +88,9 @@ def main_huawei(task: Task) -> Result:
 
 def main(task: Task) -> Result:
     if task.host.platform == "cisco_iosxe":
-        task.run(
-            task=main_cisco,
-            severity_level=10,
-        )
+        task.run(task=main_cisco)
     elif task.host.platform == "huawei_vrp":
-        task.run(
-            task=main_huawei,
-            severity_level=10,
-        )
+        task.run(task=main_huawei)
 
 
 if __name__ == "__main__":
@@ -107,6 +101,7 @@ if __name__ == "__main__":
     result = nr.run(task=main, severity_level=10)
 
     # множество неуспешных устройств
+    print(f"{nr.data.failed_hosts=}")
     for host in nr.data.failed_hosts:
         print(f"задачи для '{host}' завершились с ошибкой")
 
@@ -132,7 +127,12 @@ if __name__ == "__main__":
             scrapli_telnet.port = 23
             scrapli_telnet.extras["transport"] = "telnet"
             nr.inventory.hosts[host].connection_options |= {"scrapli": scrapli_telnet}
-        retry_result = nr.run(task=main, severity_level=10, on_good=False, on_failed=True)
+        retry_result = nr.run(
+            task=main,
+            severity_level=10,
+            on_good=False,
+            on_failed=True,
+        )
         for host in list(nr.data.failed_hosts):
             if host not in retry_result.failed_hosts:
                 nr.data.recover_host(host)
@@ -140,5 +140,5 @@ if __name__ == "__main__":
 
     print_result(
         result,
-        # vars=["status"],
+        vars=["status"],
     )

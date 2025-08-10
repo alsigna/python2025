@@ -230,7 +230,7 @@ vvvv <название_вложенной_подзадачи> ** changed : <True
 
 Что бы маскировать возможные ошибки, запуск задачи (task.run) необходимо оборачивать в try/except и отлавливать исключение `nornir.core.exceptions.NornirSubTaskError`.
 
-Множество неуспешных устройств (имена) доступно в объекте `nr.data.failed_hosts`, который можно очистить `nr.data.reset_failed_hosts()` или `nr.data.recover_host(host)` для указанного устройства . Кроме этого, в объекте AggregatedResult (возвращается `nr.run()`) неуспешные устройства и результат задач находится в словаре `.failed_hosts: dict[str, MultiResult]`
+Множество неуспешных устройств (имена) доступно в объекте `nr.data.failed_hosts`, который можно очистить `nr.data.reset_failed_hosts()` или `nr.data.recover_host(host)` для указанного устройства . Кроме этого, в объекте AggregatedResult (возвращается `nr.run()`) неуспешные устройства и результат задач находится в словаре `result.failed_hosts: dict[str, MultiResult]`
 
 Повторить запуск задач только для неуспешных устройств можно конструкцией
 

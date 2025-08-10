@@ -1,4 +1,3 @@
-
 from nornir.core.task import Result, Task
 from nornir_scrapli.tasks import send_commands
 
@@ -7,6 +6,7 @@ def collect_output(task: Task) -> Result:
     # print(task.host.data)
     # print(task.host.data["commands"])
     # print(task.host["commands"])
+
     result = task.run(
         task=send_commands,
         commands=task.host["commands"],

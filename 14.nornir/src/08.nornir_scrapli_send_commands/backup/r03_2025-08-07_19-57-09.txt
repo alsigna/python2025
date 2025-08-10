@@ -1,0 +1,238 @@
+Huawei Versatile Routing Platform Software
+VRP (R) Software, Version 5.160 (USG6000V2 V500R001C10)
+Copyright (C) 2014-2015 Huawei Technologies Co., Ltd
+USG6000V2 uptime is 0 week, 0 day, 0 hour, 37 minutes
+
+
+IPS Signature Database Version   :
+IPS Engine Version               : V200R002C10SPC021
+AV Signature Database Version    :
+SA Signature Database Version    : 2015072900
+C&C Domain Name Database Version :
+Location Database Version        : 2014010414
+
+!Software Version V500R001C10
+#
+sysname r03
+#
+ undo l2tp sendaccm enable
+ l2tp domain suffix-separator @
+#
+undo telnet ipv6 server enable
+#
+clock timezone UTC add 00:00:00
+#
+ firewall packet-filter basic-protocol enable
+#
+ firewall detect ftp
+#
+ firewall defend action discard
+#
+ log type traffic enable
+ log type syslog enable
+ log type policy enable
+#
+ undo dataflow enable
+#
+ isp name "china mobile"
+ isp name "china mobile" set filename china-mobile.csv
+ isp name "china unicom"
+ isp name "china unicom" set filename china-unicom.csv
+ isp name "china telecom"
+ isp name "china telecom" set filename china-telecom.csv
+ isp name "china educationnet"
+ isp name "china educationnet" set filename china-educationnet.csv
+#
+ snmp-agent session history-max-number enable
+ snmp-agent session trap threshold 1600000
+ snmp-agent session-rate trap threshold 64000
+#
+ web-manager security version tlsv1 tlsv1.1
+ web-manager security enable
+#
+firewall dataplane to manageplane application-apperceive default-action drop
+#
+ update schedule ips-sdb daily 23:19
+ update schedule av-sdb daily 23:19
+ update schedule sa-sdb daily 23:19
+ update schedule cnc daily 23:19
+#
+ip vpn-instance default
+ ipv4-family
+#
+ time-range worktime
+  period-range 08:00:00 to 18:00:00 working-day
+#
+aaa
+ authentication-scheme default
+ authentication-scheme admin_local
+ authentication-scheme admin_radius_local
+ authentication-scheme admin_hwtacacs_local
+ authentication-scheme admin_ad_local
+ authentication-scheme admin_ldap_local
+ authentication-scheme admin_radius
+ authentication-scheme admin_hwtacacs
+ authentication-scheme admin_ad
+ authentication-scheme admin_ldap
+ authorization-scheme default
+ accounting-scheme default
+ domain default
+  service-type l2tp ike
+  reference user current-domain
+ manager-user password-modify enable
+ manager-user audit-admin
+  password cipher @%@%X)bLSM\b3F{d30#Ho~WM*3E4[0/"Gk#eF@(]Y.Zy!DfK3E7*@%@%
+  service-type web terminal
+  level 15
+
+ manager-user api-admin
+  password cipher @%@%{X4AH6ti=9:Q/sC;7'!2-I(J/49p~+3kqU#3BV(PijUFI(M-@%@%
+  service-type api
+  level 15
+
+ manager-user admin
+  password cipher @%@%02lMHBM!-SVbhh);JX9'V4YTgn\8Ow590&fGpW!,(`/+4YWV@%@%
+  service-type terminal telnet ssh
+  level 15
+
+ role system-admin
+  dashboard read-write
+  monitor read-write
+  policy read-write
+  object read-write
+  network read-write
+  system read-write
+ role device-admin
+  dashboard read-only
+  monitor read-only log log-traffic log-threat log-policy-matching report traffic-map threat-map session statistic statistic-acl
+  monitor none diagnose
+  policy read-write
+  object read-write
+  network read-write
+  system read-write high-reliability
+  system none configuration vsys license update-center mail-send feedback
+ role device-admin(monitor)
+  dashboard read-only
+  monitor read-only log log-traffic log-threat log-policy-matching report traffic-map threat-map session statistic statistic-acl
+  monitor none diagnose
+  policy read-only
+  object read-only
+  network read-only
+  system read-only high-reliability
+  system none configuration vsys license update-center mail-send feedback
+ role audit-admin
+  dashboard read-only
+  monitor read-write log-audit
+  monitor read-only log log-traffic log-threat log-syslog log-policy-matching report traffic-map threat-map
+  monitor none session statistic statistic-acl diagnose
+  policy none
+  object none
+  network none
+  system none
+ bind manager-user audit-admin role audit-admin
+#
+interface GigabitEthernet0/0/0
+ undo shutdown
+ ip binding vpn-instance default
+ ip address 192.168.122.103 255.255.255.0
+ service-manage http permit
+ service-manage https permit
+ service-manage ping permit
+ service-manage ssh permit
+ service-manage snmp permit
+ service-manage telnet permit
+ service-manage netconf permit
+#
+interface GigabitEthernet1/0/0
+ undo shutdown
+ ip address 192.168.13.2 255.255.255.252
+ ospf network-type p2p
+ service-manage http permit
+ service-manage https permit
+ service-manage ping permit
+ service-manage ssh permit
+ service-manage snmp permit
+ service-manage telnet permit
+ service-manage netconf permit
+#
+interface GigabitEthernet1/0/1
+ undo shutdown
+#
+interface GigabitEthernet1/0/2
+ undo shutdown
+#
+interface GigabitEthernet1/0/3
+ undo shutdown
+#
+interface GigabitEthernet1/0/4
+ undo shutdown
+#
+interface Virtual-if0
+#
+interface NULL0
+#
+interface LoopBack0
+ ip address 10.255.255.103 255.255.255.255
+#
+firewall zone local
+ set priority 100
+#
+firewall zone trust
+ set priority 85
+ add interface GigabitEthernet0/0/0
+ add interface GigabitEthernet1/0/0
+#
+firewall zone untrust
+ set priority 5
+#
+firewall zone dmz
+ set priority 50
+#
+l2tp-group default-lns
+#
+ospf 1 router-id 10.255.255.103
+ area 0.0.0.0
+  network 10.255.255.103 0.0.0.0
+  network 192.168.13.2 0.0.0.0
+#
+ip route-static vpn-instance default 10.8.0.0 255.255.255.0 192.168.122.1
+#
+undo ssh server compatible-ssh1x enable
+stelnet server enable
+ssh user admin
+ssh user admin authentication-type password
+ssh user admin service-type all
+#
+user-interface con 0
+ authentication-mode aaa
+user-interface vty 0 4
+ authentication-mode aaa
+ user privilege level 15
+ protocol inbound all
+user-interface vty 16 20
+#
+sa
+#
+location
+#
+ multi-interface
+  mode proportion-of-weight
+#
+right-manager server-group
+#
+api
+#
+security-policy
+ default action permit
+#
+traffic-policy
+#
+policy-based-route
+#
+nat-policy
+#
+pcp-policy
+#
+dns-transparent-policy
+#
+return

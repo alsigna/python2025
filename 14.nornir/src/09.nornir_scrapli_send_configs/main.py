@@ -8,7 +8,7 @@ if __name__ == "__main__":
     cwd = Path(__file__).parent
     nr = InitNornir(
         config_file=Path(cwd, "config.yaml"),
-        # dry_run=True,
+        dry_run=False,
     )
     result = nr.run(
         task=configure_ospf,

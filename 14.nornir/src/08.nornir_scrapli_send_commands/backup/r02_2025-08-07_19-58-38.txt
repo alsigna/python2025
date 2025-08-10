@@ -6,7 +6,7 @@ Compiled Wed 27-Jan-21 09:58 by prod_rel_team
 
 ROM: Bootstrap program is IOSv
 
-r02 uptime is 3 hours, 48 minutes
+r02 uptime is 39 minutes
 System returned to ROM by reload
 System image file is "flash0:/vios-adventerprisek9-m"
 Last reload reason: Unknown reason
@@ -44,9 +44,7 @@ Configuration register is 0x0
 
 Building configuration...
 
-Current configuration : 3834 bytes
-!
-! Last configuration change at 12:03:55 UTC Wed Jul 2 2025 by admin
+Current configuration : 3877 bytes
 !
 version 15.9
 service timestamps debug datetime msec
@@ -96,6 +94,8 @@ mmi snmp-timeout 180
 !
 !
 ip cef
+login on-failure log
+login on-success log
 no ipv6 cef
 !
 multilink bundle-name authenticated
@@ -125,6 +125,10 @@ redundancy
 interface Loopback0
  ip address 10.255.255.102 255.255.255.255
 !
+interface Loopback1
+ description test
+ no ip address
+!
 interface GigabitEthernet0/0
  vrf forwarding mgmt
  ip address 192.168.122.102 255.255.255.0
@@ -140,8 +144,7 @@ interface GigabitEthernet0/1
  media-type rj45
 !
 interface GigabitEthernet0/2
- no ip address
- shutdown
+ ip address 192.168.24.1 255.255.255.252
  duplex auto
  speed auto
  media-type rj45

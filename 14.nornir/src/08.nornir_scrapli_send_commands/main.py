@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 from nornir import InitNornir
@@ -12,7 +13,7 @@ if __name__ == "__main__":
         task=collect_output,
     )
     # print_structured_result(result)
-    # print_result(result)
+    print_result(result)
 
     # backup
     backup_folder = Path(cwd, "backup")
@@ -21,4 +22,4 @@ if __name__ == "__main__":
         task=backup_configuration,
         backup_folder=backup_folder,
     )
-    print_result(result)
+    print_result(result, severity_level=logging.DEBUG)
