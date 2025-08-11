@@ -1,0 +1,11 @@
+<native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+  <ip>
+{% for acl in host["access-lists"] %}
+    <access-list>
+      <extended xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-acl">
+        <name>{{ acl }}</name>
+      </extended>
+    </access-list>
+{% endfor %}
+  </ip>
+</native>

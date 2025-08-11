@@ -1,0 +1,10 @@
+inventory:
+  plugin: SimpleInventory
+  options:
+    host_file: ./14.nornir/src/22.netconf/inventory/hosts.yaml
+logging:
+  enabled: false
+runner:
+  plugin: threaded
+  options:
+    num_workers: 1

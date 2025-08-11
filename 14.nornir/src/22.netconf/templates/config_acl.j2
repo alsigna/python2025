@@ -1,0 +1,23 @@
+<config>
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <ip>
+      <access-list>
+{% for acl_name, acl_rules in host["access-lists"].items() %}
+        <extended xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-acl">
+          <name>{{ acl_name }}</name>
+{% for seq, ace in acl_rules.items() %}
+          <access-list-seq-rule>
+            <sequence>{{ seq }}</sequence>
+            <ace-rule>
+{% for key, value in ace.items() %}
+              <{{ key }}>{{ value if value }}</{{ key }}>
+{% endfor %}
+            </ace-rule>
+          </access-list-seq-rule>
+{% endfor %}
+        </extended>
+{% endfor %}
+      </access-list>
+    </ip>
+  </native>
+</config>

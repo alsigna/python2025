@@ -1,0 +1,175 @@
+<!--
+  ssh admin@192.168.122.101 -p 830 -s netconf
+-->
+
+<hello xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <capabilities>
+    <capability>urn:ietf:params:netconf:base:1.0</capability>
+  </capabilities>
+</hello>]]>]]>
+
+
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
+  <get-config>
+    <source>
+      <candidate />
+    </source>
+    <filter>
+      <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+        <ip>
+          <access-list>
+            <extended xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-acl">
+              <name>acl_UNDER_TEST</name>
+              <access-list-seq-rule>
+                <sequence>100</sequence>
+              </access-list-seq-rule>
+            </extended>
+          </access-list>
+        </ip>
+      </native>
+    </filter>
+  </get-config>
+</rpc>]]>]]>
+
+
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
+  <edit-config>
+    <target>
+      <candidate />
+    </target>
+    <config>
+      <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+        <ip>
+          <access-list>
+            <extended xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-acl" operation="replace">
+              <name>acl_PERMIT_ANY</name>
+              <access-list-seq-rule>
+                <sequence>10</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>ip</protocol>
+                  <any></any>
+                  <dst-any></dst-any>
+                </ace-rule>
+              </access-list-seq-rule>
+            </extended>
+            <extended xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-acl" operation="replace">
+              <name>acl_UNDER_TEST</name>
+              <access-list-seq-rule>
+                <sequence>10</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>icmp</protocol>
+                  <any></any>
+                  <dst-any></dst-any>
+                </ace-rule>
+              </access-list-seq-rule>
+              <access-list-seq-rule>
+                <sequence>20</sequence>
+                <ace-rule>
+                  <action>deny</action>
+                  <protocol>ip</protocol>
+                  <host>8.8.8.8</host>
+                  <dst-any></dst-any>
+                </ace-rule>
+              </access-list-seq-rule>
+              <access-list-seq-rule>
+                <sequence>30</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>ospf</protocol>
+                  <any></any>
+                  <dst-any></dst-any>
+                </ace-rule>
+              </access-list-seq-rule>
+              <access-list-seq-rule>
+                <sequence>40</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>tcp</protocol>
+                  <any></any>
+                  <dst-host>1.2.3.1</dst-host>
+                  <dst-eq>1231</dst-eq>
+                </ace-rule>
+              </access-list-seq-rule>
+              <access-list-seq-rule>
+                <sequence>50</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>tcp</protocol>
+                  <host>10.255.255.109</host>
+                  <dst-any></dst-any>
+                  <dst-eq>bgp</dst-eq>
+                </ace-rule>
+              </access-list-seq-rule>
+              <access-list-seq-rule>
+                <sequence>60</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>tcp</protocol>
+                  <host>192.168.122.109</host>
+                  <dst-host>10.255.255.101</dst-host>
+                  <dst-eq>telnet</dst-eq>
+                </ace-rule>
+              </access-list-seq-rule>
+              <access-list-seq-rule>
+                <sequence>70</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>tcp</protocol>
+                  <ipv4-address>10.8.0.0</ipv4-address>
+                  <mask>0.0.0.255</mask>
+                  <dst-host>10.255.255.101</dst-host>
+                  <dst-eq>telnet</dst-eq>
+                </ace-rule>
+              </access-list-seq-rule>
+              <access-list-seq-rule>
+                <sequence>80</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>tcp</protocol>
+                  <any></any>
+                  <dst-host>1.2.3.2</dst-host>
+                  <dst-eq>1232</dst-eq>
+                </ace-rule>
+              </access-list-seq-rule>
+              <access-list-seq-rule>
+                <sequence>90</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>tcp</protocol>
+                  <any></any>
+                  <dst-host>1.2.3.3</dst-host>
+                  <dst-eq>1233</dst-eq>
+                </ace-rule>
+              </access-list-seq-rule>
+              <access-list-seq-rule>
+                <sequence>100</sequence>
+                <ace-rule>
+                  <action>permit</action>
+                  <protocol>tcp</protocol>
+                  <any></any>
+                  <dst-host>1.2.3.4</dst-host>
+                  <dst-eq>1234</dst-eq>
+                </ace-rule>
+              </access-list-seq-rule>
+            </extended>
+          </access-list>
+        </ip>
+      </native>
+    </config>
+  </edit-config>
+</rpc>]]>]]>
+
+
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
+  <discard-changes />
+</rpc>]]>]]>
+
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
+  <commit />
+</rpc>]]>]]>
+
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="101">
+  <close-session />
+</rpc>]]>]]>

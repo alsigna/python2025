@@ -1,0 +1,79 @@
+r01:
+  hostname: 192.168.122.101
+  username: admin
+  password: P@ssw0rd
+  port: 830
+  platform: iosxe
+  data:
+    access-lists:
+      acl_PERMIT_ANY:
+        10:
+          action: permit
+          protocol: ip
+          any:
+          dst-any:
+      acl_UNDER_TEST:
+        10:
+          action: permit
+          protocol: icmp
+          any:
+          dst-any:
+        20:
+          action: deny
+          protocol: ip
+          host: 8.8.8.8
+          dst-any:
+        30:
+          action: permit
+          protocol: ospf
+          any:
+          dst-any:
+        40:
+          action: permit
+          protocol: tcp
+          any:
+          dst-host: 1.2.3.1
+          dst-eq: 1231
+        50:
+          action: permit
+          protocol: tcp
+          host: 10.255.255.109
+          dst-any:
+          dst-eq: bgp
+        60:
+          action: permit
+          protocol: tcp
+          host: 192.168.122.109
+          dst-host: 10.255.255.101
+          dst-eq: telnet
+        70:
+          action: permit
+          protocol: tcp
+          ipv4-address: 10.8.0.0
+          mask: 0.0.0.255
+          dst-host: 10.255.255.101
+          dst-eq: telnet
+        80:
+          action: permit
+          protocol: tcp
+          any:
+          dst-host: 1.2.3.1
+          dst-eq: 1232
+        90:
+          action: permit
+          protocol: tcp
+          any:
+          dst-host: 1.2.3.22
+          dst-eq: 1233
+        # 100:
+        #   action: permit
+        #   protocol: tcp
+        #   any:
+        #   dst-host: 1.2.3.3
+        #   dst-eq: 1234
+        110:
+          action: permit
+          protocol: tcp
+          any:
+          dst-host: 1.2.3.5
+          dst-eq: 1234
