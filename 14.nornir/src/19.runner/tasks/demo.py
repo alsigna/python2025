@@ -20,7 +20,11 @@ def demo(task: Task) -> Result:
     time.sleep(randint(50, 200) / 100)
     task.run(task=sub_task, name="sub-task-1")
     task.run(task=sub_task, name="sub-task-2")
-    output = task.run(task=send_command, command="show clock", severity_level=10)
+    output = task.run(
+        task=send_command,
+        command="show clock",
+        severity_level=10,
+    )
     return Result(
         host=task.host,
         changed=False,

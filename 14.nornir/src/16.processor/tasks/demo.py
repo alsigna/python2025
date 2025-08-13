@@ -1,23 +1,35 @@
-from pathlib import Path
-
-from nornir import InitNornir
 from nornir.core.task import Result, Task
-from nornir_rich.functions import print_result
-from nornir_rich.progress_bar import RichProgressBar
 from nornir_scrapli.tasks import send_command
-from plugins.processors import LogProcessor
 
 
 def cisco_main(task: Task) -> Result:
-    commands = ["show version", "show clock", "show inventory"]
+    commands = [
+        "show version",
+        "show clock",
+        "show inventory",
+    ]
     for command in commands:
-        task.run(task=send_command, command=command, name=f"вывод '{command}'", severity_level=20)
+        task.run(
+            task=send_command,
+            command=command,
+            name=f"вывод '{command}'",
+            severity_level=20,
+        )
 
 
 def huawei_main(task: Task) -> Result:
-    commands = ["display version", "display clockk", "display device"]
+    commands = [
+        "display version",
+        "display clock",
+        "display device",
+    ]
     for command in commands:
-        task.run(task=send_command, command=command, name=f"вывод '{command}'", severity_level=20)
+        task.run(
+            task=send_command,
+            command=command,
+            name=f"вывод '{command}'",
+            severity_level=20,
+        )
 
 
 def demo(task: Task) -> Result:

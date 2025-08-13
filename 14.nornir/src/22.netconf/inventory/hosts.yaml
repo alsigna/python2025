@@ -51,7 +51,7 @@ r01:
           protocol: tcp
           ipv4-address: 10.8.0.0
           mask: 0.0.0.255
-          dst-host: 10.255.255.101
+          dst-host: 10.255.255.102
           dst-eq: telnet
         80:
           action: permit
@@ -65,12 +65,12 @@ r01:
           any:
           dst-host: 1.2.3.22
           dst-eq: 1233
-        # 100:
-        #   action: permit
-        #   protocol: tcp
-        #   any:
-        #   dst-host: 1.2.3.3
-        #   dst-eq: 1234
+        100:
+          action: permit
+          protocol: tcp
+          any:
+          dst-host: 1.2.3.3
+          dst-eq: 1234
         110:
           action: permit
           protocol: tcp

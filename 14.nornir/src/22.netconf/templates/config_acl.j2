@@ -3,7 +3,7 @@
     <ip>
       <access-list>
 {% for acl_name, acl_rules in host["access-lists"].items() %}
-        <extended xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-acl">
+        <extended xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-acl" operation="replace">
           <name>{{ acl_name }}</name>
 {% for seq, ace in acl_rules.items() %}
           <access-list-seq-rule>

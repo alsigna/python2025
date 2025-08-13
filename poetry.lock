@@ -1176,6 +1176,22 @@ jinja2 = ">=2.11.2,<4"
 nornir = ">=3,<4"
 
 [[package]]
+name = "nornir-netbox"
+version = "0.3.0"
+description = "Netbox plugin for Nornir"
+optional = false
+python-versions = ">=3.6,<4.0"
+groups = ["main"]
+files = [
+    {file = "nornir_netbox-0.3.0-py3-none-any.whl", hash = "sha256:b95c46c01da72db9ade1bab7e8268e73d8c4946a635f93deda8369fbe6fdc142"},
+    {file = "nornir_netbox-0.3.0.tar.gz", hash = "sha256:bd94ab1aa1f11671a7891b7913c5c44446fb1722de3e755e0440fadc0c7a7a36"},
+]
+
+[package.dependencies]
+nornir = ">=3,<4"
+requests = ">=2.23.0,<3.0.0"
+
+[[package]]
 name = "nornir-netconf"
 version = "2.1.0"
 description = "NETCONF plugin for Nornir"
@@ -2309,4 +2325,4 @@ pygments = ">=2.5,<3.0"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "25f390a134ea68463a3fbdf1f3ea95aa9a9b7be7dbff4a0be35fbd687ff58d77"
+content-hash = "f80be9c55f0cd2d2db76d85407c00a5d0612419c75617501290a341584030fba"

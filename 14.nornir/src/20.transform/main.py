@@ -14,7 +14,10 @@ RunnersPluginRegister.register("FibonacciThreadedRunner", FibonacciThreadedRunne
 
 if __name__ == "__main__":
     nr = InitNornir(
-        runner={"plugin": "FibonacciThreadedRunner", "options": {"num_workers": 8}},
+        runner={
+            "plugin": "FibonacciThreadedRunner",
+            "options": {"num_workers": 8},
+        },
         inventory={
             "plugin": "DynamicInventory",
             "transform_function": "update_credentials",

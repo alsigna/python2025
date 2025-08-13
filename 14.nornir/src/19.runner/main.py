@@ -13,9 +13,16 @@ RunnersPluginRegister.register("FibonacciThreadedRunner", FibonacciThreadedRunne
 
 if __name__ == "__main__":
     nr = InitNornir(
-        runner={"plugin": "FibonacciThreadedRunner", "options": {"num_workers": 8}},
+        runner={
+            "plugin": "FibonacciThreadedRunner",
+            "options": {
+                "num_workers": 8,
+            },
+        },
         inventory={"plugin": "DynamicInventory"},
         logging={"enabled": False},
     )
-    result = nr.with_processors([RichProcessor(rich_log)]).run(task=demo)
+    result = nr.with_processors(
+        [RichProcessor(rich_log)],
+    ).run(task=demo)
     print_table(result)

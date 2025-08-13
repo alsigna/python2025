@@ -3,8 +3,6 @@ from rich import box
 from rich.console import Console
 from rich.table import Table
 
-# box.
-
 
 def print_table(results: AggregatedResult, variables: list[str] | None = None) -> None:
     console = Console()

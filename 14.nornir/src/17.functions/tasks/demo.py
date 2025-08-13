@@ -1,13 +1,8 @@
 import re
-from pathlib import Path
 
-from nornir import InitNornir
+from nornir.core.exceptions import NornirSubTaskError
 from nornir.core.task import Result, Task
-from nornir_rich.functions import print_result
 from nornir_scrapli.tasks import send_command
-
-# from nornir_utils.plugins.functions import print_result
-from plugins.functions.rich_table import print_table
 from scrapli.response import Response
 
 
@@ -15,15 +10,23 @@ def demo(task: Task) -> Result:
     if task.host.platform == "cisco_iosxe":
         command = "show version"
     elif task.host.platform == "huawei_vrp":
-        command = "display version"
+        command = "display versions"
     else:
         raise ValueError(f"неизвестная платформа {task.host.platform}")
-    result = task.run(
-        task=send_command,
-        command=command,
-        name=f"вывод '{command}'",
-        severity_level=10,
-    )
+    try:
+        result = task.run(
+            task=send_command,
+            command=command,
+            name=f"вывод '{command}'",
+            severity_level=10,
+        )
+    except NornirSubTaskError:
+        return Result(
+            host=task.host,
+            result="",
+            uptime="",
+            version="",
+        )
     scrapli_response: Response = result.scrapli_response
     uptime = re.search(r"\suptime\sis\s(.*)", scrapli_response.result).group(1)
     uptime = uptime.lstrip("0wekday, ")

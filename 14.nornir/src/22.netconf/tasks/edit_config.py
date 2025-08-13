@@ -76,7 +76,7 @@ def edit_acl(task: Task) -> Result:
         task.name += " (dry-run)"
         task.run(
             task=netconf_rpc,
-            payload="<discard-changes/>",
+            payload="<discard-changes />",
             severity_level=10,
         )
     else:

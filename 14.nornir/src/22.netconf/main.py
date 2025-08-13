@@ -7,7 +7,7 @@ from tasks.edit_config import edit_acl
 if __name__ == "__main__":
     nr = InitNornir(
         config_file=Path(Path(__file__).parent, "config.yaml"),
-        dry_run=True,
+        # dry_run=True,
     )
     result = nr.run(task=edit_acl)
 

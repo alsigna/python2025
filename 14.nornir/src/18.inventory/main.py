@@ -17,7 +17,7 @@ if __name__ == "__main__":
     )
     result = nr.with_processors(
         [
-            LogProcessor(simple_log),
+            # LogProcessor(simple_log),
             RichProcessor(rich_log),
         ],
     ).run(task=demo)
