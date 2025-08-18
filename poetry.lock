@@ -589,6 +589,21 @@ test = ["certifi (>=2024)", "cryptography-vectors (==45.0.5)", "pretend (>=0.7)"
 test-randomorder = ["pytest-randomly"]
 
 [[package]]
+name = "ctreepo"
+version = "0.3.30"
+description = "CTreePO - configuration tree patch overview - Parsing, filtering and diff calculation for network device configurations"
+optional = false
+python-versions = ">=3.11"
+groups = ["main"]
+files = [
+    {file = "ctreepo-0.3.30-py3-none-any.whl", hash = "sha256:4ec26a16395573f1ada7cedaa5b4296bb219dda79f1bc97643404a06a7b7da53"},
+    {file = "ctreepo-0.3.30.tar.gz", hash = "sha256:52a4dc3f2c68de45e60837589813087245aee95a31d59f464b2287717cdfd2f8"},
+]
+
+[package.dependencies]
+pyyaml = ">=6.0"
+
+[[package]]
 name = "decorator"
 version = "5.2.1"
 description = "Decorators for Humans"
@@ -2325,4 +2340,4 @@ pygments = ">=2.5,<3.0"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "f80be9c55f0cd2d2db76d85407c00a5d0612419c75617501290a341584030fba"
+content-hash = "ea53516525c4c6097e2df37c4e61026e4fdc093ffca4a825b4160b8cada04562"

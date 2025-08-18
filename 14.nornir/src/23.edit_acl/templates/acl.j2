@@ -1,0 +1,43 @@
+{% for name, aces in host["access-lists"].items() %}
+ip access-list extended {{ name }}
+    {% for seq, ace in aces.items() %}
+ {{ seq }} {{ ace["action"] }}{% if ace["action"] == "deny" %}  {% endif %} {{ ace["protocol"] }}
+
+        {%- if "any" in ace %}
+ any
+        {%- elif "host" in ace %}
+ host {{ ace["host"] }}
+        {%- elif "ipv4-address" in ace and "mask" in ace %}
+ {{ ace["ipv4-address"] }} {{ ace["mask"] }}
+        {%- endif %}
+
+        {%- if "src-range1" in ace and "src-range2" in ace %}
+ range {{ ace["src-range1"] }} {{ ace["src-range2"] }}
+        {%- elif "src-eq" in ace %}
+ eq {{ ace["src-eq"] }}
+        {%- elif "src-lt" in ace %}
+ lt {{ ace["src-lt"] }}
+        {%- elif "src-gt" in ace %}
+ gt {{ ace["src-gt"] }}
+        {%- endif %}
+
+        {%- if "dst-any" in ace %}
+ any
+        {%- elif "dst-host" in ace %}
+ host {{ ace["dst-host"] }}
+        {%- elif "dst-ipv4-address" in ace and "dst-mask" in ace %}
+ {{ ace["dst-ipv4-address"] }} {{ ace["dst-mask"] }}
+        {%- endif %}
+
+        {%- if "dst-range1" in ace and "dst-range2" in ace %}
+ range {{ ace["dst-range1"] }} {{ ace["dst-range2"] }}
+        {%- elif "dst-eq" in ace %}
+ eq {{ ace["dst-eq"] }}
+        {%- elif "dst-lt" in ace %}
+ lt {{ ace["dst-lt"] }}
+        {%- elif "dst-gt" in ace %}
+ gt {{ ace["dst-gt"] }}
+        {%- endif %}
+
+    {% endfor %}
+{% endfor %}

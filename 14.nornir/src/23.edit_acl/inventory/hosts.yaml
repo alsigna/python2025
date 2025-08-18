@@ -10,6 +10,13 @@ r01:
           protocol: ip
           any:
           dst-any:
+        20:
+          action: permit
+          protocol: tcp
+          ipv4-address: 10.9.0.0
+          mask: 0.0.0.255
+          src-gt: 1234
+          dst-any:
       acl_UNDER_TEST:
         10:
           action: permit
@@ -37,7 +44,7 @@ r01:
           protocol: tcp
           host: 10.255.255.109
           dst-any:
-          dst-eq: bgp
+          dst-eq: telnet
         60:
           action: permit
           protocol: tcp
@@ -67,7 +74,7 @@ r01:
           action: permit
           protocol: tcp
           any:
-          dst-host: 1.2.3.3
+          dst-host: 1.2.3.33
           dst-eq: 1234
         110:
           action: permit
