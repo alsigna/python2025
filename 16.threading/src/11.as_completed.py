@@ -19,22 +19,6 @@ scrapli_template = {
 }
 
 
-ip_addresses = [
-    "192.168.122.101",
-    "192.168.122.102",
-    "192.168.122.109",
-    "192.168.122.110",
-    "192.168.122.111",
-    "192.168.122.112",
-    "192.168.122.113",
-    "192.168.122.114",
-    "192.168.122.115",
-    "192.168.122.116",
-    "192.168.122.117",
-    "192.168.122.118",
-]
-
-
 def print_version(host: str) -> str:
     log(f"{host:>15}: подключение...")
     if host == "192.168.122.101":
@@ -55,11 +39,24 @@ def print_version(host: str) -> str:
 
 
 if __name__ == "__main__":
+    ip_addresses = [
+        "192.168.122.101",
+        "192.168.122.102",
+        "192.168.122.109",
+        "192.168.122.110",
+        "192.168.122.111",
+        "192.168.122.112",
+        "192.168.122.113",
+        "192.168.122.114",
+        "192.168.122.115",
+        "192.168.122.116",
+        "192.168.122.117",
+        "192.168.122.118",
+    ]
+
     t0 = perf_counter()
     with ThreadPoolExecutor(max_workers=5) as pool:
-        futures: dict[Future, str] = {}
-        for ip in ip_addresses:
-            futures |= {pool.submit(print_version, ip): ip}
+        futures: dict[Future, str] = {pool.submit(print_version, ip): ip for ip in ip_addresses}
 
         log("задачи поставлены в очередь")
 
