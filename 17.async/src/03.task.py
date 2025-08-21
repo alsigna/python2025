@@ -18,8 +18,10 @@ async def main() -> str:
     task2 = asyncio.create_task(coro(2))
     task3 = asyncio.create_task(coro(3))
     log("задачи созданы")
-    # await asyncio.sleep(0)
-    # sleep(10)
+    await task3
+
+    # await asyncio.sleep(3)
+    # sleep(2)
     # await asyncio.sleep(0)
     log("выходим из main")
     return "все задачи выполнены"
@@ -27,6 +29,9 @@ async def main() -> str:
 
 if __name__ == "__main__":
     t0 = perf_counter()
+    # sleep(1)
+    # цикла событий еще нет
     result = asyncio.run(main())
+    # цикла событий уже нет
     log("асинхронный код закончен")
-    print(f"{result=}")
+    log(f"{result=}")

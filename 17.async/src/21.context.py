@@ -44,8 +44,7 @@ async def upload_to_s3(config: str, ip: str) -> str:
 
 
 async def process_router(ip: str) -> str:
-    current_uuid = str(uuid.uuid4())
-    request_id.set(current_uuid)
+    request_id.set(str(uuid.uuid4()).split("-")[-1])
 
     log.info(f"обработка маршрутизатора '{ip}'")
     try:
@@ -63,15 +62,25 @@ async def main(ips: list[str]):
     tasks = [asyncio.create_task(process_router(ip)) for ip in ips]
     await asyncio.gather(*tasks, return_exceptions=True)
 
-    for ip, task in zip(ips, tasks):
-        ctx = task.get_context()
-        _request_id = ctx.get(request_id)
-        exc = task.exception()
-        if exc is not None:
-            log.error(f"статус '{ip}': ошибка: {str(exc)}", extra={"uuid": _request_id})
-        else:
-            result = task.result()
-            log.info(f"статус '{ip}': успешно: {result}", extra={"uuid": _request_id})
+    new_tasks = []
+    for ip, task in zip(ips, tasks, strict=True):
+        new_tasks.append(
+            asyncio.create_task(
+                coro=fetch_router_config(ip),
+                context=task.get_context(),
+            ),
+        )
+
+    await asyncio.gather(*new_tasks, return_exceptions=True)
+
+    # _request_id = ctx.get(request_id)
+
+    # exc = task.exception()
+    # if exc is not None:
+    #     log.error(f"статус '{ip}': ошибка: {str(exc)}", extra={"uuid": _request_id})
+    # else:
+    #     result = task.result()
+    #     log.info(f"статус '{ip}': успешно: {result}", extra={"uuid": _request_id})
 
 
 if __name__ == "__main__":

@@ -34,16 +34,14 @@ async def level1() -> None:
     log.info("начало работы корутины level1")
     await asyncio.sleep(1)
     ctx = asyncio.current_task().get_context()
-    task = asyncio.create_task(level2(), context=ctx)
-    await task
+    await asyncio.create_task(level2(), context=ctx)
     log.info("конец работы корутины level1")
 
 
 async def main():
     request_id.set("main")
     log.info("начало работы корутины main")
-    task = asyncio.create_task(level1())
-    await task
+    await asyncio.create_task(level1())
     log.info("конец работы корутины main")
 
 

@@ -14,11 +14,8 @@ async def coro(num: int) -> str:
 
 
 async def main() -> None:
-    fast = asyncio.create_task(coro(2))
-    middle = asyncio.create_task(coro(4))
-    slow = asyncio.create_task(coro(6))
-    # print(isinstance(slow, asyncio.Task))
-    await slow
+    await asyncio.create_task(coro(2, "host1"))
+    await asyncio.create_task(coro(4, "host2"))
 
 
 if __name__ == "__main__":

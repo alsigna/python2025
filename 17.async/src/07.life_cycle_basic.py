@@ -13,7 +13,7 @@ async def coro(num: int) -> str:
     log("--- внутри задачи ---")
     log(f"done: {task.done()}")
     log(f"cancelled: {task.cancelled()}")
-    log(f"state: {task._state}")
+    log(f"state: {task._state}")  # noqa: SLF001
     log(f"конец работы корутины '{num}'")
     return f"корутина '{num}' выполнена"
 
@@ -23,14 +23,14 @@ async def main() -> None:
     log("--- после создания ---")
     log(f"done: {task.done()}")
     log(f"cancelled: {task.cancelled()}")
-    log(f"state: {task._state}")
+    log(f"state: {task._state}")  # noqa: SLF001
 
     await task
     log("--- после завершения ---")
     log(f"done: {task.done()}")
     log(f"cancelled: {task.cancelled()}")
     log(f"exception: {task.exception()}")
-    log(f"state: {task._state}")
+    log(f"state: {task._state}")  # noqa: SLF001
 
 
 if __name__ == "__main__":

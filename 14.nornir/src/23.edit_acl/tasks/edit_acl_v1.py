@@ -21,9 +21,11 @@ def get_acl_diff_tuples(current_acl: str, target_acl: str) -> list[tuple[str, st
         if tag == "equal":
             continue
         if tag == "delete":
-            result.append((current_lines[i1:i2], ""))
+            for line in current_lines[i1:i2]:
+                result.append((line, ""))
         elif tag == "insert":
-            result.append(("", target_lines[j1:j2]))
+            for line in target_lines[j1:j2]:
+                result.append(("", line))
         elif tag == "replace":
             old_block = current_lines[i1:i2]
             new_block = target_lines[j1:j2]
@@ -56,6 +58,7 @@ def parse_acl(config: str) -> dict[str, str]:
 def get_diff(task: Task, current_config: str, target_config: str) -> Result:
     current_acls = parse_acl(current_config)
     target_acls = parse_acl(target_config)
+
     diff = []
     for acl_name, acl_entries in target_acls.items():
         entrypoint = f"ip access-list extended {acl_name}"
@@ -63,7 +66,9 @@ def get_diff(task: Task, current_config: str, target_config: str) -> Result:
             diff.append(entrypoint)
             diff.extend(acl_entries.splitlines())
             continue
+
         acl_diff = get_acl_diff_tuples(current_acls[acl_name], target_acls[acl_name])
+
         if not acl_diff:
             continue
         diff.append(entrypoint)
@@ -105,6 +110,13 @@ def edit_acl(task: Task) -> Result:
         return Result(
             host=task.host,
             result="нет diff",
+        )
+
+    if task.is_dry_run():
+        task.name += " (dry-run)"
+        return Result(
+            host=task.host,
+            result="\n".join(diff.result),
         )
 
     result = task.run(

@@ -48,7 +48,7 @@ r01:
         60:
           action: permit
           protocol: tcp
-          host: 192.168.122.109
+          host: 192.168.122.19
           dst-host: 10.255.255.101
           dst-eq: telnet
         70:

@@ -6,6 +6,15 @@ def log(msg: str) -> None:
     print(f"{perf_counter() - t0:.3f} сек: - {msg}")
 
 
+async def main() -> None:
+    # step1
+    # step2
+    # step3
+    await coro(4)
+    # step4
+    # step5
+
+
 async def coro(num: int) -> None:
     log(f"начало работы корутины '{num}'")
     await asyncio.sleep(num)
@@ -14,5 +23,5 @@ async def coro(num: int) -> None:
 
 if __name__ == "__main__":
     t0 = perf_counter()
-    asyncio.run(coro(4))
+    asyncio.run(main())
     log("асинхронный код закончен")

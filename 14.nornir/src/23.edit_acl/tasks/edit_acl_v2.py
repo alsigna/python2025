@@ -62,7 +62,7 @@ def edit_acl(task: Task) -> Result:
         task.name += " (dry-run)"
         return Result(
             host=task.host,
-            result=diff.result,
+            result="\n".join(diff.result),
         )
 
     result = task.run(

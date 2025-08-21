@@ -15,7 +15,8 @@ async def coro(num: int) -> str:
 
 async def main() -> str:
     for i in range(1, 6):
-        await coro(i)
+        c = coro(i)
+        await c
     return "все корутины выполнены"
 
 

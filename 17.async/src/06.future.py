@@ -6,11 +6,13 @@ def log(msg: str) -> None:
     print(f"{perf_counter() - t0:.3f} сек: - {msg}")
 
 
-async def coro(num: int, fut: asyncio.Future) -> None:
+async def coro(num: int, fut: asyncio.Future) -> str:
     log(f"начало работы корутины '{num}'")
     await asyncio.sleep(num)
     log(f"конец работы корутины '{num}'")
-    fut.set_result(f"корутина '{num}' выполнена")
+    msg = f"корутина '{num}' выполнена"
+    fut.set_result(msg)
+    return msg
 
 
 async def main() -> None:
@@ -23,12 +25,12 @@ async def main() -> None:
     log(f"{type(future) = }")
     log(f"{task.done() = }")
     log(f"{future.done() = }")
-    await task
+    # await task
+    await future
     log(f"{task.done() = }")
     log(f"{future.done() = }")
-    await future
-    log(task.result())
-    log(future.result())
+    log(f"{task.result() = }")
+    log(f"{future.result() = }")
 
 
 if __name__ == "__main__":
