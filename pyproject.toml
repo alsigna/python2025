@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = [{ name = "Your Name", email = "you@example.com" }]
 readme = "README.md"
-requires-python = ">=3.11,<4.0"
+requires-python = ">=3.12,<4.0"
 dependencies = [
     "pyyaml (>=6.0.2,<7.0.0)",
     "pydantic (>=2.11.4,<3.0.0)",
@@ -32,6 +32,10 @@ dependencies = [
     "nornir-netconf (>=2.1.0,<3.0.0)",
     "nornir-netbox (>=0.3.0,<0.4.0)",
     "ctreepo (>=0.3.30,<0.4.0)",
+    "aiofiles (>=24.1.0,<25.0.0)",
+    "aiopath (>=0.7.7,<0.8.0)",
+    "aiohttp (>=3.12.15,<4.0.0)",
+    "httpx (>=0.28.1,<0.29.0)",
 ]
 
 

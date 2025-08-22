@@ -7,7 +7,7 @@ from typing import Any, Self
 import aiohttp
 from pydantic import BaseModel
 
-NETBOX_TOKEN = "8a11fb6aa8f3918cb05e984cf4c16ad5a02e2678"
+NETBOX_TOKEN = "907ad06273546d032dfa5e300ab7c3cd5d669ede"
 NETBOX_URL = "https://demo.netbox.dev"
 
 NETBOX_DEVICES = [
