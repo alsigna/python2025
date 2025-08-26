@@ -26,14 +26,14 @@ if __name__ == "__main__":
     t0 = perf_counter()
     asyncio.run(
         main=main(),
-        debug=False,
+        # debug=True,
         # простая интеграция с другими реализациями цикла событий
         loop_factory=uvloop.Loop,
     )
     log("асинхронный код закончен")
     log("-" * 10)
 
-    t0 = perf_counter()
+    # t0 = perf_counter()
     # повторно создаем цикл
     asyncio.run(
         main=main(),

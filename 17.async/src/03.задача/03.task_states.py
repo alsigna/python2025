@@ -1,4 +1,5 @@
 import asyncio
+import time
 from time import perf_counter
 
 
@@ -8,7 +9,11 @@ def log(msg: str) -> None:
 
 async def coro(num: int) -> str:
     log(f"начало работы корутины '{num}'")
-    await asyncio.sleep(num)
+    try:
+        await asyncio.sleep(num)
+    except asyncio.CancelledError:
+        log(f"отмена корутины '{num}'")
+        raise
     if num == 2 or num == 5:
         log(f"ошибка в корутине '{num}'")
         raise ZeroDivisionError("деление на ноль")
@@ -32,13 +37,14 @@ async def main() -> None:
     #         try:
     #             # log(f"   {task.result()=}")
     #             log(f"   {task.exception()=}")
-    #         except asyncio.exceptions.CancelledError as exc:
+    #         except asyncio.CancelledError as exc:
     #             log(f"   {str(exc)}")
     #     else:
     #         log("   задача завершена")
     #         log(f"   {task.exception()=}")
     #         try:
-    #             result = await task
+    #             result = task.result()
+    #             # result = await task
     #             log(f"   {result=}")
     #             # или так, для завершенной задачи `await task` тоже самое, что и `task.result()`
     #             # log(f"   {task.result()=}")
@@ -67,14 +73,16 @@ async def main() -> None:
     #     log(f"   {task.done()=}")
     #     log(f"   {task.cancelled()=}")
     #     try:
+    #         result = task.result()
     #         log(f"   {task.result()=}")
-    #     except asyncio.exceptions.CancelledError as exc:
+    #     except asyncio.CancelledError as exc:
     #         log("   задача отменена")
     #         log(f"   {str(exc)}")
     #     except Exception as exc:
     #         log(f"   задача завершена с исключением: {str(exc)}")
     #     else:
     #         log("   задача завершена корректно без исключений")
+    #         log(f"   {result=}")
 
     # если добавляем timeout в as_completed, то нужен еще внешний try/except для
     # отработки TimeoutError и отмены не успевших задач
@@ -102,6 +110,7 @@ async def main() -> None:
             log("-" * 10)
             log(f"   отмена задачи {task.get_name()=}")
             task.cancel()
+
     await asyncio.gather(*tasks, return_exceptions=True)
     log("выход из main")
 

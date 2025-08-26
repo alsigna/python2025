@@ -1,4 +1,5 @@
 import asyncio
+import time
 from time import perf_counter
 
 
@@ -22,7 +23,7 @@ async def shielded_coro(num: int) -> str:
     log(f"начало работы корутины '{num}'")
     try:
         await asyncio.sleep(num)
-    except asyncio.exceptions.CancelledError:
+    except asyncio.CancelledError:
         log(f"попытка отмена корутины '{num}'")
     task = asyncio.current_task()
     log("--- внутри задачи ---")
@@ -34,8 +35,8 @@ async def shielded_coro(num: int) -> str:
 
 
 async def main() -> None:
-    # task = asyncio.create_task(shielded_coro(2))
-    task = asyncio.create_task(coro(3))
+    task = asyncio.create_task(shielded_coro(3))
+    # task = asyncio.create_task(coro(3))
 
     log("--- после создания ---")
     log(f"    done: {task.done()}")
@@ -43,7 +44,7 @@ async def main() -> None:
     log(f"    state: {task._state}")  # noqa: SLF001
 
     # переключаемся, что бы coro(3) начала выполняться
-    await asyncio.sleep(0)
+    await asyncio.sleep(1)
     task.cancel()
     try:
         await task

@@ -36,18 +36,27 @@ async def bad_coro(num: int) -> str:
     log(f"начало работы блокирующей корутины '{num}'")
     for i in range(num * 1000):
         time.sleep(1 / 1000)
-        if i % 10 == 0:
+        if i % 100 == 0:
+            log("передаем управление в event loop")
             await asyncio.sleep(0)
+            log("вернули управление из event loop")
     log(f"конец работы блокирующей корутины '{num}'")
     return f"блокирующая корутина '{num}' выполнена"
 
 
 async def main() -> None:
     # tasks = [asyncio.create_task(coro(i)) for i in range(7, 4, -1)]
-    # tasks = [asyncio.create_task(coro(i)) for i in range(4, 7)]
+    # tasks = [asyncio.create_task(coro(i)) for i in range(4, 10)]
     tasks = [asyncio.create_task(coro(i)) for i in range(1, 3)]
     tasks.append(asyncio.create_task(bad_coro(3)))
     await asyncio.gather(*tasks)
+
+    # пример с uvloop.Loop
+    # await asyncio.sleep(0)
+    # log("начало блокирующего кода")
+    # time.sleep(3.5)
+    # log("конец блокирующего кода")
+    # await asyncio.gather(*tasks)
 
 
 if __name__ == "__main__":

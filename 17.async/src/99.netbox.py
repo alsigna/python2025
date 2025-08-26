@@ -7,7 +7,7 @@ from typing import Any, Self
 import aiohttp
 from pydantic import BaseModel
 
-NETBOX_TOKEN = "907ad06273546d032dfa5e300ab7c3cd5d669ede"
+NETBOX_TOKEN = "bae8ea05608d48b153cba36f7caf38e1c2cca108"
 NETBOX_URL = "https://demo.netbox.dev"
 
 NETBOX_DEVICES = [
@@ -15,7 +15,7 @@ NETBOX_DEVICES = [
         "name": "r01",
         "model": "iosv",
         "role": "router",
-        "site": "dm-akron",
+        "site": "LAB",
         "ip-addresses": {"192.168.122.101/24": "Loopback0"},
         "tags": ["python2025"],
     },
@@ -23,7 +23,7 @@ NETBOX_DEVICES = [
         "name": "r02",
         "model": "iosv",
         "role": "router",
-        "site": "dm-akron",
+        "site": "LAB",
         "ip-addresses": {"192.168.122.102/24": "Loopback0"},
         "tags": ["python2025"],
     },
@@ -31,7 +31,7 @@ NETBOX_DEVICES = [
         "name": "r03",
         "model": "usg6000v2",
         "role": "router",
-        "site": "dm-akron",
+        "site": "LAB",
         "ip-addresses": {"192.168.122.103/24": "Loopback0"},
         "tags": ["python2025"],
     },
@@ -145,6 +145,7 @@ class NetboxAPIHandler:
         if self.session is None:
             raise RuntimeError("метод используется в контекстном менеджере")
         async with self.session.post(url=url, data=json.dumps(data)) as response:
+            print(await response.text())
             response.raise_for_status()
             response_json = await response.json()
         return response_json
