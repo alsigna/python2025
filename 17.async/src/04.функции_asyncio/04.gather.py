@@ -17,19 +17,34 @@ async def coro(num: int) -> str:
 
 
 async def main(coro_count: int) -> None:
-    tasks = [asyncio.create_task(coro(i)) for i in range(1, coro_count + 1)]
-    # await asyncio.gather(*tasks)
-    result = await asyncio.gather(*tasks, return_exceptions=True)
-    # в result лежит список результатов выполнения тасков либо exception в том порядке,
-    # в котором они ставились (создавались)
-    log(result)
-    # так как в gather передавались tasks, то результат еще можно получить и из самого
-    # исходного списка tasks.
-    for task in tasks:
-        if (exc := task.exception()) is not None:
-            log(f"ошибка. {exc.__class__.__name__}: {str(exc)}")
+    # пример 1
+    tasks = [
+        coro(1),
+        coro(2),
+        coro(3),
+    ]
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+    log("-" * 10)
+    for result in results:
+        if isinstance(result, Exception):
+            log(f"Ошибка!: {str(result)}")
         else:
-            log(task.result())
+            log(result)
+
+    # пример 2
+    tasks = [asyncio.create_task(coro(i)) for i in range(1, coro_count + 1)]
+    await asyncio.gather(*tasks, return_exceptions=True)
+    log("-" * 10)
+    for task in tasks:
+        task_name = task.get_name()
+        try:
+            result = task.result()
+        except asyncio.CancelledError:
+            log(f"задача {task_name} отменена")
+        except Exception as exc:
+            log(f"ошибка {exc.__class__.__name__}: {str(exc)}")
+        else:
+            log(result)
 
 
 if __name__ == "__main__":

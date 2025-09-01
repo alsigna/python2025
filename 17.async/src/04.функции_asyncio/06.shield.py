@@ -14,8 +14,10 @@ async def coro(num: int) -> str:
 
 
 async def main() -> None:
-    task = asyncio.create_task(coro(3))
-    shield = asyncio.shield(task)
+    # task = asyncio.create_task(coro(3))
+    # shield = asyncio.shield(task)
+
+    shield = asyncio.shield(asyncio.create_task(coro(3)))
 
     await asyncio.sleep(1)
     # исходная задача не защищена и при её отмене будет CancelledError
@@ -26,14 +28,18 @@ async def main() -> None:
         # shield защищает задачу от отмены, т.е. внутри корутины не будет вызван CancelledError
         # но не защищает ожидание результата, поэтому в точке await мы увидим CancelledError
         await shield
-    except asyncio.exceptions.CancelledError:
+    except asyncio.CancelledError:
         log("попытка отмена задачи")
 
     # shield приняла на себя cancel, но исходная задача продолжила работу, поэтому её нужно дождаться
-    await task
-    log(f"{task.done()=}")
-    log(f"{task.cancelled()=}")
-    log(f"{task.result()=}")
+    # await task
+    log(f"{shield.done()=}")
+    log(f"{shield.cancelled()=}")
+    log(f"{shield.result()=}")
+
+    # log(f"{task.done()=}")
+    # log(f"{task.cancelled()=}")
+    # log(f"{task.result()=}")
 
 
 if __name__ == "__main__":
