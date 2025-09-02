@@ -5,7 +5,7 @@ from typing import Any, Self
 
 import httpx
 
-NETBOX_TOKEN = "54536d673c05f56af3ec42705f642b95f1cf074a"
+NETBOX_TOKEN = "1f8b8d63cb3446b8eaa21e6a782dfc505cc105e6"
 NETBOX_URL = "https://demo.netbox.dev"
 PARAMS = [("limit", 2)]
 
@@ -19,7 +19,7 @@ class NetboxAPIHandler:
         self.base_url = base_url
         self.token = token
         self.session_limit = session_limit
-        self.session: httpx.Client | None = None
+        self.session: httpx.Client | httpx.AsyncClient | None = None
 
     def __enter__(self) -> Self:
         self.session = httpx.Client(
@@ -102,6 +102,7 @@ class NetboxAPIHandler:
     async def aget(self, url: str, params: list[tuple[str, Any]] | None = None) -> list[dict[str, Any]]:
         if self.session is None:
             raise RuntimeError("метод используется в контекстном менеджере")
+
         response: httpx.Response = await self.session.get(url=url, params=params)
         log(f"запрос '{response.url}'")
         response.raise_for_status()

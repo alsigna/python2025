@@ -15,7 +15,7 @@ async def coro(num: int) -> str:
 
 
 async def main(coro_count: int) -> None:
-    await asyncio.gather(*[coro(i) for i in range(1, coro_count + 1)])
+    await asyncio.gather(*[asyncio.create_task(coro(i), name=f"coro-{i}") for i in range(1, coro_count + 1)])
     log("все корутины завершены")
 
 
@@ -24,16 +24,19 @@ async def check_status(loop: asyncio.AbstractEventLoop) -> None:
     while True:
         await asyncio.sleep(2)
         if filename.is_file():
-            log("завершаем цикл")
+            log("завершаем цикл, файл shutdown найден")
             await shutdown(loop)
             return
         log("завершение цикла не требуется")
 
 
 async def shutdown(loop: asyncio.AbstractEventLoop) -> None:
+    log("работа корутины shutdown")
     tasks = [t for t in asyncio.all_tasks(loop) if t is not asyncio.current_task(loop)]
     for task in tasks:
         task.cancel()
+        log(f"{task.get_name()} отменена")
+
     await asyncio.gather(*tasks, return_exceptions=True)
     loop.stop()
 
@@ -42,11 +45,11 @@ if __name__ == "__main__":
     t0 = perf_counter()
     loop = asyncio.new_event_loop()
     try:
-        loop.create_task(check_status(loop))
-        loop.create_task(main(coro_count=3))
+        loop.create_task(check_status(loop), name="check_status")
+        loop.create_task(main(coro_count=3), name="main")
         loop.run_forever()
     except KeyboardInterrupt:
-        log("Принудительная остановка")
+        log("принудительная остановка")
         loop.run_until_complete(shutdown(loop))
     finally:
         loop.close()

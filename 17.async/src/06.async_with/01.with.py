@@ -9,6 +9,7 @@ def log(msg: str) -> None:
     print(f"{perf_counter() - t0:.3f} сек: - {msg}")
 
 
+# Вариант 1: нет долгих блокирующих операций - оба контекстных менеджера дают одинаковый эффект:
 class SyncAsyncContextManagerV1:
     def __enter__(self) -> Self:
         log("вход в sync контекст")
@@ -37,6 +38,7 @@ class SyncAsyncContextManagerV1:
         return False
 
 
+# Вариант 2: есть долгие блокирующие CPU-bound вычисления - оба контекстных менеджера дают одинаковый эффект:
 class SyncAsyncContextManagerV2:
     OPS_COUNT = 100_000_000
 
@@ -58,7 +60,7 @@ class SyncAsyncContextManagerV2:
     async def __aenter__(self) -> Self:
         for i in range(self.OPS_COUNT):
             _ = i * i % 12345
-            # if i % 100_000 == 0:
+            # if i % 1_000_000 == 0:
             #     await asyncio.sleep(0)
         log("вход в async контекст")
         return self
@@ -73,6 +75,8 @@ class SyncAsyncContextManagerV2:
         return False
 
 
+# Вариант 3: есть долгие IO-bound операции, которые можно реализовать как корутины и использовать await
+# (например установление сессии с устройством, получение информации через API и пр).
 class SyncAsyncContextManagerV3:
     def open(self) -> None:
         time.sleep(5)
