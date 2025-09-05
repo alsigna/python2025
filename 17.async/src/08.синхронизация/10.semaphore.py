@@ -9,19 +9,22 @@ from scrapli.response import Response
 DEVICES = [
     "192.168.122.101",
     "192.168.122.102",
-    "192.168.122.103",
+    "192.168.122.110",
+    "192.168.122.111",
+    "192.168.122.112",
+    "192.168.122.113",
 ]
 COMMANDS = [
     "show interfaces description",
     "show version",
     "show ip interface brief",
 ]
-MAX_CONNECTIONS = 2
+MAX_CONNECTIONS = 3
 
+semaphore = asyncio.Semaphore(MAX_CONNECTIONS)
 
 pairs = list(product(DEVICES, COMMANDS))
 shuffle(pairs)
-semaphore = asyncio.Semaphore(MAX_CONNECTIONS)
 
 
 def log(msg: str) -> None:
@@ -46,15 +49,20 @@ device_scrapli = {
 }
 
 
-async def get_output_scrapli(ip: str, cmd: str) -> Response:
+async def _get_output_scrapli(ip: str, cmd: str) -> Response:
     log(f"get_output_scrapli - {ip:>15}: \u23f2 корутина для сбора '{cmd}' создана")
     device = device_scrapli | {"host": ip}
-    async with semaphore:
-        log(f"get_output_scrapli - {ip:>15}: \u23e9 сбор '{cmd}'")
-        async with AsyncScrapli(**device) as ssh:
-            response = await ssh.send_command(cmd)
+    log(f"get_output_scrapli - {ip:>15}: \u23e9 сбор '{cmd}'")
+    # async with semaphore:
+    async with AsyncScrapli(**device) as ssh:
+        response = await ssh.send_command(cmd)
     log(f"get_output_scrapli - {ip:>15}: \u2705 завершено '{cmd}'")
     return response
+
+
+async def get_output_scrapli(ip: str, cmd: str) -> Response:
+    async with semaphore:
+        return await _get_output_scrapli(ip, cmd)
 
 
 async def main() -> None:

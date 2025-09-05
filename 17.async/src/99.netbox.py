@@ -7,7 +7,7 @@ from typing import Any, Self
 import aiohttp
 from pydantic import BaseModel
 
-NETBOX_TOKEN = "bae8ea05608d48b153cba36f7caf38e1c2cca108"
+NETBOX_TOKEN = "ed04c3ed7e2fa4159f71eb077363236a9e6db2f7"
 NETBOX_URL = "https://demo.netbox.dev"
 
 NETBOX_DEVICES = [
@@ -15,7 +15,7 @@ NETBOX_DEVICES = [
         "name": "r01",
         "model": "iosv",
         "role": "router",
-        "site": "LAB",
+        "site": "dm-akron",
         "ip-addresses": {"192.168.122.101/24": "Loopback0"},
         "tags": ["python2025"],
     },
@@ -23,7 +23,7 @@ NETBOX_DEVICES = [
         "name": "r02",
         "model": "iosv",
         "role": "router",
-        "site": "LAB",
+        "site": "dm-akron",
         "ip-addresses": {"192.168.122.102/24": "Loopback0"},
         "tags": ["python2025"],
     },
@@ -31,7 +31,7 @@ NETBOX_DEVICES = [
         "name": "r03",
         "model": "usg6000v2",
         "role": "router",
-        "site": "LAB",
+        "site": "dm-akron",
         "ip-addresses": {"192.168.122.103/24": "Loopback0"},
         "tags": ["python2025"],
     },
