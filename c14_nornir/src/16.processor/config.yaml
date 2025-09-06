@@ -1,0 +1,12 @@
+inventory:
+  plugin: SimpleInventory
+  options:
+    host_file: ./c14_nornir/src/16.processor/inventory/hosts.yaml
+    group_file: ./c14_nornir/src/16.processor/inventory/groups.yaml
+    defaults_file: ./c14_nornir/src/16.processor/inventory/defaults.yaml
+logging:
+  enabled: true
+runner:
+  plugin: threaded
+  options:
+    num_workers: 1

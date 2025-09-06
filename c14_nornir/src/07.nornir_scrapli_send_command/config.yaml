@@ -1,0 +1,12 @@
+inventory:
+  plugin: SimpleInventory
+  options:
+    host_file: ./c14_nornir/src/07.nornir_scrapli_send_command/inventory/hosts.yaml
+    group_file: ./c14_nornir/src/07.nornir_scrapli_send_command/inventory/groups.yaml
+    defaults_file: ./c14_nornir/src/07.nornir_scrapli_send_command/inventory/defaults.yaml
+logging:
+  enabled: true
+runner:
+  plugin: threaded
+  options:
+    num_workers: 20

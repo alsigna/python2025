@@ -1,8 +1,0 @@
-2025-08-04 19:01:11,496 -  nornir.core -     INFO -        run() - Running task 'tcp_ping' with args {'ports': [22, 23, 24], 'timeout': 3} on 3 hosts
-2025-08-04 19:01:11,496 - nornir.core.task -    DEBUG -      start() - Host 'r0': running task 'tcp_ping'
-2025-08-04 19:01:11,497 - nornir.core.task -    DEBUG -      start() - Host 'r1': running task 'tcp_ping'
-2025-08-04 19:01:11,497 - nornir.core.task -    DEBUG -      start() - Host 'r2': running task 'tcp_ping'
-2025-08-04 19:02:11,633 -  nornir.core -     INFO -        run() - Running task 'tcp_ping' with args {'ports': [22, 23, 24], 'timeout': 3} on 3 hosts
-2025-08-04 19:02:11,633 - nornir.core.task -    DEBUG -      start() - Host 'r0': running task 'tcp_ping'
-2025-08-04 19:02:11,633 - nornir.core.task -    DEBUG -      start() - Host 'r1': running task 'tcp_ping'
-2025-08-04 19:02:11,633 - nornir.core.task -    DEBUG -      start() - Host 'r2': running task 'tcp_ping'

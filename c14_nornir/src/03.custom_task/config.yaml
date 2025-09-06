@@ -1,0 +1,14 @@
+inventory:
+  plugin: SimpleInventory
+  options:
+    host_file: ./c14_nornir/src/03.custom_task/inventory/hosts.yaml
+    group_file: ./c14_nornir/src/03.custom_task/inventory/groups.yaml
+    defaults_file: ./c14_nornir/src/03.custom_task/inventory/defaults.yaml
+logging:
+  enabled: True
+  level: DEBUG
+  to_console: True
+runner:
+  plugin: threaded
+  options:
+    num_workers: 20

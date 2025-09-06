@@ -1,0 +1,21 @@
+inventory:
+  plugin: NetBoxInventory2
+  options:
+    nb_url: "https://demo.netbox.dev"
+    nb_token: "a4b84ec659a0717acd697dfa5115c6043956a4a3"
+    ssl_verify: False
+    filter_parameters:
+      # manufacturer: cisco
+      # name__isw: r1
+      # site: br1
+      # device_type: iosv
+      tag:
+        - python2025
+    group_file: "./c14_nornir/src/13.nornir_netbox/inventory/groups.yaml"
+    defaults_file: "./c14_nornir/src/13.nornir_netbox/inventory/defaults.yaml"
+logging:
+  enabled: True
+runner:
+  plugin: threaded
+  options:
+    num_workers: 20
