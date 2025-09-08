@@ -1399,6 +1399,44 @@ monkeypatch похожа на Mock из unittest, но:
 
 monkeypatch используется в простых подменах, в сложных случаях (например нужно контролировать как были вызваны методы) используется Mock.
 
-<https://pytest-docs-ru.readthedocs.io/ru/latest/>
-[text](https://docs.pytest.org/en/stable/reference/reference.html#ini-options-ref)
-<https://docs.pytest.org/en/latest/>
+Кроме этого существует пакет [pytest-mock](https://pytest-mock.readthedocs.io/en/latest/), который является оберткой над Mock, но в pytest стиле: подключение через фикстуру, откат после завершения теста. Т.е. это не для нового функционала, а для удобного использования старого. Пакет предоставляет возможности создавать mock-объекты, например
+
+```python
+from pytest_mock import mocker
+
+m = mocker.Mock()
+am = mocker.AsyncMock()
+```
+
+Патчить объекты
+
+```python
+mocker.patch.object(...)
+mocker.patch.dict(...)
+```
+
+Пример использования в качестве фикстуры:
+
+```python
+def test_get_single_object_response(mocker: MockerFixture) -> None:
+    fake_response = SimpleNamespace(
+        json=lambda: {
+            "hostname": "demo-netbox-stable",
+            "installed_apps": {
+                "django_filters": "25.1",
+            },
+            "netbox-version": "4.4.0",
+        },
+        raise_for_status=lambda: None,
+    )
+    mocker.patch.object(
+        target=httpx.Client,
+        attribute="get",
+        return_value=fake_response,
+    )
+
+    with NetboxAPIHandler("http://netbox.fake.com", "token") as api:
+        response = api.get("/api/status/")
+
+    assert response[0]["netbox-version"] == "4.4.0"
+```
