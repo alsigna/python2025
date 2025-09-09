@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 
 import aiohttp
 
-NETBOX_TOKEN = "734e96018b4dfe18716e24d3e7b4b32adbb4ad80"
+NETBOX_TOKEN = "41d348dc28250a19e597bac5641704c71f2e1e47"
 NETBOX_URL = "https://demo.netbox.dev"
 
 
@@ -18,7 +18,7 @@ def log(msg: str) -> None:
 
 class HTTPTrace:
     @classmethod
-    def _get_trace_config(cls) -> aiohttp.TraceConfig:
+    def get_trace_config(cls) -> aiohttp.TraceConfig:
         trace_config = aiohttp.TraceConfig()
         # инициализация запроса
         trace_config.on_request_start.append(cls._trace_on_request_start)
@@ -41,7 +41,7 @@ class HTTPTrace:
     ) -> None:
         start_time = datetime.now(tz=ZoneInfo("Europe/Moscow"))
         log(f"инициализация '{params.method}' запроса на '{params.url}'")
-        params.headers["Authorization"] = "strip"
+        # params.headers["Authorization"] = "strip"
         trace_config_ctx.start_time = start_time
 
     @classmethod
@@ -115,7 +115,7 @@ class NetboxAPIHandler:
                 "Accept": "application/json",
             },
             timeout=aiohttp.ClientTimeout(total=5),
-            trace_configs=[HTTPTrace._get_trace_config()] if self._trace else None,
+            trace_configs=[HTTPTrace.get_trace_config()] if self._trace else None,
         )
         return self
 

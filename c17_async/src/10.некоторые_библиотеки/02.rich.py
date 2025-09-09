@@ -3,6 +3,7 @@ import asyncio
 from itertools import product
 from random import shuffle
 from time import perf_counter
+from typing import Any
 
 from rich.live import Live
 from rich.progress import (
@@ -19,10 +20,10 @@ from scrapli import AsyncScrapli
 from scrapli.response import Response
 
 DEVICES = [
-    "192.168.122.101",
-    "192.168.122.102",
-    "192.168.122.103",
-    "192.168.122.104",
+    "192.168.122.110",
+    "192.168.122.111",
+    "192.168.122.112",
+    "192.168.122.113",
 ]
 COMMANDS = [
     "show interfaces description",
@@ -30,14 +31,6 @@ COMMANDS = [
     "show ip interface brief",
 ]
 MAX_CONNECTIONS = 2
-PROGRESS_COLUMNS = (
-    SpinnerColumn(),
-    TextColumn("[progress.description]{task.description}"),
-    BarColumn(),
-    TaskProgressColumn(),
-    MofNCompleteColumn(),
-    TimeElapsedColumn(),
-)
 
 
 pairs = list(product(DEVICES, COMMANDS))
@@ -70,13 +63,31 @@ device_scrapli = {
 }
 
 
-class ProgressBar:
+class Singleton[T](type):
+    _INSTANCES: dict["Singleton[T]", T] = {}
+
+    def __call__(cls, *args: Any, **kwargs: Any) -> T:
+        if cls not in cls._INSTANCES:
+            cls._INSTANCES[cls] = super().__call__(*args, **kwargs)
+        return cls._INSTANCES[cls]
+
+
+class ProgressBar(metaclass=Singleton):
+    PROGRESS_COLUMNS = (
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        BarColumn(),
+        TaskProgressColumn(),
+        MofNCompleteColumn(),
+        TimeElapsedColumn(),
+    )
+
     def __init__(self, total: int):
         self._stats = Progress("{task.description}", TextColumn("{task.completed}"))
         self._stats_succeeded = self._stats.add_task("[green]завершено успешно")
         self._stats_failed = self._stats.add_task("[red]завершено с ошибкой")
 
-        self._progress = Progress(*PROGRESS_COLUMNS)
+        self._progress = Progress(*self.PROGRESS_COLUMNS)
         self._progress_total = self._progress.add_task("[yellow] прогресс сбора", total=total)
 
         self.footer = Table.grid()
@@ -108,7 +119,8 @@ async def get_output_scrapli(ip: str, cmd: str) -> Response | None:
         return response
 
 
-async def worker(queue: asyncio.Queue, pb: ProgressBar) -> None:
+async def worker(queue: asyncio.Queue) -> None:
+    pb = ProgressBar()
     while True:
         ip, cmd = await queue.get()
         try:
@@ -129,9 +141,10 @@ async def main() -> None:
         queue.put_nowait(pair)
 
     pb = ProgressBar(len(pairs))
+
     with Live(pb.footer, refresh_per_second=10):
-        # создаем ограниченное число воркеров, раньше это было ограничение через semaphore
-        workers = [asyncio.create_task(worker(queue, pb)) for _ in range(MAX_CONNECTIONS)]
+        # создаем ограниченное число воркеров, можно и через семафоры сделать
+        workers = [asyncio.create_task(worker(queue)) for _ in range(MAX_CONNECTIONS)]
         # ждем, пока вся очередь не будет разобрана
         await queue.join()
 

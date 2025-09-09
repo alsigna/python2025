@@ -46,8 +46,8 @@ def generate_asa_log():
 
 
 for i in range(50):
-    with open(f"./src/files/asa_logs_{i:>02}.txt", "w") as f:
-        for _ in range(1000):
+    with open(f"./c17_async/src/10.некоторые_библиотеки/files/asa_logs_{i:>02}.txt", "w") as f:
+        for _ in range(10000):
             f.write(generate_asa_log())
 
     print(f"Файл asa_logs_{i:>02}.txt успешно создан!")

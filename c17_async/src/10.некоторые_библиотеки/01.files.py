@@ -5,6 +5,7 @@ from pathlib import Path
 from time import perf_counter
 
 import aiofiles
+from aiofile import async_open
 from aiopath import AsyncPath
 from tqdm.asyncio import tqdm_asyncio
 
@@ -71,6 +72,7 @@ def _read_file(file: Path) -> None:
         _ = f.read()
         # если будет выгрузка в процессы - то они ничего о t0 не знают, и тут будет ошибка
         log(f"файл {file.name} прочитан")
+        # print(f"файл {file.name} прочитан")
         time.sleep(0.5)  # больше блокирующих задержек
 
 
@@ -130,7 +132,7 @@ async def read_file_aiofiles(files: list[Path]) -> None:
 # чтение через aiofile
 #
 async def _read_file_aiofile(file: Path) -> None:
-    async with aiofiles.open(file, "r") as f:
+    async with async_open(file, "r") as f:
         _ = await f.read()
         log(f"файл {file.name} прочитан")
 
@@ -173,7 +175,7 @@ async def main():
 
     tasks = [
         *[asyncio.create_task(coro(i)) for i in range(1, 4)],
-        asyncio.create_task(read_file_thread(files)),
+        asyncio.create_task(read_file_aiopath(files)),
     ]
     await tqdm_asyncio.gather(
         *tasks,
