@@ -11,7 +11,8 @@ def get_svi_name(vendor: Vendor, svi_id: int) -> str:
     elif vendor == Vendor.ARISTA:
         return f"Vlan{svi_id}"
     else:
-        assert_never(vendor)
+        # assert_never(vendor)
+        raise RuntimeError("not supported vendor")
 
 
 if __name__ == "__main__":

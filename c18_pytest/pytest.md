@@ -147,9 +147,9 @@ class DivisionTestCase(TestCase):
             expected_regex=r"division by \w+",
         ) as cm:
             42 / 0  # noqa: B018
-            self.assertIsInstance(cm.exception, ZeroDivisionError)
-            self.assertIsInstance(str(cm.exception), str)
-            self.assertEqual(str(cm.exception), "division by zero")
+        self.assertIsInstance(cm.exception, ZeroDivisionError)
+        self.assertIsInstance(str(cm.exception), str)
+        self.assertEqual(str(cm.exception), "division by zero")
 ```
 
 ### Предварительная настройка и уборка отдельного теста (`.setUp`, `.tearDown`)
