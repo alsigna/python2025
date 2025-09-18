@@ -26,6 +26,7 @@ if __name__ == "__main__":
     log("оригинальный объект:")
     asyncio.run(main())
 
+    log("-----")
     log("mock-объект:")
     with patch.object(
         target=Device,
@@ -35,6 +36,7 @@ if __name__ == "__main__":
     ) as mock_get_output:
         asyncio.run(main())
 
+    log("-----")
     log("mock-sleep:")
     with patch(
         target="asyncio.sleep",
@@ -43,11 +45,16 @@ if __name__ == "__main__":
         mock_sleep.return_value = None
         asyncio.run(main())
 
+    log("-----")
     log("пример с рекурсией:")
     real_sleep = asyncio.sleep
 
     async def fake_sleep(delay: float) -> None:
-        return await real_sleep(1)
+        # мы используем эту функцию как side_effect, но внутри нее идет обращение к
+        # функции, которая была замокана. Поэтому возникает рекурсия. В этом случае
+        # мы сохраняем оригинальную функцию в отдельный объект и используем его
+        return await asyncio.sleep(1)
+        # return await real_sleep(1)
 
     with patch(
         target="asyncio.sleep",
