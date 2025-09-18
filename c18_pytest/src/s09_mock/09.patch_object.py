@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     def show(*devices: Device) -> None:
         for device in devices:
-            output = device.parse_output("some text")
+            output = device.parse_output("12345")
             version = device.get_version()
             print(f"{output} <|> {version}")
 
@@ -29,8 +29,8 @@ if __name__ == "__main__":
     with patch.object(
         target=Device,
         attribute="get_version",
-        return_value="mocked",
-    ):
+    ) as mock:
+        mock.return_value = "mocked"
         show(device)
     show(device)
 
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     device2 = Device("5.6.7.8")
     show(device1, device2)
     with patch.object(
-        target=device1,
+        target=Device,
         attribute="get_version",
         return_value="mocked",
     ):

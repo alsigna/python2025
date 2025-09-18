@@ -1,4 +1,4 @@
-from unittest.mock import MagicMock, PropertyMock, patch
+from unittest.mock import PropertyMock, patch
 
 
 class Device:
@@ -7,7 +7,7 @@ class Device:
 
     @property
     def version(self) -> str:
-        return "1.0"
+        return f"1.0-{self.ip}"
 
 
 if __name__ == "__main__":

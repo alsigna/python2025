@@ -17,12 +17,12 @@ def test_api(
     value: int,
     # patch самостоятельно создает mock-объект и прокидывает его в функцию
     # внутри test_api netbox_request это mock, за её пределами - оригинальная функция
-    mock_request: MagicMock,
+    mock: MagicMock,
 ) -> None:
-    assert isinstance(mock_request, MagicMock)
+    assert isinstance(mock, MagicMock)
     data = netbox_request()
     assert data[key] == value
-    mock_request.assert_called_once()
+    mock.assert_called_once()
 
 
 if __name__ == "__main__":

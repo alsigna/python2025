@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     def show(*devices: Device) -> None:
         for device in devices:
-            output = device.parse_output("some text")
+            output = device.parse_output("12345")
             version = device.get_version()
             print(f"{output} <|> {version}")
 

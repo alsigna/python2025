@@ -2,7 +2,7 @@ import asyncio
 
 from netbox_api_handler import NetboxAPIHandler
 
-NETBOX_TOKEN = "d5562616b529e6a121805ecadffaf5c2f48aeeac"
+NETBOX_TOKEN = "40a04a95a105dc4345197df6bdb390e6d2aefaa7"
 NETBOX_URL = "https://demo.netbox.dev"
 PARAMS = [
     ("brief", "true"),
