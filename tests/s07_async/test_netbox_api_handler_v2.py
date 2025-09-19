@@ -1,5 +1,5 @@
 # python -m unittest discover -s ./c18_pytest/src/s07_async/ -v
-# export TEST_NETBOX_URL=https://demo.netbox.dev/ TEST_NETBOX_TOKEN=TEST_NETBOX_TOKEN=d5562616b529e6a121805ecadffaf5c2f48aeeac
+# export TEST_NETBOX_URL=https://demo.netbox.dev/ TEST_NETBOX_TOKEN=1c8989e7eda13ed91404385d1c3337249eebf8f8
 
 from os import getenv
 from unittest import IsolatedAsyncioTestCase, TestCase
@@ -8,7 +8,7 @@ from c18_pytest.src.s07_async.netbox_api_handler import NetboxAPIHandler
 
 
 class NetboxAPIHandlerMixIn:
-    NETBOX_VERSION = "4.4.0"
+    NETBOX_VERSION = "4.4.1"
 
     @classmethod
     def setUpClass(cls) -> None:

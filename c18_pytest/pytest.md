@@ -1425,7 +1425,7 @@ def test_get_single_object_response(mocker: MockerFixture) -> None:
             "installed_apps": {
                 "django_filters": "25.1",
             },
-            "netbox-version": "4.4.0",
+            "netbox-version": "4.4.1",
         },
         raise_for_status=lambda: None,
     )
@@ -1438,5 +1438,5 @@ def test_get_single_object_response(mocker: MockerFixture) -> None:
     with NetboxAPIHandler("http://netbox.fake.com", "token") as api:
         response = api.get("/api/status/")
 
-    assert response[0]["netbox-version"] == "4.4.0"
+    assert response[0]["netbox-version"] == "4.4.1"
 ```

@@ -12,7 +12,7 @@ import httpx
 
 
 class NetboxTestCase(TestCase):
-    NETBOX_VERSION = "4.4.0"
+    NETBOX_VERSION = "4.4.1"
     PYTHON_VERSION = "3.12.3"
     QUEUE_COUNT = 3
 

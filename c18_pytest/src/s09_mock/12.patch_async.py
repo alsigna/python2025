@@ -12,12 +12,13 @@ class Device:
         self.ip = ip
 
     async def get_output(self, command: str) -> str:
-        await asyncio.sleep(3)
+        await asyncio.sleep(1)
         return f"output of '{command}'"
 
 
 async def main() -> None:
     device = Device("1.2.3.4")
+    await asyncio.sleep(2)
     log(await device.get_output("show version"))
 
 
@@ -33,7 +34,7 @@ if __name__ == "__main__":
         attribute="get_output",
         new_callable=AsyncMock,
         return_value="mocked output",
-    ) as mock_get_output:
+    ):
         asyncio.run(main())
 
     log("-----")
@@ -53,8 +54,8 @@ if __name__ == "__main__":
         # мы используем эту функцию как side_effect, но внутри нее идет обращение к
         # функции, которая была замокана. Поэтому возникает рекурсия. В этом случае
         # мы сохраняем оригинальную функцию в отдельный объект и используем его
-        return await asyncio.sleep(1)
-        # return await real_sleep(1)
+        # return await asyncio.sleep(1)
+        return await real_sleep(1)
 
     with patch(
         target="asyncio.sleep",

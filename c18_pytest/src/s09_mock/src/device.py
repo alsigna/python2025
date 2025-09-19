@@ -6,9 +6,9 @@ from scrapli import Scrapli
 
 
 class Device:
-    def __init__(self, host: str, platform: str) -> None:
+    def __init__(self, host: str) -> None:
         self.host = host
-        self.platform = platform
+        self.platform = "cisco_iosxe"
         self.cli: Scrapli = Scrapli(**self.scrapli)
 
     @property
@@ -53,12 +53,14 @@ class Device:
 
     def get_version(self) -> str:
         output = self.cli.send_command("show version")
+        if output.failed:
+            return "ERROR"
         re_version = re.search(r"Version (?P<version>\S+), ", output.result)
         return re_version.group("version")
 
 
 if __name__ == "__main__":
-    device = Device("192.168.122.101", "cisco_iosxe")
+    device = Device("192.168.122.101")
     with device:
         version = device.get_version()
         print(version)

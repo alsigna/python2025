@@ -8,7 +8,7 @@ from c18_pytest.src.s07_async.netbox_api_handler import NetboxAPIHandler
 
 
 class NetboxAPIHandlerTestCase(TestCase):
-    NETBOX_VERSION = "4.4.0"
+    NETBOX_VERSION = "4.4.1"
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -31,7 +31,7 @@ class NetboxAPIHandlerTestCase(TestCase):
 
 
 class NetboxAPIHandlerAsyncTestCase(IsolatedAsyncioTestCase):
-    NETBOX_VERSION = "4.4.0"
+    NETBOX_VERSION = "4.4.1"
 
     @classmethod
     def setUpClass(cls) -> None:
