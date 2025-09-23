@@ -141,15 +141,18 @@ exclude_also = [
     'if __name__ == .__main__.:',
 ]
 
+
+[tool.pytest.ini_options]
+markers = [
+    "api: тесты api",
+    "slow: медленные тесты",
+    "redis: тесты с запущенным редисом",
+    "mock_ssh: тесты с mock-ssh scrapli сервером",
+]
+
 # [tool.pytest.ini_options]
 # asyncio_mode = "auto" # auto | strict (default)
 # testpaths = ["tests"]
-# markers = [
-#     "api: тесты api",
-#     "slow: медленные тесты",
-#     "redis: тесты с запущенным редисом",
-#     "mock_ssh: тесты с mock-ssh scrapli сервером",
-# ]
 # console_output_style = "count"
 # addopts = "-ra --strict-markers -v -s"
 # filterwarnings = ["ignore::DeprecationWarning"]
