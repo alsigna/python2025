@@ -76,18 +76,18 @@ events:
           such\nGPL code under the terms of GPL Version 2.0.  For more details, see
           the\ndocumentation or \"License Notice\" file accompanying the IOS-XE software,\n
           or the applicable URL provided on the flyer accompanying the IOS-XE\nsoftware.\n
-          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 5 minutes\nUptime for this control
-          processor is 6 minutes\nSystem returned to ROM by reload\nSystem image file
-          is \"bootflash:packages.conf\"\nLast reload reason: reload\n\n\n\nThis product
-          contains cryptographic features and is subject to United\nStates and local
-          country laws governing import, export, transfer and\nuse. Delivery of Cisco
-          cryptographic products does not imply\nthird-party authority to import,
-          export, distribute or use encryption.\nImporters, exporters, distributors
-          and users are responsible for\ncompliance with U.S. and local country laws.
-          By using this product you\nagree to comply with applicable laws and regulations.
-          If you are unable\nto comply with U.S. and local laws, return this product
-          immediately.\n\nA summary of U.S. laws governing Cisco cryptographic products
-          may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 1 hour, 18 minutes\nUptime for this
+          control processor is 1 hour, 20 minutes\nSystem returned to ROM by reload\n
+          System image file is \"bootflash:packages.conf\"\nLast reload reason: reload\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
           \nIf you require further assistance please contact us by sending email to\n
           export@cisco.com.\n\nLicense Level: ax\nLicense Type: N/A(Smart License
           Enabled)\nNext reload license Level: ax\n\nThe current throughput level
@@ -95,7 +95,7 @@ events:
           \ncisco CSR1000V (VXE) processor (revision VXE) with 2071913K/3075K bytes
           of memory.\nProcessor board ID 9RQ38I0EKUL\nRouter operating mode: Autonomous\n
           4 Gigabit Ethernet interfaces\n32768K bytes of non-volatile configuration
-          memory.\n3978472K bytes of physical memory.\n6188032K bytes of virtual hard
+          memory.\n3978412K bytes of physical memory.\n6188032K bytes of virtual hard
           disk at bootflash:.\n\nConfiguration register is 0x2102\n\nr01>"
         result_privilege_level: exec
         returns_prompt: true
@@ -118,8 +118,9 @@ events:
         type: standard
       sh ip ospf ne:
         channel_output: "\nNeighbor ID     Pri   State           Dead Time   Address\
-          \         Interface\n10.255.255.102    0   FULL/  -        00:00:35    192.168.12.2\
-          \    GigabitEthernet2\nr01>"
+          \         Interface\n10.255.255.103    0   FULL/  -        00:00:38    192.168.13.2\
+          \    GigabitEthernet3\n10.255.255.102    0   FULL/  -        00:00:36  \
+          \  192.168.12.2    GigabitEthernet2\nr01>"
         result_privilege_level: exec
         returns_prompt: true
         closes_connection: false
@@ -209,18 +210,18 @@ events:
           such\nGPL code under the terms of GPL Version 2.0.  For more details, see
           the\ndocumentation or \"License Notice\" file accompanying the IOS-XE software,\n
           or the applicable URL provided on the flyer accompanying the IOS-XE\nsoftware.\n
-          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 5 minutes\nUptime for this control
-          processor is 7 minutes\nSystem returned to ROM by reload\nSystem image file
-          is \"bootflash:packages.conf\"\nLast reload reason: reload\n\n\n\nThis product
-          contains cryptographic features and is subject to United\nStates and local
-          country laws governing import, export, transfer and\nuse. Delivery of Cisco
-          cryptographic products does not imply\nthird-party authority to import,
-          export, distribute or use encryption.\nImporters, exporters, distributors
-          and users are responsible for\ncompliance with U.S. and local country laws.
-          By using this product you\nagree to comply with applicable laws and regulations.
-          If you are unable\nto comply with U.S. and local laws, return this product
-          immediately.\n\nA summary of U.S. laws governing Cisco cryptographic products
-          may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 1 hour, 19 minutes\nUptime for this
+          control processor is 1 hour, 21 minutes\nSystem returned to ROM by reload\n
+          System image file is \"bootflash:packages.conf\"\nLast reload reason: reload\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
           \nIf you require further assistance please contact us by sending email to\n
           export@cisco.com.\n\nLicense Level: ax\nLicense Type: N/A(Smart License
           Enabled)\nNext reload license Level: ax\n\nThe current throughput level
@@ -228,7 +229,7 @@ events:
           \ncisco CSR1000V (VXE) processor (revision VXE) with 2071913K/3075K bytes
           of memory.\nProcessor board ID 9RQ38I0EKUL\nRouter operating mode: Autonomous\n
           4 Gigabit Ethernet interfaces\n32768K bytes of non-volatile configuration
-          memory.\n3978472K bytes of physical memory.\n6188032K bytes of virtual hard
+          memory.\n3978412K bytes of physical memory.\n6188032K bytes of virtual hard
           disk at bootflash:.\n\nConfiguration register is 0x2102\n\nr01>"
         result_privilege_level: exec
         returns_prompt: true
@@ -251,8 +252,9 @@ events:
         type: standard
       sh ip ospf ne:
         channel_output: "\nNeighbor ID     Pri   State           Dead Time   Address\
-          \         Interface\n10.255.255.102    0   FULL/  -        00:00:39    192.168.12.2\
-          \    GigabitEthernet2\nr01>"
+          \         Interface\n10.255.255.103    0   FULL/  -        00:00:32    192.168.13.2\
+          \    GigabitEthernet3\n10.255.255.102    0   FULL/  -        00:00:32  \
+          \  192.168.12.2    GigabitEthernet2\nr01>"
         result_privilege_level: exec
         returns_prompt: true
         closes_connection: false
@@ -339,18 +341,18 @@ events:
           such\nGPL code under the terms of GPL Version 2.0.  For more details, see
           the\ndocumentation or \"License Notice\" file accompanying the IOS-XE software,\n
           or the applicable URL provided on the flyer accompanying the IOS-XE\nsoftware.\n
-          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 5 minutes\nUptime for this control
-          processor is 6 minutes\nSystem returned to ROM by reload\nSystem image file
-          is \"bootflash:packages.conf\"\nLast reload reason: reload\n\n\n\nThis product
-          contains cryptographic features and is subject to United\nStates and local
-          country laws governing import, export, transfer and\nuse. Delivery of Cisco
-          cryptographic products does not imply\nthird-party authority to import,
-          export, distribute or use encryption.\nImporters, exporters, distributors
-          and users are responsible for\ncompliance with U.S. and local country laws.
-          By using this product you\nagree to comply with applicable laws and regulations.
-          If you are unable\nto comply with U.S. and local laws, return this product
-          immediately.\n\nA summary of U.S. laws governing Cisco cryptographic products
-          may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 1 hour, 18 minutes\nUptime for this
+          control processor is 1 hour, 20 minutes\nSystem returned to ROM by reload\n
+          System image file is \"bootflash:packages.conf\"\nLast reload reason: reload\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
           \nIf you require further assistance please contact us by sending email to\n
           export@cisco.com.\n\nLicense Level: ax\nLicense Type: N/A(Smart License
           Enabled)\nNext reload license Level: ax\n\nThe current throughput level
@@ -358,7 +360,7 @@ events:
           \ncisco CSR1000V (VXE) processor (revision VXE) with 2071913K/3075K bytes
           of memory.\nProcessor board ID 9RQ38I0EKUL\nRouter operating mode: Autonomous\n
           4 Gigabit Ethernet interfaces\n32768K bytes of non-volatile configuration
-          memory.\n3978472K bytes of physical memory.\n6188032K bytes of virtual hard
+          memory.\n3978412K bytes of physical memory.\n6188032K bytes of virtual hard
           disk at bootflash:.\n\nConfiguration register is 0x2102\n\nr01#"
         result_privilege_level: privilege_exec
         returns_prompt: true
@@ -381,8 +383,9 @@ events:
         type: standard
       sh ip ospf ne:
         channel_output: "\nNeighbor ID     Pri   State           Dead Time   Address\
-          \         Interface\n10.255.255.102    0   FULL/  -        00:00:34    192.168.12.2\
-          \    GigabitEthernet2\nr01#"
+          \         Interface\n10.255.255.103    0   FULL/  -        00:00:38    192.168.13.2\
+          \    GigabitEthernet3\n10.255.255.102    0   FULL/  -        00:00:36  \
+          \  192.168.12.2    GigabitEthernet2\nr01#"
         result_privilege_level: privilege_exec
         returns_prompt: true
         closes_connection: false
@@ -471,18 +474,18 @@ events:
           such\nGPL code under the terms of GPL Version 2.0.  For more details, see
           the\ndocumentation or \"License Notice\" file accompanying the IOS-XE software,\n
           or the applicable URL provided on the flyer accompanying the IOS-XE\nsoftware.\n
-          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 5 minutes\nUptime for this control
-          processor is 7 minutes\nSystem returned to ROM by reload\nSystem image file
-          is \"bootflash:packages.conf\"\nLast reload reason: reload\n\n\n\nThis product
-          contains cryptographic features and is subject to United\nStates and local
-          country laws governing import, export, transfer and\nuse. Delivery of Cisco
-          cryptographic products does not imply\nthird-party authority to import,
-          export, distribute or use encryption.\nImporters, exporters, distributors
-          and users are responsible for\ncompliance with U.S. and local country laws.
-          By using this product you\nagree to comply with applicable laws and regulations.
-          If you are unable\nto comply with U.S. and local laws, return this product
-          immediately.\n\nA summary of U.S. laws governing Cisco cryptographic products
-          may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 1 hour, 19 minutes\nUptime for this
+          control processor is 1 hour, 21 minutes\nSystem returned to ROM by reload\n
+          System image file is \"bootflash:packages.conf\"\nLast reload reason: reload\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
           \nIf you require further assistance please contact us by sending email to\n
           export@cisco.com.\n\nLicense Level: ax\nLicense Type: N/A(Smart License
           Enabled)\nNext reload license Level: ax\n\nThe current throughput level
@@ -490,7 +493,7 @@ events:
           \ncisco CSR1000V (VXE) processor (revision VXE) with 2071913K/3075K bytes
           of memory.\nProcessor board ID 9RQ38I0EKUL\nRouter operating mode: Autonomous\n
           4 Gigabit Ethernet interfaces\n32768K bytes of non-volatile configuration
-          memory.\n3978472K bytes of physical memory.\n6188032K bytes of virtual hard
+          memory.\n3978412K bytes of physical memory.\n6188032K bytes of virtual hard
           disk at bootflash:.\n\nConfiguration register is 0x2102\n\nr01#"
         result_privilege_level: privilege_exec
         returns_prompt: true
@@ -513,8 +516,9 @@ events:
         type: standard
       sh ip ospf ne:
         channel_output: "\nNeighbor ID     Pri   State           Dead Time   Address\
-          \         Interface\n10.255.255.102    0   FULL/  -        00:00:39    192.168.12.2\
-          \    GigabitEthernet2\nr01#"
+          \         Interface\n10.255.255.103    0   FULL/  -        00:00:31    192.168.13.2\
+          \    GigabitEthernet3\n10.255.255.102    0   FULL/  -        00:00:31  \
+          \  192.168.12.2    GigabitEthernet2\nr01#"
         result_privilege_level: privilege_exec
         returns_prompt: true
         closes_connection: false
@@ -791,18 +795,18 @@ events:
           such\nGPL code under the terms of GPL Version 2.0.  For more details, see
           the\ndocumentation or \"License Notice\" file accompanying the IOS-XE software,\n
           or the applicable URL provided on the flyer accompanying the IOS-XE\nsoftware.\n
-          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 5 minutes\nUptime for this control
-          processor is 6 minutes\nSystem returned to ROM by reload\nSystem image file
-          is \"bootflash:packages.conf\"\nLast reload reason: reload\n\n\n\nThis product
-          contains cryptographic features and is subject to United\nStates and local
-          country laws governing import, export, transfer and\nuse. Delivery of Cisco
-          cryptographic products does not imply\nthird-party authority to import,
-          export, distribute or use encryption.\nImporters, exporters, distributors
-          and users are responsible for\ncompliance with U.S. and local country laws.
-          By using this product you\nagree to comply with applicable laws and regulations.
-          If you are unable\nto comply with U.S. and local laws, return this product
-          immediately.\n\nA summary of U.S. laws governing Cisco cryptographic products
-          may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 1 hour, 18 minutes\nUptime for this
+          control processor is 1 hour, 20 minutes\nSystem returned to ROM by reload\n
+          System image file is \"bootflash:packages.conf\"\nLast reload reason: reload\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
           \nIf you require further assistance please contact us by sending email to\n
           export@cisco.com.\n\nLicense Level: ax\nLicense Type: N/A(Smart License
           Enabled)\nNext reload license Level: ax\n\nThe current throughput level
@@ -810,7 +814,7 @@ events:
           \ncisco CSR1000V (VXE) processor (revision VXE) with 2071913K/3075K bytes
           of memory.\nProcessor board ID 9RQ38I0EKUL\nRouter operating mode: Autonomous\n
           4 Gigabit Ethernet interfaces\n32768K bytes of non-volatile configuration
-          memory.\n3978472K bytes of physical memory.\n6188032K bytes of virtual hard
+          memory.\n3978412K bytes of physical memory.\n6188032K bytes of virtual hard
           disk at bootflash:.\n\nConfiguration register is 0x2102\n\nr01(tcl)#"
         result_privilege_level: tclsh
         returns_prompt: true
@@ -833,8 +837,9 @@ events:
         type: standard
       sh ip ospf ne:
         channel_output: "\nNeighbor ID     Pri   State           Dead Time   Address\
-          \         Interface\n10.255.255.102    0   FULL/  -        00:00:33    192.168.12.2\
-          \    GigabitEthernet2\nr01(tcl)#"
+          \         Interface\n10.255.255.103    0   FULL/  -        00:00:36    192.168.13.2\
+          \    GigabitEthernet3\n10.255.255.102    0   FULL/  -        00:00:34  \
+          \  192.168.12.2    GigabitEthernet2\nr01(tcl)#"
         result_privilege_level: tclsh
         returns_prompt: true
         closes_connection: false
@@ -923,18 +928,18 @@ events:
           such\nGPL code under the terms of GPL Version 2.0.  For more details, see
           the\ndocumentation or \"License Notice\" file accompanying the IOS-XE software,\n
           or the applicable URL provided on the flyer accompanying the IOS-XE\nsoftware.\n
-          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 5 minutes\nUptime for this control
-          processor is 7 minutes\nSystem returned to ROM by reload\nSystem image file
-          is \"bootflash:packages.conf\"\nLast reload reason: reload\n\n\n\nThis product
-          contains cryptographic features and is subject to United\nStates and local
-          country laws governing import, export, transfer and\nuse. Delivery of Cisco
-          cryptographic products does not imply\nthird-party authority to import,
-          export, distribute or use encryption.\nImporters, exporters, distributors
-          and users are responsible for\ncompliance with U.S. and local country laws.
-          By using this product you\nagree to comply with applicable laws and regulations.
-          If you are unable\nto comply with U.S. and local laws, return this product
-          immediately.\n\nA summary of U.S. laws governing Cisco cryptographic products
-          may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \n\nROM: IOS-XE ROMMON\n\nr01 uptime is 1 hour, 19 minutes\nUptime for this
+          control processor is 1 hour, 21 minutes\nSystem returned to ROM by reload\n
+          System image file is \"bootflash:packages.conf\"\nLast reload reason: reload\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
           \nIf you require further assistance please contact us by sending email to\n
           export@cisco.com.\n\nLicense Level: ax\nLicense Type: N/A(Smart License
           Enabled)\nNext reload license Level: ax\n\nThe current throughput level
@@ -942,7 +947,7 @@ events:
           \ncisco CSR1000V (VXE) processor (revision VXE) with 2071913K/3075K bytes
           of memory.\nProcessor board ID 9RQ38I0EKUL\nRouter operating mode: Autonomous\n
           4 Gigabit Ethernet interfaces\n32768K bytes of non-volatile configuration
-          memory.\n3978472K bytes of physical memory.\n6188032K bytes of virtual hard
+          memory.\n3978412K bytes of physical memory.\n6188032K bytes of virtual hard
           disk at bootflash:.\n\nConfiguration register is 0x2102\n\nr01(tcl)#"
         result_privilege_level: tclsh
         returns_prompt: true
@@ -965,8 +970,9 @@ events:
         type: standard
       sh ip ospf ne:
         channel_output: "\nNeighbor ID     Pri   State           Dead Time   Address\
-          \         Interface\n10.255.255.102    0   FULL/  -        00:00:37    192.168.12.2\
-          \    GigabitEthernet2\nr01(tcl)#"
+          \         Interface\n10.255.255.103    0   FULL/  -        00:00:39    192.168.13.2\
+          \    GigabitEthernet3\n10.255.255.102    0   FULL/  -        00:00:39  \
+          \  192.168.12.2    GigabitEthernet2\nr01(tcl)#"
         result_privilege_level: tclsh
         returns_prompt: true
         closes_connection: false

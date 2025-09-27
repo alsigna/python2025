@@ -149,15 +149,13 @@ markers = [
     "redis: тесты с запущенным редисом",
     "mock_ssh: тесты с mock-ssh scrapli сервером",
 ]
-
-# [tool.pytest.ini_options]
-# asyncio_mode = "auto" # auto | strict (default)
-# testpaths = ["tests"]
+asyncio_mode = "auto" # auto | strict (default)
+testpaths = ["tests"]
 # console_output_style = "count"
-# addopts = "-ra --strict-markers -v -s"
-# filterwarnings = ["ignore::DeprecationWarning"]
+addopts = "-ra --strict-markers -v"
+filterwarnings = ["ignore::DeprecationWarning"]
 # xfail_strict = true
-# # asyncio_default_fixture_loop_scope = "module"
+asyncio_default_fixture_loop_scope = "module"
 
 [build-system]
 requires = ["poetry-core"]

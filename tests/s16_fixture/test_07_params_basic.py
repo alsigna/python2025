@@ -4,6 +4,16 @@ import pytest
 from pytest import FixtureRequest
 
 
+@pytest.fixture(params=["prod", "stg"])
+def netbox(request: FixtureRequest) -> str:
+    if request.param == "prod":
+        # идем в продовый сервис
+        return "admin"
+    elif request.param == "stg":
+        # какой-то другой код для stg
+        return "user"
+
+
 @pytest.fixture(
     params=[
         "admin",

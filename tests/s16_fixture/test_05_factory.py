@@ -19,6 +19,14 @@ def user_factory() -> Callable[..., User]:
     return create_user
 
 
+def test_custom_user_admin(
+    user_factory: Callable[..., User],
+) -> None:
+    admin = user_factory(name="mike", role="admin")
+    assert admin.name == "mike"
+    assert admin.role == "admin"
+
+
 def test_custom_user_staff(
     user_factory: Callable[..., User],
 ) -> None:
@@ -32,6 +40,8 @@ def test_custom_user_staff(
     [
         ("John", "admin"),
         ("John", "staff"),
+        ("mike", "admin"),
+        pytest.param("mike", "staff", id="m-staff"),
     ],
 )
 def test_custom_user(

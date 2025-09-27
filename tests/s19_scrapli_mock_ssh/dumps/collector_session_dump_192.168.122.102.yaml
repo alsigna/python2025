@@ -69,26 +69,26 @@ events:
         channel_output: "Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M),
           Version 15.9(3)M3, RELEASE SOFTWARE (fc1)\nTechnical Support: http://www.cisco.com/techsupport\n
           Copyright (c) 1986-2021 by Cisco Systems, Inc.\nCompiled Wed 27-Jan-21 09:58
-          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 8
-          minutes\nSystem returned to ROM by reload\nSystem image file is \"flash0:/vios-adventerprisek9-m\"\
-          \nLast reload reason: Unknown reason\n\n\n\nThis product contains cryptographic
-          features and is subject to United\nStates and local country laws governing
-          import, export, transfer and\nuse. Delivery of Cisco cryptographic products
-          does not imply\nthird-party authority to import, export, distribute or use
-          encryption.\nImporters, exporters, distributors and users are responsible
-          for\ncompliance with U.S. and local country laws. By using this product
-          you\nagree to comply with applicable laws and regulations. If you are unable\n
-          to comply with U.S. and local laws, return this product immediately.\n\n
-          A summary of U.S. laws governing Cisco cryptographic products may be found
-          at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n\nIf you require
-          further assistance please contact us by sending email to\nexport@cisco.com.\n
-          \nCisco IOSv (revision 1.0) with  with 984321K/62464K bytes of memory.\n
-          Processor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet interfaces\n
-          DRAM configuration is 72 bits wide with parity disabled.\n256K bytes of
-          non-volatile configuration memory.\n2097152K bytes of ATA System CompactFlash
-          0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n0K bytes of
-          ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash 3 (Read/Write)\n
-          \n\n\nConfiguration register is 0x0\n\nr02>"
+          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 1
+          hour, 21 minutes\nSystem returned to ROM by reload\nSystem image file is
+          \"flash0:/vios-adventerprisek9-m\"\nLast reload reason: Unknown reason\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \nIf you require further assistance please contact us by sending email to\n
+          export@cisco.com.\n\nCisco IOSv (revision 1.0) with  with 984321K/62464K
+          bytes of memory.\nProcessor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet
+          interfaces\nDRAM configuration is 72 bits wide with parity disabled.\n256K
+          bytes of non-volatile configuration memory.\n2097152K bytes of ATA System
+          CompactFlash 0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n
+          0K bytes of ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash
+          3 (Read/Write)\n\n\n\nConfiguration register is 0x0\n\nr02>"
         result_privilege_level: exec
         returns_prompt: true
         closes_connection: false
@@ -193,26 +193,26 @@ events:
         channel_output: "Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M),
           Version 15.9(3)M3, RELEASE SOFTWARE (fc1)\nTechnical Support: http://www.cisco.com/techsupport\n
           Copyright (c) 1986-2021 by Cisco Systems, Inc.\nCompiled Wed 27-Jan-21 09:58
-          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 9
-          minutes\nSystem returned to ROM by reload\nSystem image file is \"flash0:/vios-adventerprisek9-m\"\
-          \nLast reload reason: Unknown reason\n\n\n\nThis product contains cryptographic
-          features and is subject to United\nStates and local country laws governing
-          import, export, transfer and\nuse. Delivery of Cisco cryptographic products
-          does not imply\nthird-party authority to import, export, distribute or use
-          encryption.\nImporters, exporters, distributors and users are responsible
-          for\ncompliance with U.S. and local country laws. By using this product
-          you\nagree to comply with applicable laws and regulations. If you are unable\n
-          to comply with U.S. and local laws, return this product immediately.\n\n
-          A summary of U.S. laws governing Cisco cryptographic products may be found
-          at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n\nIf you require
-          further assistance please contact us by sending email to\nexport@cisco.com.\n
-          \nCisco IOSv (revision 1.0) with  with 984321K/62464K bytes of memory.\n
-          Processor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet interfaces\n
-          DRAM configuration is 72 bits wide with parity disabled.\n256K bytes of
-          non-volatile configuration memory.\n2097152K bytes of ATA System CompactFlash
-          0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n0K bytes of
-          ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash 3 (Read/Write)\n
-          \n\n\nConfiguration register is 0x0\n\nr02>"
+          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 1
+          hour, 22 minutes\nSystem returned to ROM by reload\nSystem image file is
+          \"flash0:/vios-adventerprisek9-m\"\nLast reload reason: Unknown reason\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \nIf you require further assistance please contact us by sending email to\n
+          export@cisco.com.\n\nCisco IOSv (revision 1.0) with  with 984321K/62464K
+          bytes of memory.\nProcessor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet
+          interfaces\nDRAM configuration is 72 bits wide with parity disabled.\n256K
+          bytes of non-volatile configuration memory.\n2097152K bytes of ATA System
+          CompactFlash 0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n
+          0K bytes of ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash
+          3 (Read/Write)\n\n\n\nConfiguration register is 0x0\n\nr02>"
         result_privilege_level: exec
         returns_prompt: true
         closes_connection: false
@@ -233,7 +233,7 @@ events:
         type: standard
       sh ip ospf ne:
         channel_output: "\nNeighbor ID     Pri   State           Dead Time   Address\
-          \         Interface\n10.255.255.101    0   FULL/  -        00:00:31    192.168.12.1\
+          \         Interface\n10.255.255.101    0   FULL/  -        00:00:32    192.168.12.1\
           \    GigabitEthernet0/1\nr02>"
         result_privilege_level: exec
         returns_prompt: true
@@ -312,26 +312,26 @@ events:
         channel_output: "Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M),
           Version 15.9(3)M3, RELEASE SOFTWARE (fc1)\nTechnical Support: http://www.cisco.com/techsupport\n
           Copyright (c) 1986-2021 by Cisco Systems, Inc.\nCompiled Wed 27-Jan-21 09:58
-          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 8
-          minutes\nSystem returned to ROM by reload\nSystem image file is \"flash0:/vios-adventerprisek9-m\"\
-          \nLast reload reason: Unknown reason\n\n\n\nThis product contains cryptographic
-          features and is subject to United\nStates and local country laws governing
-          import, export, transfer and\nuse. Delivery of Cisco cryptographic products
-          does not imply\nthird-party authority to import, export, distribute or use
-          encryption.\nImporters, exporters, distributors and users are responsible
-          for\ncompliance with U.S. and local country laws. By using this product
-          you\nagree to comply with applicable laws and regulations. If you are unable\n
-          to comply with U.S. and local laws, return this product immediately.\n\n
-          A summary of U.S. laws governing Cisco cryptographic products may be found
-          at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n\nIf you require
-          further assistance please contact us by sending email to\nexport@cisco.com.\n
-          \nCisco IOSv (revision 1.0) with  with 984321K/62464K bytes of memory.\n
-          Processor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet interfaces\n
-          DRAM configuration is 72 bits wide with parity disabled.\n256K bytes of
-          non-volatile configuration memory.\n2097152K bytes of ATA System CompactFlash
-          0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n0K bytes of
-          ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash 3 (Read/Write)\n
-          \n\n\nConfiguration register is 0x0\n\nr02#"
+          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 1
+          hour, 21 minutes\nSystem returned to ROM by reload\nSystem image file is
+          \"flash0:/vios-adventerprisek9-m\"\nLast reload reason: Unknown reason\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \nIf you require further assistance please contact us by sending email to\n
+          export@cisco.com.\n\nCisco IOSv (revision 1.0) with  with 984321K/62464K
+          bytes of memory.\nProcessor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet
+          interfaces\nDRAM configuration is 72 bits wide with parity disabled.\n256K
+          bytes of non-volatile configuration memory.\n2097152K bytes of ATA System
+          CompactFlash 0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n
+          0K bytes of ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash
+          3 (Read/Write)\n\n\n\nConfiguration register is 0x0\n\nr02#"
         result_privilege_level: privilege_exec
         returns_prompt: true
         closes_connection: false
@@ -433,26 +433,26 @@ events:
         channel_output: "Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M),
           Version 15.9(3)M3, RELEASE SOFTWARE (fc1)\nTechnical Support: http://www.cisco.com/techsupport\n
           Copyright (c) 1986-2021 by Cisco Systems, Inc.\nCompiled Wed 27-Jan-21 09:58
-          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 9
-          minutes\nSystem returned to ROM by reload\nSystem image file is \"flash0:/vios-adventerprisek9-m\"\
-          \nLast reload reason: Unknown reason\n\n\n\nThis product contains cryptographic
-          features and is subject to United\nStates and local country laws governing
-          import, export, transfer and\nuse. Delivery of Cisco cryptographic products
-          does not imply\nthird-party authority to import, export, distribute or use
-          encryption.\nImporters, exporters, distributors and users are responsible
-          for\ncompliance with U.S. and local country laws. By using this product
-          you\nagree to comply with applicable laws and regulations. If you are unable\n
-          to comply with U.S. and local laws, return this product immediately.\n\n
-          A summary of U.S. laws governing Cisco cryptographic products may be found
-          at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n\nIf you require
-          further assistance please contact us by sending email to\nexport@cisco.com.\n
-          \nCisco IOSv (revision 1.0) with  with 984321K/62464K bytes of memory.\n
-          Processor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet interfaces\n
-          DRAM configuration is 72 bits wide with parity disabled.\n256K bytes of
-          non-volatile configuration memory.\n2097152K bytes of ATA System CompactFlash
-          0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n0K bytes of
-          ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash 3 (Read/Write)\n
-          \n\n\nConfiguration register is 0x0\n\nr02#"
+          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 1
+          hour, 22 minutes\nSystem returned to ROM by reload\nSystem image file is
+          \"flash0:/vios-adventerprisek9-m\"\nLast reload reason: Unknown reason\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \nIf you require further assistance please contact us by sending email to\n
+          export@cisco.com.\n\nCisco IOSv (revision 1.0) with  with 984321K/62464K
+          bytes of memory.\nProcessor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet
+          interfaces\nDRAM configuration is 72 bits wide with parity disabled.\n256K
+          bytes of non-volatile configuration memory.\n2097152K bytes of ATA System
+          CompactFlash 0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n
+          0K bytes of ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash
+          3 (Read/Write)\n\n\n\nConfiguration register is 0x0\n\nr02#"
         result_privilege_level: privilege_exec
         returns_prompt: true
         closes_connection: false
@@ -742,26 +742,26 @@ events:
         channel_output: "Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M),
           Version 15.9(3)M3, RELEASE SOFTWARE (fc1)\nTechnical Support: http://www.cisco.com/techsupport\n
           Copyright (c) 1986-2021 by Cisco Systems, Inc.\nCompiled Wed 27-Jan-21 09:58
-          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 8
-          minutes\nSystem returned to ROM by reload\nSystem image file is \"flash0:/vios-adventerprisek9-m\"\
-          \nLast reload reason: Unknown reason\n\n\n\nThis product contains cryptographic
-          features and is subject to United\nStates and local country laws governing
-          import, export, transfer and\nuse. Delivery of Cisco cryptographic products
-          does not imply\nthird-party authority to import, export, distribute or use
-          encryption.\nImporters, exporters, distributors and users are responsible
-          for\ncompliance with U.S. and local country laws. By using this product
-          you\nagree to comply with applicable laws and regulations. If you are unable\n
-          to comply with U.S. and local laws, return this product immediately.\n\n
-          A summary of U.S. laws governing Cisco cryptographic products may be found
-          at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n\nIf you require
-          further assistance please contact us by sending email to\nexport@cisco.com.\n
-          \nCisco IOSv (revision 1.0) with  with 984321K/62464K bytes of memory.\n
-          Processor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet interfaces\n
-          DRAM configuration is 72 bits wide with parity disabled.\n256K bytes of
-          non-volatile configuration memory.\n2097152K bytes of ATA System CompactFlash
-          0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n0K bytes of
-          ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash 3 (Read/Write)\n
-          \n\n\nConfiguration register is 0x0\n\nr02(tcl)#"
+          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 1
+          hour, 21 minutes\nSystem returned to ROM by reload\nSystem image file is
+          \"flash0:/vios-adventerprisek9-m\"\nLast reload reason: Unknown reason\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \nIf you require further assistance please contact us by sending email to\n
+          export@cisco.com.\n\nCisco IOSv (revision 1.0) with  with 984321K/62464K
+          bytes of memory.\nProcessor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet
+          interfaces\nDRAM configuration is 72 bits wide with parity disabled.\n256K
+          bytes of non-volatile configuration memory.\n2097152K bytes of ATA System
+          CompactFlash 0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n
+          0K bytes of ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash
+          3 (Read/Write)\n\n\n\nConfiguration register is 0x0\n\nr02(tcl)#"
         result_privilege_level: tclsh
         returns_prompt: true
         closes_connection: false
@@ -863,26 +863,26 @@ events:
         channel_output: "Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M),
           Version 15.9(3)M3, RELEASE SOFTWARE (fc1)\nTechnical Support: http://www.cisco.com/techsupport\n
           Copyright (c) 1986-2021 by Cisco Systems, Inc.\nCompiled Wed 27-Jan-21 09:58
-          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 9
-          minutes\nSystem returned to ROM by reload\nSystem image file is \"flash0:/vios-adventerprisek9-m\"\
-          \nLast reload reason: Unknown reason\n\n\n\nThis product contains cryptographic
-          features and is subject to United\nStates and local country laws governing
-          import, export, transfer and\nuse. Delivery of Cisco cryptographic products
-          does not imply\nthird-party authority to import, export, distribute or use
-          encryption.\nImporters, exporters, distributors and users are responsible
-          for\ncompliance with U.S. and local country laws. By using this product
-          you\nagree to comply with applicable laws and regulations. If you are unable\n
-          to comply with U.S. and local laws, return this product immediately.\n\n
-          A summary of U.S. laws governing Cisco cryptographic products may be found
-          at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n\nIf you require
-          further assistance please contact us by sending email to\nexport@cisco.com.\n
-          \nCisco IOSv (revision 1.0) with  with 984321K/62464K bytes of memory.\n
-          Processor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet interfaces\n
-          DRAM configuration is 72 bits wide with parity disabled.\n256K bytes of
-          non-volatile configuration memory.\n2097152K bytes of ATA System CompactFlash
-          0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n0K bytes of
-          ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash 3 (Read/Write)\n
-          \n\n\nConfiguration register is 0x0\n\nr02(tcl)#"
+          by prod_rel_team\n\n\nROM: Bootstrap program is IOSv\n\nr02 uptime is 1
+          hour, 22 minutes\nSystem returned to ROM by reload\nSystem image file is
+          \"flash0:/vios-adventerprisek9-m\"\nLast reload reason: Unknown reason\n
+          \n\n\nThis product contains cryptographic features and is subject to United\n
+          States and local country laws governing import, export, transfer and\nuse.
+          Delivery of Cisco cryptographic products does not imply\nthird-party authority
+          to import, export, distribute or use encryption.\nImporters, exporters,
+          distributors and users are responsible for\ncompliance with U.S. and local
+          country laws. By using this product you\nagree to comply with applicable
+          laws and regulations. If you are unable\nto comply with U.S. and local laws,
+          return this product immediately.\n\nA summary of U.S. laws governing Cisco
+          cryptographic products may be found at:\nhttp://www.cisco.com/wwl/export/crypto/tool/stqrg.html\n
+          \nIf you require further assistance please contact us by sending email to\n
+          export@cisco.com.\n\nCisco IOSv (revision 1.0) with  with 984321K/62464K
+          bytes of memory.\nProcessor board ID 9TU215EWFIVAUIE4IC5WW\n4 Gigabit Ethernet
+          interfaces\nDRAM configuration is 72 bits wide with parity disabled.\n256K
+          bytes of non-volatile configuration memory.\n2097152K bytes of ATA System
+          CompactFlash 0 (Read/Write)\n0K bytes of ATA CompactFlash 1 (Read/Write)\n
+          0K bytes of ATA CompactFlash 2 (Read/Write)\n0K bytes of ATA CompactFlash
+          3 (Read/Write)\n\n\n\nConfiguration register is 0x0\n\nr02(tcl)#"
         result_privilege_level: tclsh
         returns_prompt: true
         closes_connection: false

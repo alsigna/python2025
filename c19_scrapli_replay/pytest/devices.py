@@ -35,6 +35,6 @@ class CiscoDevice:
 
 
 if __name__ == "__main__":
-    device = CiscoDevice("192.168.122.102")
+    device = CiscoDevice("192.168.122.101")
     version = device.get_version()
     print(version)
