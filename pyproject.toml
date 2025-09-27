@@ -155,7 +155,7 @@ testpaths = ["tests"]
 addopts = "-ra --strict-markers -v"
 filterwarnings = ["ignore::DeprecationWarning"]
 # xfail_strict = true
-asyncio_default_fixture_loop_scope = "module"
+# asyncio_default_fixture_loop_scope = "module"
 
 [build-system]
 requires = ["poetry-core"]
