@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package app.chars.v1;
+
+message CharMessage {
+  string msg = 1;
+}
+
+service CharService {
+  rpc TextToChars (CharMessage) returns (stream CharMessage);
+}

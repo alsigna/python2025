@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package app.map;
+
+message Platform {
+    map<string, string> scrapli = 1;
+}

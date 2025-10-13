@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package app.enum;
+
+enum Status {
+    STATUS_DEFAULT = 0;
+    STATUS_OK = 1;
+    STATUS_FAIL = 2;
+    STATUS_TIMEOUT = 3;
+}
+
+message PingReply {
+    Status status = 1;
+}
+
+
+// message PingReply {
+//   enum Status {
+//     DEFAULT = 0;
+//     OK = 1;
+//     FAIL = 2;
+//     TIMEOUT = 3;
+//   }
+
+//   Status status = 1;
+// }

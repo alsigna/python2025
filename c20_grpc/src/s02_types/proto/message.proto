@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package app.message;
+
+
+message Address {
+    string city = 1;
+    string street = 2;
+}
+
+message User {
+    string name = 1;
+    int32 age = 2;
+    Address address = 3;
+}
+
+message Response {
+    message Result {
+        bool ok = 1;
+        int32 code = 2;
+    }
+    Result status = 1;
+    string text = 2;
+}

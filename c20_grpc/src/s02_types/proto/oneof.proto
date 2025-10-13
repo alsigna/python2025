@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package app.oneof;
+
+message Event {
+    oneof payload {
+        string text = 1;
+        int32 code = 3;
+    }
+}

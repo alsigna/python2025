@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package app.ping.v1;
+
+message PingRequest {
+    string target = 10;
+    int32 delay = 20;
+}
+message PingReply {
+    bool ok = 1;
+    string msg = 2;
+    int32 delay = 3;
+}
+
+
+service PingService {
+    rpc Ping (PingRequest) returns (PingReply);
+}

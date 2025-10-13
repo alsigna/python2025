@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package app.ping.v1;
+
+message PingRequest {
+    string target = 10;
+}
+message PingReply {
+    bool ok = 1;
+    string msg = 2;
+}
+
+service PingService {
+    rpc Ping (PingRequest) returns (PingReply);
+}

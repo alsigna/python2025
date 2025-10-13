@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package app.hello.v1;
+
+message HelloRequest {
+    string msg = 1;
+    int32 delay = 2;
+}
+message HelloResponse {
+    enum Status {
+        STATUS_DEFAULT = 0;
+        STATUS_OK = 1;
+        STATUS_FAIL = 2;
+        STATUS_TIMEOUT = 3;
+    }
+    string msg = 1;
+    int32 delay = 2;
+    Status status = 10;
+}
+
+service HelloService {
+    rpc Hello (HelloRequest) returns (HelloResponse);
+}

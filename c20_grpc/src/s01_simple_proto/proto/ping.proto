@@ -1,0 +1,26 @@
+// версия синтаксиса
+syntax = "proto3";
+
+// однострочный комментарий
+// имя пакета
+package app.ping;  // inline комментарий
+/*
+многострочный
+комментарии
+*/
+
+// входящее сообщение (аргументы функции)
+message PingRequest {
+    string target = 10;
+    bool ok = 20;
+}
+// выходящее сообщение (результат работы функции)
+message PingReply {
+    bool ok = 1;
+}
+
+// описание сервиса Ping
+service PingService {
+    // одна ручка Ping
+    rpc Ping (PingRequest) returns (PingReply);
+}
