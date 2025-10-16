@@ -13,24 +13,15 @@ import logging
 from random import randint
 
 import grpc
+from grpc.aio import ServicerContext
+from pb import ping_pb2_grpc
+from pb.ping_pb2 import PingReply, PingRequest
 from rich.logging import RichHandler
-
-from c20_grpc.src.s05_async_server_limit.app.pb import ping_pb2, ping_pb2_grpc
 
 log = logging.getLogger("app")
 log.setLevel(logging.DEBUG)
-rh = RichHandler(
-    markup=True,
-    show_path=False,
-    omit_repeated_times=True,
-    rich_tracebacks=True,
-)
-rh.setFormatter(
-    logging.Formatter(
-        fmt="%(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-    ),
-)
+rh = RichHandler(markup=True, show_path=False, omit_repeated_times=False)
+rh.setFormatter(logging.Formatter(fmt="%(message)s", datefmt="%Y-%m-%d %H:%M:%S"))
 log.addHandler(rh)
 
 
@@ -50,13 +41,13 @@ class PingHandler:
 class PingService(ping_pb2_grpc.PingServiceServicer):
     async def Ping(  # noqa: N802
         self,
-        request: ping_pb2.PingRequest,
-        context: grpc.aio.ServicerContext,
-    ) -> ping_pb2.PingReply:
+        request: PingRequest,
+        context: ServicerContext[PingRequest, PingReply],
+    ) -> PingReply:
         async with semaphore:
             log.info(f"новый запрос: '{request.target}'")
             ok, msg = await PingHandler.handle(request.target)
-            return ping_pb2.PingReply(ok=ok, msg=msg)
+            return PingReply(ok=ok, msg=msg)
 
 
 async def main() -> None:
@@ -64,7 +55,7 @@ async def main() -> None:
     server = grpc.aio.server()
 
     # регистрируем сервис
-    ping_pb2_grpc.add_PingServiceServicer_to_server(PingService(), server)
+    ping_pb2_grpc.add_PingServiceServicer_to_server(PingService(), server)  # type: ignore[no-untyped-call]
     server.add_insecure_port("[::]:50051")
     log.info("gRPC сервер запущен на порту 50051")
 

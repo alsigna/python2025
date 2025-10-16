@@ -1,8 +1,7 @@
 from concurrent import futures
 
 import grpc
-
-from c20_grpc.src.s03_simple_client_server.app.pb import ping_pb2, ping_pb2_grpc
+from pb import ping_pb2, ping_pb2_grpc
 
 
 # класс-реализация сервера. Можно не наследоваться от Servicer, единственный метод
@@ -43,7 +42,7 @@ def serve() -> None:
     # - для каждого rpc метода сервиса будет создан обработчик, который умеет принимать и
     #   десериализовать запросы, вызывать python-метод который мы реализовали, сериализовать
     #   результат и отправлять бинарные данные клиенту
-    ping_pb2_grpc.add_PingServiceServicer_to_server(PingService(), server)
+    ping_pb2_grpc.add_PingServiceServicer_to_server(PingService(), server)  # type: ignore[no-untyped-call]
 
     try:
         # запуск сервера, это не блокирующий метод, поэтому сервер стартует и начинает обрабатывать

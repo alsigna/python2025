@@ -4,8 +4,7 @@ from collections.abc import Awaitable, Callable
 import grpc
 from grpc import HandlerCallDetails, RpcMethodHandler
 from grpc.aio import ServerInterceptor, ServicerContext
-
-from c20_grpc.src.s08_interceptor.app.pb.hello_pb2 import HelloRequest, HelloResponse
+from pb.hello_pb2 import HelloRequest, HelloResponse
 
 log = logging.getLogger("app")
 

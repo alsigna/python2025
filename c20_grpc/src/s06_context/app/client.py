@@ -1,21 +1,19 @@
 import asyncio
 
 import grpc
-from grpc.aio import Call
-
-from c20_grpc.src.s06_context.app.pb import ping_pb2, ping_pb2_grpc
+from grpc.aio import UnaryUnaryCall
+from pb import ping_pb2_grpc
+from pb.ping_pb2 import PingReply, PingRequest
 
 
 async def main() -> None:
-    async with grpc.aio.insecure_channel(
-        target="localhost:50051",
-    ) as channel:
-        stub = ping_pb2_grpc.PingServiceStub(channel)
+    async with grpc.aio.insecure_channel("localhost:50051") as channel:
+        stub = ping_pb2_grpc.PingServiceStub(channel)  # type: ignore[no-untyped-call]
 
-        call: Call = stub.Ping(
-            ping_pb2.PingRequest(target="target"),
+        call: UnaryUnaryCall[PingRequest, PingReply] = stub.Ping(
+            PingRequest(target="target"),
         )
-        result: ping_pb2.PingReply = await call
+        result: PingReply = await call
 
         print(await call.code())
         print(await call.details())

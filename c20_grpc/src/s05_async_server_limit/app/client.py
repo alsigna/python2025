@@ -2,8 +2,7 @@ import asyncio
 from random import randint
 
 import grpc
-
-from c20_grpc.src.s05_async_server_limit.app.pb import ping_pb2, ping_pb2_grpc
+from pb import ping_pb2, ping_pb2_grpc
 
 
 async def main() -> None:
@@ -11,7 +10,7 @@ async def main() -> None:
     async with grpc.aio.insecure_channel(
         target="localhost:50051",
     ) as channel:
-        stub = ping_pb2_grpc.PingServiceStub(channel)
+        stub = ping_pb2_grpc.PingServiceStub(channel)  # type: ignore[no-untyped-call]
         request = ping_pb2.PingRequest(target="example.com")
         response = await stub.Ping(request)
         print("Ответ от сервера:", response)
@@ -23,13 +22,13 @@ async def main() -> None:
         target = f"user-{num:02}"
         try:
             await stub.Ping(ping_pb2.PingRequest(target=target))
-        except grpc.aio.AioRpcError:
-            print(f"ошибка в запросе {target}")
+        except grpc.aio.AioRpcError as exc:
+            print(f"ошибка в запросе {target}. {exc.code()}: {exc.details()}")
 
     async with grpc.aio.insecure_channel(
         target="localhost:50051",
     ) as channel:
-        stub = ping_pb2_grpc.PingServiceStub(channel)
+        stub = ping_pb2_grpc.PingServiceStub(channel)  # type: ignore[no-untyped-call]
         tasks = [make_request(i) for i in range(50)]
         print("запросы созданы")
         await asyncio.gather(*tasks)

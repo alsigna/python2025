@@ -2,60 +2,82 @@ import asyncio
 import time
 from collections.abc import Awaitable, Callable
 from random import randint
+from typing import TypeVar
 
 import grpc
-from grpc.aio import AioRpcError, Call, ClientCallDetails, UnaryUnaryClientInterceptor
+from google.protobuf.message import Message
+from grpc.aio import (
+    AioRpcError,
+    Call,
+    ClientCallDetails,
+    ClientInterceptor,
+    UnaryUnaryCall,
+    UnaryUnaryClientInterceptor,
+)
+from pb import hello_pb2_grpc
+from pb.hello_pb2 import HelloRequest, HelloResponse
 
-from c20_grpc.src.s08_interceptor.app.pb import hello_pb2_grpc
-from c20_grpc.src.s08_interceptor.app.pb.hello_pb2 import HelloRequest, HelloResponse
+Request = TypeVar("Request", bound=Message)
+Response = TypeVar("Response", bound=Message)
 
 
 def log(msg: str) -> None:
     print(f"{time.perf_counter() - t0:.3f} сек: - {msg}")
 
 
-class LoggingClientInterceptor(UnaryUnaryClientInterceptor):
+class LoggingClientInterceptor(UnaryUnaryClientInterceptor):  # type: ignore[type-arg]
     async def intercept_unary_unary(
         self,
-        continuation: Callable[[ClientCallDetails, HelloRequest], Awaitable[Call]],
+        continuation: Callable[
+            [ClientCallDetails, Request],
+            Awaitable[UnaryUnaryCall[Request, Response]],
+        ],
         client_call_details: ClientCallDetails,
-        request: HelloRequest,
-    ) -> HelloResponse:
+        request: Request,
+    ) -> Response:
         log(
-            f"[CLIENT] запрос, method: {client_call_details.method}, "
-            #     f"metadata: {client_call_details.metadata}, "
-            #     f"request: {request.msg}/{request.delay}",
+            f"[LoggingClientInterceptor] запрос, method: {client_call_details.method}, "
+            f"metadata: {client_call_details.metadata}",
         )
-        call: Call = await continuation(client_call_details, request)
-        response: HelloResponse = await call
+        # continuation возвращает корутину на UnaryUnaryCall
+        call = await continuation(client_call_details, request)
+        log("[LoggingClientInterceptor] call получен")
+        # UnaryUnaryCall реализует __await__, поэтому и его можем ожидать
+        response = await call
+        log("[LoggingClientInterceptor] response получен")
         initial_metadata = await call.initial_metadata()
         trailing_metadata = await call.trailing_metadata()
 
-        log(f"[CLIENT] ответ, method={client_call_details.method}: {initial_metadata=}")
-        log(f"[CLIENT] ответ, method={client_call_details.method}: {trailing_metadata=}")
-        log(f"[CLIENT] ответ, method={client_call_details.method}: {response.msg}/{response.status}")
+        log(f"[LoggingClientInterceptor] ответ, method={client_call_details.method}: {initial_metadata=}")
+        log(f"[LoggingClientInterceptor] ответ, method={client_call_details.method}: {trailing_metadata=}")
 
         return response
 
 
-class RandomDelayInterceptor(UnaryUnaryClientInterceptor):
+class RandomDelayInterceptor(UnaryUnaryClientInterceptor):  # type: ignore[type-arg]
     async def intercept_unary_unary(
         self,
-        continuation: Callable[[ClientCallDetails, HelloRequest], Awaitable[Call]],
+        continuation: Callable[
+            [ClientCallDetails, Request],
+            Awaitable[UnaryUnaryCall[Request, Response]],
+        ],
         client_call_details: ClientCallDetails,
-        request: HelloRequest,
-    ) -> HelloResponse:
+        request: Request,
+    ) -> Response:
         await asyncio.sleep(randint(2, 15) / 10)
         return await continuation(client_call_details, request)
 
 
-class CustomMetadataInterceptor(UnaryUnaryClientInterceptor):
+class CustomMetadataInterceptor(UnaryUnaryClientInterceptor):  # type: ignore[type-arg]
     async def intercept_unary_unary(
         self,
-        continuation: Callable[[ClientCallDetails, HelloRequest], Awaitable[Call]],
+        continuation: Callable[
+            [ClientCallDetails, Request],
+            Awaitable[UnaryUnaryCall[Request, Response]],
+        ],
         client_call_details: ClientCallDetails,
-        request: HelloRequest,
-    ) -> HelloResponse:
+        request: Request,
+    ) -> Response:
         custom_metadata = []
         for metadata in client_call_details.metadata:
             if metadata[0] != "user-agent":
@@ -75,7 +97,7 @@ class CustomMetadataInterceptor(UnaryUnaryClientInterceptor):
         return await continuation(updated_call_details, request)
 
 
-class RateLimitInterceptor(UnaryUnaryClientInterceptor):
+class RateLimitInterceptor(UnaryUnaryClientInterceptor):  # type: ignore[type-arg]
     def __init__(self, max_requests: int):
         self.max_requests = max_requests
         self.current_tokens = max_requests
@@ -84,10 +106,13 @@ class RateLimitInterceptor(UnaryUnaryClientInterceptor):
 
     async def intercept_unary_unary(
         self,
-        continuation: Callable[[ClientCallDetails, HelloRequest], Awaitable[Call]],
+        continuation: Callable[
+            [ClientCallDetails, Request],
+            Awaitable[UnaryUnaryCall[Request, Response]],
+        ],
         client_call_details: ClientCallDetails,
-        request: HelloRequest,
-    ) -> HelloResponse:
+        request: Request,
+    ) -> Response:
         def update_tokens() -> None:
             # считаем сколько времени прошло с прошлого запроса
             now = time.monotonic()
@@ -126,14 +151,15 @@ async def main() -> None:
         # user-agent ни к чему не приведет, на сервере все равно будет стандартные
         ("user-agent", "my-grpc-client"),
     ]
+    interceptors: list[ClientInterceptor] = [
+        RandomDelayInterceptor(),
+        RateLimitInterceptor(3),
+        LoggingClientInterceptor(),
+        CustomMetadataInterceptor(),
+    ]
     async with grpc.aio.insecure_channel(
         target="localhost:50051",
-        interceptors=[
-            RandomDelayInterceptor(),
-            RateLimitInterceptor(3),
-            LoggingClientInterceptor(),
-            CustomMetadataInterceptor(),
-        ],
+        interceptors=interceptors,
         # поэтому переписываем user-agent во время создания канала через опции. Или используем другие названия
         # хедеров, типа x-user-agent
         # options=[

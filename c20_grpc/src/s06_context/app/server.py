@@ -1,13 +1,3 @@
-"""async сервер, генерация proto.
-
-python -m grpc_tools.protoc \
-  --proto_path=./proto \
-  --python_out=./app/pb \
-  --grpc_python_out=./app/pb \
-  --mypy_out=./app/pb \
-  ./proto/*
-"""
-
 # кейсы:
 # 1. когда клиент падает, а на сервере остаются его запросы, в примере делаем healthcheck через
 #    context.send_initial_metadata(). НО metadata можно отправлять только один раз!
@@ -16,57 +6,54 @@ python -m grpc_tools.protoc \
 
 import asyncio
 import logging
-from asyncio import Protocol, Queue
+from asyncio import Queue
 from dataclasses import dataclass
 from datetime import datetime
 from random import randint
+from typing import Any, Generic, Protocol, TypeVar
 from zoneinfo import ZoneInfo
 
 import grpc
 from google.protobuf.message import Message
+from grpc.aio import ServicerContext
+from pb import ping_pb2_grpc
+from pb.ping_pb2 import PingReply, PingRequest
 from rich.logging import RichHandler
-
-from c20_grpc.src.s06_context.app.pb import ping_pb2, ping_pb2_grpc
 
 log = logging.getLogger("app")
 log.setLevel(logging.DEBUG)
-rh = RichHandler(
-    markup=True,
-    show_path=False,
-    omit_repeated_times=True,
-    rich_tracebacks=True,
-)
-rh.setFormatter(
-    logging.Formatter(
-        fmt="%(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-    ),
-)
+rh = RichHandler(markup=True, show_path=False, omit_repeated_times=False)
+rh.setFormatter(logging.Formatter(fmt="%(message)s", datefmt="%Y-%m-%d %H:%M:%S"))
 log.addHandler(rh)
 
 
-class Handler(Protocol):
-    async def handle(self, request: Message) -> Message: ...
+T = TypeVar("T", bound=Message, contravariant=True)
+R = TypeVar("R", bound=Message, covariant=True)
+
+
+class Handler(Protocol[T, R]):
+    @classmethod
+    async def handle(cls, request: T) -> R: ...
 
 
 @dataclass(frozen=True, slots=True)
-class Task:
-    handler: Handler
-    reply_queue: Queue
-    request: Message
-    context: grpc.aio.ServicerContext
+class Task(Generic[T, R]):
+    handler: type[Handler[T, R]]
+    reply_queue: Queue[R]
+    request: T
+    context: ServicerContext[T, R]
 
 
-request_queue: Queue[Task] = Queue(maxsize=10)
+request_queue: Queue[Task[Any, Any]] = Queue(maxsize=10)
 
 
 # логика отдельно
 class PingHandler:
     @classmethod
-    async def handle(cls, request: ping_pb2.PingRequest) -> ping_pb2.PingReply:
+    async def handle(cls, request: PingRequest) -> PingReply:
         await asyncio.sleep(randint(50, 200) / 100)
         log.info(f"запрос '{request.target}' обработан")
-        return ping_pb2.PingReply(
+        return PingReply(
             ok=True,
             msg=f"ответ на запрос '{request.target}'",
         )
@@ -76,11 +63,11 @@ class PingHandler:
 class PingService(ping_pb2_grpc.PingServiceServicer):
     async def Ping(  # noqa: N802
         self,
-        request: ping_pb2.PingRequest,
-        context: grpc.aio.ServicerContext,
-    ) -> ping_pb2.PingReply:
+        request: PingRequest,
+        context: ServicerContext[PingRequest, PingReply],
+    ) -> PingReply:
         # отдельная очередь для ответа именно на этот запрос
-        response_queue: Queue[ping_pb2.PingReply] = Queue(maxsize=1)
+        response_queue: Queue[PingReply] = Queue(maxsize=1)
         try:
             request_queue.put_nowait(Task(PingHandler, response_queue, request, context))
             log.info(f"запрос '{request.target}' помещен в очередь")
@@ -148,15 +135,16 @@ async def worker_v2(worker_id: int) -> None:
             request_queue.task_done()
 
 
-# воркер для метаданных
+# воркер, который добавляем метаданные
 async def worker_v3(worker_id: int) -> None:
     log_prefix = f"worker-{worker_id:02}:"
     while True:
         task = await request_queue.get()
         # метаданные, полученные от клиента:
-        log.info(task.context.invocation_metadata())
-        for key, value in task.context.invocation_metadata():
-            log.info(f"{key}={value}")
+        invocation_metadata = task.context.invocation_metadata()
+        if invocation_metadata is not None:
+            for key, value in invocation_metadata:
+                log.debug(f"от клиента: {key}={value!r}")
 
         log.info(f"{log_prefix} начал работы над запросом")
         start_time = datetime.now(tz=ZoneInfo("Europe/Moscow"))
@@ -168,7 +156,7 @@ async def worker_v3(worker_id: int) -> None:
         try:
             result = await task.handler.handle(task.request)
             end_time = datetime.now(tz=ZoneInfo("Europe/Moscow"))
-            # после завершения отсылаем trailing метаданные
+            # после завершения устанавливаем trailing метаданные
             task.context.set_trailing_metadata(
                 (
                     ("end-time", str(end_time)),
@@ -188,7 +176,7 @@ async def main() -> None:
     server = grpc.aio.server()
 
     # регистрируем сервис
-    ping_pb2_grpc.add_PingServiceServicer_to_server(PingService(), server)
+    ping_pb2_grpc.add_PingServiceServicer_to_server(PingService(), server)  # type: ignore[no-untyped-call]
     server.add_insecure_port("[::]:50051")
     log.info("gRPC сервер запущен на порту 50051")
 

@@ -18,9 +18,8 @@ from zoneinfo import ZoneInfo
 
 import grpc
 from google.protobuf.message import Message
+from pb import ping_pb2, ping_pb2_grpc
 from rich.logging import RichHandler
-
-from c20_grpc.src.s07_keepalive.app.pb import ping_pb2, ping_pb2_grpc
 
 log = logging.getLogger("app")
 log.setLevel(logging.DEBUG)

@@ -10,46 +10,39 @@ python -m grpc_tools.protoc \
 
 import asyncio
 import logging
-from asyncio import Protocol, Queue
+from asyncio import Queue
 from random import randint
+from typing import Protocol
 
 import grpc
 from google.protobuf.message import Message
+from grpc.aio import ServicerContext
+from pb import ping_pb2_grpc
+from pb.ping_pb2 import PingReply, PingRequest
 from rich.logging import RichHandler
-
-from c20_grpc.src.s05_async_server_limit.app.pb import ping_pb2, ping_pb2_grpc
 
 log = logging.getLogger("app")
 log.setLevel(logging.DEBUG)
-rh = RichHandler(
-    markup=True,
-    show_path=False,
-    omit_repeated_times=True,
-    rich_tracebacks=True,
-)
-rh.setFormatter(
-    logging.Formatter(
-        fmt="%(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-    ),
-)
+rh = RichHandler(markup=True, show_path=False, omit_repeated_times=False)
+rh.setFormatter(logging.Formatter(fmt="%(message)s", datefmt="%Y-%m-%d %H:%M:%S"))
 log.addHandler(rh)
 
 
 class Handler(Protocol):
-    async def handle(self, request: Message) -> Message: ...
+    @classmethod
+    async def handle(cls, request: Message) -> Message: ...
 
 
-queue: Queue[tuple[Handler, Message, Queue]] = Queue(maxsize=10)
+queue: Queue[tuple[type[Handler], Message, Queue[Message]]] = Queue(maxsize=10)
 
 
 # логика отдельно
 class PingHandler:
     @classmethod
-    async def handle(cls, request: ping_pb2.PingRequest) -> ping_pb2.PingReply:
+    async def handle(cls, request: PingRequest) -> PingReply:
         await asyncio.sleep(randint(50, 200) / 100)
         log.info(f"запрос '{request.target}' обработан")
-        return ping_pb2.PingReply(
+        return PingReply(
             ok=True,
             msg=f"ответ на запрос '{request.target}'",
         )
@@ -59,20 +52,20 @@ class PingHandler:
 class PingService(ping_pb2_grpc.PingServiceServicer):
     async def Ping(  # noqa: N802
         self,
-        request: ping_pb2.PingRequest,
-        context: grpc.aio.ServicerContext,
-    ) -> ping_pb2.PingReply:
+        request: PingRequest,
+        context: ServicerContext[PingRequest, PingReply],
+    ) -> PingReply:
         # отдельная очередь для ответа именно на этот запрос
-        response_queue: Queue[ping_pb2.PingReply] = Queue(maxsize=1)
+        response_queue: Queue[PingReply] = Queue(maxsize=1)
 
         try:
-            queue.put_nowait((PingHandler, request, response_queue))
+            queue.put_nowait((PingHandler, request, response_queue))  # type: ignore[arg-type]
             log.info(f"запрос '{request.target}' помещен в очередь")
         except asyncio.QueueFull:
             log.info(f"запрос '{request.target}' отброшен")
             context.set_code(grpc.StatusCode.RESOURCE_EXHAUSTED)
             context.set_details("сервер перегружен")
-            return ping_pb2.PingReply(ok=False, msg="очередь переполнена")
+            return PingReply(ok=False, msg="очередь переполнена")
 
         # ждём результат от воркера
         return await response_queue.get()
@@ -93,7 +86,7 @@ async def main() -> None:
     server = grpc.aio.server()
 
     # регистрируем сервис
-    ping_pb2_grpc.add_PingServiceServicer_to_server(PingService(), server)
+    ping_pb2_grpc.add_PingServiceServicer_to_server(PingService(), server)  # type: ignore[no-untyped-call]
     server.add_insecure_port("[::]:50051")
     log.info("gRPC сервер запущен на порту 50051")
 

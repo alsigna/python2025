@@ -13,17 +13,17 @@ import logging
 
 import grpc
 from grpc.aio import ServicerContext
+from pb import hello_pb2_grpc
+from pb.hello_pb2 import HelloRequest, HelloResponse
 from rich.logging import RichHandler
 
-from c20_grpc.src.s08_interceptor.app.interceptors import (
+from .interceptors import (
     ServerHelloDelayInterceptor,
     ServerLoggingInterceptor,
     ServerRateLimitInterceptor,
     ServerRequestTrackingInterceptor,
     ServerRequestTrackingInterceptorV2,
 )
-from c20_grpc.src.s08_interceptor.app.pb import hello_pb2_grpc
-from c20_grpc.src.s08_interceptor.app.pb.hello_pb2 import HelloRequest, HelloResponse
 
 log = logging.getLogger("app")
 log.setLevel(logging.DEBUG)

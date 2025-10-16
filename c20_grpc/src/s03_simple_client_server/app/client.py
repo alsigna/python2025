@@ -1,8 +1,7 @@
 import subprocess
 
 import grpc
-
-from c20_grpc.src.s03_simple_client_server.app.pb import ping_pb2, ping_pb2_grpc
+from pb import ping_pb2, ping_pb2_grpc
 
 # создание insecure_channel — канала без TLS (plaintext в cli), канал это HTTP/2 соединение под капотом
 # канал потокобезопасен - можно использовать из разных потоков
@@ -14,7 +13,7 @@ channel = grpc.insecure_channel(
 
 # stub-обертка, для вызова rpc. При создании передаем channel, по которому будет идти взаимодействие.
 # объект занимается сериализацией/десериализацией сообщений. stub - легковесный и потокобезопасный
-stub = ping_pb2_grpc.PingServiceStub(channel)
+stub = ping_pb2_grpc.PingServiceStub(channel)  # type: ignore[no-untyped-call]
 
 # создаем сообщение и передаем его как аргумент в метод stub-объекта. Это блокирующий метод и на этом
 # места исполнение кода блокируется до получения ответа или таймаута/ошибки
@@ -31,7 +30,7 @@ channel.close()
 
 
 def show_tcp_sessions() -> None:
-    lsof = subprocess.run(
+    lsof = subprocess.run(  # noqa: S603
         ["lsof", "-iTCP:50051"],  # noqa: S607
         encoding="utf-8",
         stdout=subprocess.PIPE,
@@ -47,7 +46,7 @@ with grpc.insecure_channel(
     # можно принудительно установить tcp сессию до первого обращения
     # grpc.channel_ready_future(channel).result(timeout=2)
     # show_tcp_sessions()
-    stub = ping_pb2_grpc.PingServiceStub(channel)
+    stub = ping_pb2_grpc.PingServiceStub(channel)  # type: ignore[no-untyped-call]
     response = stub.Ping(ping_pb2.PingRequest(target="example.com"))
     print(response)
     # show_tcp_sessions()

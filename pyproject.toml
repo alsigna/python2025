@@ -36,6 +36,9 @@ dependencies = [
     "aiopath (>=0.7.7,<0.8.0)",
     "aiohttp (>=3.12.15,<4.0.0)",
     "httpx (>=0.28.1,<0.29.0)",
+    "grpcio (>=1.75.1,<2.0.0)",
+    "protobuf (>=6.32.1,<7.0.0)",
+    "grpcio-reflection (>=1.75.1,<2.0.0)",
 ]
 
 
@@ -61,6 +64,9 @@ pytest-mock = "^3.15.0"
 pytest-cov = "^6.3.0"
 coverage = "^7.10.6"
 pytest-dotenv = "^0.5.2"
+grpcio-tools = "^1.75.1"
+mypy-protobuf = "^3.6.0"
+grpc-stubs = "^1.53.0.6"
 
 
 [tool.black]
@@ -156,6 +162,7 @@ addopts = "-ra --strict-markers -v"
 filterwarnings = ["ignore::DeprecationWarning"]
 # xfail_strict = true
 # asyncio_default_fixture_loop_scope = "module"
+
 
 [build-system]
 requires = ["poetry-core"]

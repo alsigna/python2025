@@ -21,9 +21,10 @@ import logging
 import grpc
 from grpc.aio import ServicerContext
 from grpc_reflection.v1alpha import reflection
+from pb import hello_pb2_grpc
+from pb.hello_pb2 import DESCRIPTOR as HELLO_DESCRIPTOR
+from pb.hello_pb2 import HelloRequest, HelloResponse
 from rich.logging import RichHandler
-
-from c20_grpc.src.s12_reflection.app.pb import hello_pb2, hello_pb2_grpc
 
 log = logging.getLogger("app")
 log.setLevel(logging.DEBUG)
@@ -36,25 +37,25 @@ class HelloHandler:
     @classmethod
     async def handle(
         cls,
-        request: hello_pb2.HelloRequest,
-        context: ServicerContext[hello_pb2.HelloRequest, hello_pb2.HelloResponse],
-    ) -> hello_pb2.HelloResponse:
+        request: HelloRequest,
+        context: ServicerContext[HelloRequest, HelloResponse],
+    ) -> HelloResponse:
         log.info(f"запрос '{request.msg}' начал обрабатываться")
         await asyncio.sleep(request.delay)
         log.info(f"запрос '{request.msg}' обработан")
-        return hello_pb2.HelloResponse(
+        return HelloResponse(
             msg=request.msg,
             delay=request.delay,
-            status=hello_pb2.HelloResponse.Status.STATUS_OK,
+            status=HelloResponse.Status.STATUS_OK,
         )
 
 
 class HelloService(hello_pb2_grpc.HelloServiceServicer):
     async def Hello(  # noqa: N802
         self,
-        request: hello_pb2.HelloRequest,
-        context: ServicerContext[hello_pb2.HelloRequest, hello_pb2.HelloResponse],
-    ) -> hello_pb2.HelloRequest:
+        request: HelloRequest,
+        context: ServicerContext[HelloRequest, HelloResponse],
+    ) -> HelloResponse:
         return await HelloHandler.handle(request, context)
 
 
@@ -68,7 +69,7 @@ async def main() -> None:
     services = (
         # наши бизнес-сервисы
         # app.hello.v1.HelloService или из переменных вытащить
-        hello_pb2.DESCRIPTOR.services_by_name["HelloService"].full_name,
+        HELLO_DESCRIPTOR.services_by_name["HelloService"].full_name,
         # и сам сервис рефлексии добавляем grpc.reflection.v1alpha.ServerReflection или из переменной
         reflection.SERVICE_NAME,
     )

@@ -201,15 +201,16 @@ dev группа `poetry add --dev grpcio-tools mypy-protobuf`:
 
 - `grpcio-tools` — компилятор protobuf в python
 - `mypy-protobuf` — генератор stub файлов (.pyi файлы)
+- `grpc-stubs` - stub файлы
 
 ## Генерация python-кода
 
 ```text
 python -m grpc_tools.protoc \
   --proto_path=./proto \
-  --python_out=./app/pb \
-  --grpc_python_out=./app/pb \
-  --mypy_out=./app/pb \
+  --python_out=./pb \
+  --grpc_python_out=./pb \
+  --mypy_out=./pb \
   ./proto/ping.proto
 ```
 
@@ -217,20 +218,20 @@ python -m grpc_tools.protoc \
 
 - `python -m grpc_tools.protoc` - сам компилятор
 - `--proto_path=./proto` - каталог для поиска импортов, можно указывать несколько раз (если несколько папок), есть короткая запись `-I=./proto`
-- `--python_out=./app` - куда складывать python код
-- `--grpc_python_out=./app` - куда складывать grpc python код (сервер/клиент)
-- `--mypy_out=./app` - куда складывать mypy stub файлы (pyi), эта опция обеспечивается пакетом `mypy-protobuf`. Есть альтернатива в виде опции `--pyi_out` из коробки (дополнительный пакет не нужен), но `--mypy_out` точнее генерирует stub файлы
+- `--python_out=./pb` - куда складывать python код
+- `--grpc_python_out=./pb` - куда складывать grpc python код (сервер/клиент)
+- `--mypy_out=./pb` - куда складывать mypy stub файлы (pyi), эта опция обеспечивается пакетом `mypy-protobuf`. Есть альтернатива в виде опции `--pyi_out` из коробки (дополнительный пакет не нужен), но `--mypy_out` точнее генерирует stub файлы
 - `./proto/ping.proto` - сам proto файл, на базе которого будем генерировать код
 
-Запуск команды выше приводит к генерации трех файлов в каталоге ./app/pb (каталог предварительно создать нужно)
+Запуск команды выше приводит к генерации трех файлов в каталоге ./pb (каталог предварительно создать нужно)
 
 ```text
 ├── app
 │   ├── main.py
-│   └── pb
-│       ├── ping_pb2_grpc.py
-│       ├── ping_pb2.py
-│       └── ping_pb2.pyi
+├── pb
+│   ├── ping_pb2_grpc.py
+│   ├── ping_pb2.py
+│   └── ping_pb2.pyi
 └── proto
     └── ping.proto
 ```

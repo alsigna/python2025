@@ -3,10 +3,9 @@ import logging
 from collections.abc import AsyncIterator
 
 import grpc
+from pb import chat_pb2_grpc
+from pb.chat_pb2 import ChatMessage
 from rich.logging import RichHandler
-
-from c20_grpc.src.s10_bidir.app.pb import chat_pb2_grpc
-from c20_grpc.src.s10_bidir.app.pb.chat_pb2 import ChatMessage
 
 log = logging.getLogger("app")
 log.setLevel(logging.DEBUG)

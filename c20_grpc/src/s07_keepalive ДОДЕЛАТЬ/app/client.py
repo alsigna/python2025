@@ -2,8 +2,7 @@ import asyncio
 import time
 
 import grpc
-
-from c20_grpc.src.s07_keepalive.app.pb import ping_pb2, ping_pb2_grpc
+from pb import ping_pb2, ping_pb2_grpc
 
 
 async def main() -> None:

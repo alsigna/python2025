@@ -1,12 +1,10 @@
 import asyncio
 import logging
-from collections.abc import AsyncIterator
 
 import grpc
+from pb import chars_pb2_grpc
+from pb.chars_pb2 import CharMessage
 from rich.logging import RichHandler
-
-from c20_grpc.src.s11_server_stream.app.pb import chars_pb2_grpc
-from c20_grpc.src.s11_server_stream.app.pb.chars_pb2 import CharMessage
 
 log = logging.getLogger("app")
 log.setLevel(logging.DEBUG)
