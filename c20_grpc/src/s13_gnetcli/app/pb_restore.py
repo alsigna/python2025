@@ -1,3 +1,16 @@
+r"""восстановление из бинарного дампа.
+
+python -m grpc_tools.protoc \
+  --proto_path=./proto_restored \
+  --descriptor_set_in=./proto_restored/server.desc \
+  --python_out=./pb_restored \
+  --mypy_out=./pb_restored \
+  --grpc_python_out=./pb_restored \
+  server.proto
+
+sed -i '' 's/^import \([^ ]*\)_pb2 as \([^ ]*\)__pb2/from . import \1_pb2 as \2__pb2/' ./pb_restored/*_pb2_grpc.py
+"""
+
 import asyncio
 import base64
 import logging
@@ -5,8 +18,8 @@ from collections.abc import AsyncIterator
 
 import grpc
 from google.protobuf.descriptor_pb2 import FileDescriptorProto, FileDescriptorSet
-from grpc.aio import AioRpcError, Call
-from grpc_reflection.v1alpha import reflection, reflection_pb2, reflection_pb2_grpc
+from grpc_reflection.v1alpha import reflection_pb2_grpc
+from grpc_reflection.v1alpha.reflection_pb2 import ServerReflectionRequest, ServerReflectionResponse
 from rich.logging import RichHandler
 
 log = logging.getLogger("app")
@@ -15,28 +28,30 @@ rh = RichHandler(markup=True, show_path=False, omit_repeated_times=False)
 rh.setFormatter(logging.Formatter(fmt="%(message)s", datefmt="%Y-%m-%d %H:%M:%S"))
 log.addHandler(rh)
 
+
 username = "mylogin"
 password = "mysecret"
-
-# https://github.com/annetutil/gnetcli
-# echo -n "$LOGIN:$PASSWORD" | base64
 token = base64.b64encode(f"{username}:{password}".encode()).decode()
 metadata = [("authorization", f"Basic {token}")]
 
 
 async def list_services() -> None:
-    async def request_generator() -> AsyncIterator[reflection_pb2.ServerReflectionRequest]:
-        yield reflection_pb2.ServerReflectionRequest(list_services="")
+    # запрос для получения списка сервисов. list_services - вернуть список всех сервисов
+    async def request_generator() -> AsyncIterator[ServerReflectionRequest]:
+        yield ServerReflectionRequest(list_services="")
 
-    async with grpc.aio.insecure_channel(
-        target="localhost:50051",
-    ) as channel:
+    async with grpc.aio.insecure_channel("localhost:50051") as channel:
         stub = reflection_pb2_grpc.ServerReflectionStub(channel)
-        response_stream = stub.ServerReflectionInfo(request_generator(), metadata=metadata)
+        # рефлексия это bidir stream сервис, поэтому нужен асинхронный генератор сообщений
+        # даже для одного сообщения
+        response_stream: AsyncIterator[ServerReflectionResponse] = stub.ServerReflectionInfo(
+            request_generator(),
+            metadata=metadata,
+        )
+        # поток ответов от сервера обрабатываем через цикл
         async for response in response_stream:
-            services = response.list_services_response.service
-            for s in services:
-                log.info(f"Доступный сервис: {s.name}")
+            for service in response.list_services_response.service:
+                log.info(f"доступное имя сервиса: {service.name}")
 
 
 async def describe_service(service_name: str) -> None:
@@ -47,7 +62,10 @@ async def describe_service(service_name: str) -> None:
     async with grpc.aio.insecure_channel("localhost:50051") as channel:
         stub = reflection_pb2_grpc.ServerReflectionStub(channel)
         fds = FileDescriptorSet()
-        response_stream: AsyncIterator[ServerReflectionResponse] = stub.ServerReflectionInfo(request_generator())
+        response_stream: AsyncIterator[ServerReflectionResponse] = stub.ServerReflectionInfo(
+            request_generator(),
+            metadata=metadata,
+        )
         async for response in response_stream:
             file_descriptors = response.file_descriptor_response.file_descriptor_proto
             log.info(f"Сервис {service_name} описан в {len(file_descriptors)} proto-файлах.")
@@ -57,12 +75,13 @@ async def describe_service(service_name: str) -> None:
                 fd = FileDescriptorProto.FromString(raw_fd)
                 fds.file.append(fd)
                 log.info(f"Имя файла {fd.name}")
-                log.info(f"Содержимое файла (дамп):\n{fd.SerializeToString()}")
-                log.info(f"Содержимое файла (человеческое):\n{fd}")
+                # log.info(f"Содержимое файла (дамп):\n{fd.SerializeToString()}")
+                # log.info(f"Содержимое файла (человеческое):\n{fd}")
         # если нужно восстановить proto файлы, то сохраняем
         with open("./proto_restored/server.desc", "wb") as f:
             f.write(fds.SerializeToString())
 
 
 if __name__ == "__main__":
-    asyncio.run(list_services())
+    # asyncio.run(list_services())
+    asyncio.run(describe_service("gnetcli.Gnetcli"))

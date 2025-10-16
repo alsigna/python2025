@@ -797,7 +797,7 @@ for key, value in context.invocation_metadata():
 
 #### [keepalive](https://grpc.io/docs/guides/keepalive/)
 
-grpc работает поверх HTTP/2, поэтому существует возможность настройки keepalive pings, которые позволяют серверу понять, что клиент больше не доступен.
+grpc работает поверх HTTP/2, поэтому существует возможность настройки keepalive pings, которые позволяют серверу понять, что клиент больше не доступен. Настройки передаются в опциях при создании сервера, например так:
 
 ```python
 server = grpc.aio.server(
