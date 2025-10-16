@@ -20,6 +20,7 @@ from rich.logging import RichHandler
 from .interceptors import (
     ServerHelloDelayInterceptor,
     ServerLoggingInterceptor,
+    ServerLoggingInterceptorV2,
     ServerRateLimitInterceptor,
     ServerRequestTrackingInterceptor,
     ServerRequestTrackingInterceptorV2,
@@ -71,11 +72,11 @@ class HelloService(hello_pb2_grpc.HelloServiceServicer):
 async def main() -> None:
     server = grpc.aio.server(
         interceptors=[
-            ServerRateLimitInterceptor(3),
+            # ServerRateLimitInterceptor(3),
             # request_tracking_interceptor,
             ServerRequestTrackingInterceptorV2(),
-            ServerLoggingInterceptor(),
-            ServerHelloDelayInterceptor(),
+            ServerLoggingInterceptorV2(),
+            # ServerHelloDelayInterceptor(),
         ],
     )
     hello_pb2_grpc.add_HelloServiceServicer_to_server(

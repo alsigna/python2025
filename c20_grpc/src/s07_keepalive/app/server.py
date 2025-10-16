@@ -37,22 +37,29 @@ class PingService(ping_pb2_grpc.PingServiceServicer):
 
 
 async def main() -> None:
-    # асинхронный сервер доступен в модуле grpc.aio
-    server = grpc.aio.server()
-
-    # регистрируем сервис
+    server = grpc.aio.server(
+        options=[
+            ("grpc.keepalive_time_ms", 5000),  # отправляем keepalive каждые 5 секунд
+            ("grpc.keepalive_timeout_ms", 2000),  # ждем ответ 2 секунд
+            ("grpc.keepalive_permit_without_calls", True),  # отправлять keepalive даже без активных rpc
+            ("grpc.http2.max_pings_without_data", 2),  # максимум keepalive без ответов
+            ("grpc.http2.min_time_between_pings_ms", 5000),  # интервал между keepalive
+            ("grpc.http2.min_ping_interval_without_data_ms", 2000),  # интервал в отсутствии обмена
+            ("grpc.max_connection_idle_ms", 15000),  # время бездействия соединения
+            ("grpc.max_connection_age_ms", 120000),  # время жизни соединения (даже активного)
+            ("grpc.max_connection_age_grace_ms", 5000),  # грейс период для закрытия сессии
+        ],
+    )
     ping_pb2_grpc.add_PingServiceServicer_to_server(PingService(), server)  # type: ignore[no-untyped-call]
     server.add_insecure_port("[::]:50051")
     log.info("gRPC сервер запущен на порту 50051")
 
-    # запуск
     await server.start()
 
     try:
         await server.wait_for_termination()
     except asyncio.CancelledError:
         log.info("Остановка сервера...")
-        # 5 секунд на graceful shutdown
         await server.stop(5)
 
 

@@ -174,7 +174,7 @@ async def main() -> None:
                 HelloRequest(msg=f"user-{i:02}", delay=i),
                 metadata=invocation_metadata,
             )
-            for i in range(1, 11)
+            for i in range(10, 11)
         ]
         log("все запросы созданы")
         async for call in asyncio.as_completed(calls):

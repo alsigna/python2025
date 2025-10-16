@@ -805,7 +805,7 @@ server = grpc.aio.server(
         ('grpc.http2.min_ping_interval_without_data_ms', 1000),
         ('grpc.http2.min_ping_strikes', 3),
         ('grpc.keepalive_permit_without_calls', 1),
-        ('grpc.keepalive_timeout_ms', 10000),  
+        ('grpc.keepalive_timeout_ms', 10000),
     ]
 )
 ```
