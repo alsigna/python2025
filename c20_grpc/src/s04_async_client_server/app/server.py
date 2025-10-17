@@ -32,7 +32,7 @@ class PingService(ping_pb2_grpc.PingServiceServicer):
         context: ServicerContext[PingRequest, PingReply],
     ) -> PingReply:
         log.info(f"новый запрос: '{request.target}'")
-        ok, msg = await PingHandler().handle(request.target)
+        ok, msg = await PingHandler.handle(request.target)
         return PingReply(ok=ok, msg=msg)
 
 

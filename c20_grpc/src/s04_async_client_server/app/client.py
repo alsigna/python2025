@@ -30,7 +30,10 @@ async def main_single() -> None:
 
         request = PingRequest(target="example.com")
         call: UnaryUnaryCall[PingRequest, PingReply] = stub.Ping(request)
-        response: PingReply = await call
+        show_tcp_sessions()
+        response = await call
+        show_tcp_sessions()
+        # response: PingReply = await call
         # stub.Ping(request) возвращает Call объект (UnaryUnaryCall в нашем случае)
         # делая await call получаем PingReply, кроме этого у call объекта есть свои параметры,
         # например метаданные и пр (посмотрим позже)
@@ -42,7 +45,6 @@ async def main_single() -> None:
 
 
 async def main_multi() -> None:
-
     # много запросов, вынесем в отдельную функцию
     async def make_request(num: int) -> None:
         await asyncio.sleep(randint(10, 100) / 100)
@@ -51,16 +53,16 @@ async def main_multi() -> None:
     async with grpc.aio.insecure_channel(
         target="localhost:50051",
     ) as channel:
-        # show_tcp_sessions()
+        show_tcp_sessions()
         # await channel.channel_ready()
         # show_tcp_sessions()
 
         stub = ping_pb2_grpc.PingServiceStub(channel)  # type: ignore[no-untyped-call]
-        tasks = [make_request(i) for i in range(500)]
+        tasks = [asyncio.create_task(make_request(i)) for i in range(500)]
         print("запросы созданы")
         await asyncio.gather(*tasks)
         print("ответы получены")
-        # show_tcp_sessions()
+        show_tcp_sessions()
 
 
 if __name__ == "__main__":

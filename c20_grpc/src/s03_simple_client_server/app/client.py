@@ -46,8 +46,19 @@ with grpc.insecure_channel(
     # можно принудительно установить tcp сессию до первого обращения
     # grpc.channel_ready_future(channel).result(timeout=2)
     # show_tcp_sessions()
+
+    # вызов через stub
     stub = ping_pb2_grpc.PingServiceStub(channel)  # type: ignore[no-untyped-call]
     response = stub.Ping(ping_pb2.PingRequest(target="example.com"))
     print(response)
+
+    # ручной прямой вызов
+    response, _ = channel.unary_unary(
+        "/app.ping.v1.PingService/Ping",
+        request_serializer=ping_pb2.PingRequest.SerializeToString,
+        response_deserializer=ping_pb2.PingReply.FromString,
+    ).with_call(ping_pb2.PingRequest(target="example.com"))
+    print(response)
+
     # show_tcp_sessions()
 # show_tcp_sessions()

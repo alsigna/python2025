@@ -33,7 +33,13 @@ class Handler(Protocol):
     async def handle(cls, request: Message) -> Message: ...
 
 
-queue: Queue[tuple[type[Handler], Message, Queue[Message]]] = Queue(maxsize=10)
+queue: Queue[
+    tuple[
+        type[Handler],
+        Message,
+        Queue[Message],
+    ],
+] = Queue(maxsize=10)
 
 
 # логика отдельно
@@ -64,7 +70,7 @@ class PingService(ping_pb2_grpc.PingServiceServicer):
         except asyncio.QueueFull:
             log.info(f"запрос '{request.target}' отброшен")
             context.set_code(grpc.StatusCode.RESOURCE_EXHAUSTED)
-            context.set_details("сервер перегружен")
+            context.set_details("сервер перегружен, очередь обработки заполнена")
             return PingReply(ok=False, msg="очередь переполнена")
 
         # ждём результат от воркера

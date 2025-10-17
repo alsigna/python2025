@@ -1,13 +1,3 @@
-"""async сервер, генерация proto.
-
-python -m grpc_tools.protoc \
-  --proto_path=./proto \
-  --python_out=./app/pb \
-  --grpc_python_out=./app/pb \
-  --mypy_out=./app/pb \
-  ./proto/*
-"""
-
 import asyncio
 import logging
 from random import randint
@@ -25,7 +15,7 @@ rh.setFormatter(logging.Formatter(fmt="%(message)s", datefmt="%Y-%m-%d %H:%M:%S"
 log.addHandler(rh)
 
 
-semaphore = asyncio.Semaphore(10)
+semaphore = asyncio.Semaphore(5)
 
 
 # логика отдельно
