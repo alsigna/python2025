@@ -24,9 +24,12 @@ class ChatClientHandler:
             msg = await self._queue.get()
             if msg is None:
                 return
+            print(msg)
             yield msg
 
     async def _handle_server_responses(self, response_iterator: AsyncIterator[ChatMessage]) -> None:
+        print(response_iterator)
+        print(type(response_iterator))
         async for message in response_iterator:
             log.info(f"{message.user=}, {message.msg=}")
 

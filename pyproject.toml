@@ -39,6 +39,7 @@ dependencies = [
     "grpcio (>=1.75.1,<2.0.0)",
     "protobuf (>=6.32.1,<7.0.0)",
     "grpcio-reflection (>=1.75.1,<2.0.0)",
+    "google-api-core (>=2.26.0,<3.0.0)",
 ]
 
 
