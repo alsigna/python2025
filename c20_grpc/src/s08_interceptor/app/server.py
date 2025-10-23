@@ -1,13 +1,3 @@
-"""async сервер, генерация proto.
-
-python -m grpc_tools.protoc \
-  --proto_path=./proto \
-  --python_out=./app/pb \
-  --grpc_python_out=./app/pb \
-  --mypy_out=./app/pb \
-  ./proto/*
-"""
-
 import asyncio
 import logging
 
@@ -72,7 +62,7 @@ class HelloService(hello_pb2_grpc.HelloServiceServicer):
 async def main() -> None:
     server = grpc.aio.server(
         interceptors=[
-            # ServerRateLimitInterceptor(3),
+            ServerRateLimitInterceptor(3),
             # request_tracking_interceptor,
             ServerRequestTrackingInterceptorV2(),
             ServerLoggingInterceptorV2(),

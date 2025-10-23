@@ -1,13 +1,3 @@
-"""async сервер, генерация proto.
-
-python -m grpc_tools.protoc \
-  --proto_path=./proto \
-  --python_out=./app/pb \
-  --grpc_python_out=./app/pb \
-  --mypy_out=./app/pb \
-  ./proto/*
-"""
-
 import asyncio
 import logging
 from collections.abc import AsyncIterator

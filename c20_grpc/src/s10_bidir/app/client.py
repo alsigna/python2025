@@ -24,12 +24,12 @@ class ChatClientHandler:
             msg = await self._queue.get()
             if msg is None:
                 return
-            print(msg)
             yield msg
 
-    async def _handle_server_responses(self, response_iterator: AsyncIterator[ChatMessage]) -> None:
-        print(response_iterator)
-        print(type(response_iterator))
+    async def _handle_server_responses(
+        self,
+        response_iterator: AsyncIterator[ChatMessage],
+    ) -> None:
         async for message in response_iterator:
             log.info(f"{message.user=}, {message.msg=}")
 
@@ -41,7 +41,7 @@ class ChatClientHandler:
             await self._queue.put(ChatMessage(user="Client", msg=message.msg[:-1]))
 
     async def chat(self) -> None:
-        await self._queue.put(ChatMessage(user="Client", msg="12345"))
+        await self._queue.put(ChatMessage(user="Client", msg="123456789"))
         response_iterator = self._stub.Chat(self._message_generator())
         await self._handle_server_responses(response_iterator)
 

@@ -46,7 +46,7 @@ queue: Queue[
 class PingHandler:
     @classmethod
     async def handle(cls, request: PingRequest) -> PingReply:
-        await asyncio.sleep(randint(50, 200) / 100)
+        await asyncio.sleep(randint(200, 300) / 100)
         log.info(f"запрос '{request.target}' обработан")
         return PingReply(
             ok=True,

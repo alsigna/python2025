@@ -1,13 +1,3 @@
-"""async сервер, генерация proto.
-
-python -m grpc_tools.protoc \
-  --proto_path=./proto \
-  --python_out=./app/pb \
-  --grpc_python_out=./app/pb \
-  --mypy_out=./app/pb \
-  ./proto/*
-"""
-
 import asyncio
 import logging
 from collections.abc import AsyncIterator
@@ -56,7 +46,7 @@ class ChatService(chat_pb2_grpc.ChatServiceServicer):
                 msg=message.msg[::-1],
             )
 
-        # выносим обработку в отдельный класс
+        # # выносим обработку в отдельный класс
         # async for msg in ChatHandler.handle(request_iterator, context):
         #     yield msg
 

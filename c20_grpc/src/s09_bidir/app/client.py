@@ -23,13 +23,10 @@ async def generate_messages() -> AsyncIterator[ChatMessage]:
 async def main() -> None:
     async with grpc.aio.insecure_channel(
         target="localhost:50051",
-        options=[
-            ("grpc.primary_user_agent", "my-grpc-client/0.0.1"),
-        ],
+        options=[("grpc.primary_user_agent", "my-grpc-client/0.0.1")],
     ) as channel:
-        stub = chat_pb2_grpc.ChatServiceStub(
-            channel=channel,
-        )
+        stub = chat_pb2_grpc.ChatServiceStub(channel=channel)
+
         async for response in stub.Chat(generate_messages()):
             print(f"> {response.user}: {response.msg}")
 
