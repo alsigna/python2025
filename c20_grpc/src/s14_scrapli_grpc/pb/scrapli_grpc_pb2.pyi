@@ -84,16 +84,16 @@ global___Host = Host
 class Command(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    HOST_FIELD_NUMBER: builtins.int
     COMMAND_FIELD_NUMBER: builtins.int
+    HOST_FIELD_NUMBER: builtins.int
     command: builtins.str
     @property
     def host(self) -> global___Host: ...
     def __init__(
         self,
         *,
-        host: global___Host | None = ...,
         command: builtins.str = ...,
+        host: global___Host | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing.Literal["host", b"host"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing.Literal["command", b"command", "host", b"host"]) -> None: ...
@@ -101,27 +101,27 @@ class Command(google.protobuf.message.Message):
 global___Command = Command
 
 @typing.final
-class Result(google.protobuf.message.Message):
+class Response(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     HOST_FIELD_NUMBER: builtins.int
     CHANNEL_INPUT_FIELD_NUMBER: builtins.int
     RESULT_FIELD_NUMBER: builtins.int
-    ELAPSED_TIME_FIELD_NUMBER: builtins.int
     FAILED_FIELD_NUMBER: builtins.int
+    ELAPSED_TIME_FIELD_NUMBER: builtins.int
     host: builtins.str
     channel_input: builtins.str
     result: builtins.str
-    elapsed_time: builtins.float
     failed: builtins.bool
+    elapsed_time: builtins.float
     def __init__(
         self,
         *,
         host: builtins.str = ...,
         channel_input: builtins.str = ...,
         result: builtins.str = ...,
-        elapsed_time: builtins.float = ...,
         failed: builtins.bool = ...,
+        elapsed_time: builtins.float = ...,
     ) -> None: ...
     def ClearField(
         self,
@@ -139,4 +139,4 @@ class Result(google.protobuf.message.Message):
         ],
     ) -> None: ...
 
-global___Result = Result
+global___Response = Response

@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package app.scrapli_grpc.v1;
+
+enum Platform {
+    PLATFORM_DEFAULT = 0;
+    PLATFORM_CISCO_IOSXE = 10;
+    PLATFORM_CISCO_IOSXR = 20;
+    PLATFORM_HUAWEI_VRP = 30;
+}
+
+message Host {
+    string host = 10;
+    Platform platform = 20;
+    string auth_username = 30;
+    string auth_password = 40;
+    string auth_secondary = 50;
+}
+
+message Command {
+    string command = 10;
+    Host host = 20;
+}
+
+message Response {
+    string host = 10;
+    string channel_input = 20;
+    string result = 30;
+    bool failed = 40;
+    float elapsed_time = 50;
+}
+
+service ScrapliService {
+    rpc SendCommand (Command) returns (Response);
+    rpc SendCommandChat (stream Command) returns (stream Response);
+}

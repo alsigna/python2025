@@ -48,15 +48,17 @@ async def main() -> None:
         servicer=HelloService(),
         server=server,
     )
+
     # формируем кортеж с именами сервисов
     services = (
         # наши бизнес-сервисы
-        # app.hello.v1.HelloService или из переменных вытащить
+        # "app.hello.v1.HelloService",
+        #   или из переменных вытащить
         HELLO_DESCRIPTOR.services_by_name["HelloService"].full_name,
         # и сам сервис рефлексии добавляем grpc.reflection.v1alpha.ServerReflection или из переменной
         reflection.SERVICE_NAME,
     )
-    # включаем рефлексию на сервисе
+    # включаем рефлексию на сервере
     reflection.enable_server_reflection(
         service_names=services,
         server=server,
