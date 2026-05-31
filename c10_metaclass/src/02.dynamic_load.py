@@ -72,7 +72,7 @@ class DeviceFactory:
         for platform, platform_data in data.items():
             platform_yaml = YamlPlatform(platform=platform, **platform_data)
             if platform in cls._PLATFORM_MAP:
-                raise ValueError(f"платформа '{platform}' уже загружена")
+                raise ValueError(f"платформа {platform!r} уже загружена")
             cls._PLATFORM_MAP[platform] = type(
                 platform.upper(),
                 (Device,),
@@ -82,7 +82,7 @@ class DeviceFactory:
     @classmethod
     def create(cls, ip: IP, platform: Platform) -> Device:
         if platform not in cls._PLATFORM_MAP:
-            raise ValueError(f"Unknown platform '{platform}'")
+            raise ValueError(f"Неизвестная платформа {platform!r}")
         return cls._PLATFORM_MAP[platform](ip)
 
 

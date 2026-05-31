@@ -62,7 +62,7 @@ class Device:
 
 Имена классов в Python принято писать в PascalCase нотации.
 
-> [!NOTE]
+> [!note]
 >
 > - `PascalCase` - слитное написание, каждое слово с большой буквы: NumberOfDevices
 > - `camelCase` - слитное написание, каждое следующее слово с большой буквы: numberOfDevices
